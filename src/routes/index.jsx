@@ -1,7 +1,19 @@
 import React from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import Button from "../components/Button/Button";
-import Card from "../components/Card/Cards";
+import Button from "@/components/Button/Button";
+import Card from "@/components/Card/Cards";
+import { cardChooseSkillSprint } from "@/data/cards";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
+import FAQS from "@/data/faq";
+import FAQ from "@/components/Faq/Faq";
+
 export const Route = createFileRoute("/")({
   component: Index,
 });
@@ -73,12 +85,8 @@ function Index() {
       </div>
       {/* The Skill Sprint Edge */}
 
-
-
-
       {/* Why Choose Skill Sprint Cards */}
       <div className="grid place-content-center space-y-2 mt-[80px] relative">
-
         <div className="text-center">
           <h2 className="font-[700] text-[45px] tracking-[2px] leading-[60px] text-white">
             Why choose Skill Sprint
@@ -115,11 +123,77 @@ function Index() {
             image="/assets/card4.png"
             right
           />
+          <div className="col-span-2 flex items-center justify-center relative mt-[50px]">
+            <Button text="Join the free program" />
+          </div>
         </div>
         {/*  */}
       </div>
-
       {/* Why Choose Skill Sprint Cards */}
+
+      {/* Upskill with skill sprint */}
+      <div className="text-white grid mt-[40px] relative p-[100px] place-content-center space-y-[70px]">
+        <div className="space-y-4 text-center">
+          <h2 className="font-[700] text-[45px] tracking-[2px] leading-[60px]">
+            Upskill with Skill Sprint
+          </h2>
+          <p className="font-inter text-paragraph text-[18px] font-[300] tracking-[2.2px] leading-[25px]">
+            Learn various in-demand skills to upgrade yor career . Start with a
+            free one-month course, <br /> live classes, hands-on projects, and
+            career opportunities.
+          </p>
+        </div>
+
+        {/* Cards */}
+        <div className="grid grid-cols-3 gap-[20px] relative">
+          {cardChooseSkillSprint.map((card) => (
+            <>
+              <div
+                className={`flex items-center relative bg-[url(${card.bg})] bg-center bg-cover bg-no-repeat h-[60lvh]`}
+                key={card.id}
+              >
+                <div className=" absolute top-0 left-0 h-full w-full bg-[#0e0d0de0]">
+                  <p className="absolute bottom-0 font-inter text-[25px] font-[600] p-6 ">
+                    {card.text}
+                  </p>
+                </div>
+              </div>
+            </>
+          ))}
+
+          {/* Button */}
+          <div className="col-span-3 flex items-center justify-center relative mt-[30px]">
+            <Button text="View all programs" location="/about" />
+          </div>
+          {/* Button */}
+        </div>
+        {/* Cards */}
+      </div>
+      {/* Upskill with skill sprint */}
+
+      {/* FAQ */}
+      <div className="border border-red-500 text-white flex justify-center items-center flex-col space-y-6">
+        <div className="space-y-4 text-center border border-white">
+          <h2 className="font-[700] text-[45px] tracking-[2px] leading-[60px]">
+            Frequently asked questions
+          </h2>
+
+          <Carousel>
+              <CarouselContent>
+                {FAQS.map((faqs) => (
+                    <CarouselItem key={faqs.id} className="basis-1/3 border">
+                      {faqs.category}
+                    </CarouselItem>
+                ))}
+              </CarouselContent>
+          </Carousel>
+        </div>
+
+        {/* Accordion */}
+        <div className="w-[65%] font-inter"></div>
+        {/* Accordion */}
+      </div>
+      {/* FAQ */}
     </div>
   );
 }
