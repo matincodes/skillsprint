@@ -6,14 +6,14 @@ const ProgrammCard = ({ image , description , role }) => {
   return (
     <div className=" bg-[#121212] rounded-lg ">
       <img className="w-full rounded-t-lg " src={image} />
-      <div className="py-5 px-2.5  flex flex-col gap-4 items-start">
+      <div className="py-5 px-2.5  flex flex-col gap-4 items-start ">
         <span className="flex flex-col gap-3.5">
-          <p className="font-bold text-xl text-white font-inter tracking-[2px]">{role}</p>
-          <p className="text-white font-normal text-xs font-inter tracking-[2px]">
-            <span className="text-[#808080] line-through">8 months</span> 1 month{" "}
-            <span className="text-[#808080] line-through">- ₦ 100,000</span> ₦ 0.00 (Free)
+          <b className="lg:text-2xl font-bold text-xl text-white font-inter tracking-[2px]">{role}</b>
+          <p className="lg:text-sm  text-white font-normal text-xs font-inter tracking-[1.5px]">
+            <b className="text-[#808080] line-through">8 months</b> 1 month{" "}
+            <b className="text-[#808080] line-through">- ₦ 100,000</b> ₦ 0.00 (Free)
           </p>
-          <p className="text-[#808080] font-medium text-sm font-inter w-96 lg:w-auto tracking-[2px]">
+          <p className="lg:text-lg text-[#808080] font-medium text-sm font-inter   tracking-[1.5px]">
            {description}
           </p>
         </span>
