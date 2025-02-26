@@ -5,6 +5,7 @@ import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -18,3 +19,4 @@ export default defineConfig({
     },
   },
 })
+
