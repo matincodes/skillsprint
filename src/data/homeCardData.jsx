@@ -1,4 +1,4 @@
-const WhyChooseSkillSprint = [
+const skillCard = [
   {
     id: 1,
     mainText: "Live Interactive Classes",
@@ -38,7 +38,7 @@ const WhyChooseSkillSprint = [
   },
 ];
 
-const cardChooseSkillSprint = [
+const upskillCard = [
   {
     id: 1,
     text: "Tech & Software Development",
@@ -71,4 +71,4 @@ const cardChooseSkillSprint = [
   },
 ];
 
-export { WhyChooseSkillSprint, cardChooseSkillSprint };
+export { skillCard, upskillCard };
