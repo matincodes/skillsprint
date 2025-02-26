@@ -1,15 +1,26 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 @import "tailwindcss";
 
 @theme {
-  /* Fonts */
-  --font-inter: Inter;
-  --font-mont: Montserrat;
-  /* Fonts */
+     /* Fonts */
+     --font-inter: Inter;
+     --font-mont: Montserrat;
+     /* Fonts */
 
-  /* Colors */
-  --color-main: #ae752c;
-  --color-paragraph: #808080;
-  /* Colors */
+     /* Colors */
+     --color-main: #AE752C;
+     --color-paragraph: #808080;
+     /* Colors */
+}
+
+
+.slideNav{
+     background: rgba(0, 0, 0, 0.3);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(7.6px);
+-webkit-backdrop-filter: blur(7.6px);
+
 }

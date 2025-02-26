@@ -7,7 +7,7 @@ import Footer from "../components/footer/Footer";
 export const Route = createRootRoute({
   component: () => (
     <>
-      <NavBar />
+      <NavBar/>
       <Outlet />
       <TanStackRouterDevtools />
       <Footer />
