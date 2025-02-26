@@ -10,7 +10,6 @@ import SkillCard from "@/components/Card/SkilllCard";
 import Footer from "@/components/footer/Footer";
 
 
-
 export const Route = createFileRoute("/")({
   component: Index,
 });
@@ -19,6 +18,7 @@ function Index() {
   return (
     <div className="bg-black">
       {/* banner */}
+
       <div className="lg:p-[105px] p-[40px] bg-black flex flex-col justify-center items-center w-full text-white relative overflow-hidden">
         <div className="font-mont text-center space-y-[50px] flex flex-col items-center justify-center ">
           <section className="space-y-3 flex flex-col items-center justify-center">
@@ -37,6 +37,7 @@ function Index() {
 
           <Button text="Join the Free Program" />
 
+
           {/* <div className="w-[100%] border flex items-center justify-center "> */}
           <img
             src="/assets/Icons/arrow.png"
@@ -54,9 +55,11 @@ function Index() {
             className="lg:w-[310px] absolute lg:right-[-17px] lg:top-[280px] right-[-100px] top-[200px] w-[180px]"
           />
           {/* </div> */}
+
         </div>
       </div>
       {/* banner */}
+
 
       {/* *********** why to join *********** */}
       <div className="text-white grid lg:mt-[10px] mt-[20px] lg:mb-[15px] mb-[170px] relative ">
