@@ -4,7 +4,7 @@ import Button from "./Button/Button";
 
 const ProgrammCard = ({ image , description , role }) => {
   return (
-    <div className=" bg-[#121212] rounded-lg ">
+    <div className="w-auto bg-[#121212] rounded-lg ">
       <img className="w-full rounded-t-lg " src={image} />
       <div className="py-5 px-2.5  flex flex-col gap-4 items-start ">
         <span className="flex flex-col gap-3.5">

@@ -1,0 +1,34 @@
+import * as React from "react";
+
+// import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import Button from "./Button";
+
+const NavBarButton = () => {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="flex">
+        <Button text="Login to portal" nav />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className={"w-[155px] space-y-4 py-3 max-w-[155px] overflow-hidden"}>
+        <DropdownMenuLabel className={"border"}>
+          <Button text="As Instructor" nav />
+        </DropdownMenuLabel>
+        <DropdownMenuLabel>
+          <Button text="As Student" nav />
+        </DropdownMenuLabel>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
+export default NavBarButton;
