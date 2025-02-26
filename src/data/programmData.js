@@ -21,24 +21,28 @@ export const programmData = [
     role: "Frontend Development",
     description:
       "Learn how to build stunning, responsive websites using HTML, CSS, JavaScript, and modern frameworks like React.",
+    category: "Tech & Software Development",
   },
   {
     image: backendImage,
     role: "Backend Development",
     description:
       "Master server-side development with Node.js and Django to build scalable and secure web applications.",
+    category: "Tech & Software Development",
   },
   {
     image: fullStackImage,
     role: "Full-Stack Development",
     description:
       "Gain expertise in both frontend and backend development to create complete, end-to-end web applications.",
+    category: "Tech & Software Development",
   },
   {
     image: mobileImage,
     role: "Mobile Development (React Native)",
     description:
       "Build cross-platform mobile applications for iOS and Android using React Native.",
+    category: "Tech & Software Development",
   },
   {
     image: designImage,
