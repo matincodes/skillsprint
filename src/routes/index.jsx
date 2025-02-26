@@ -25,7 +25,7 @@ function Index() {
             <h2 className="font-[700] lg:text-[45px] text-[23px] tracking-[2px] lg:leading-[60px] relative lg:w-[70%] w-[99%] ">
               <img
                 src={"/assets/Icons/spark.png"}
-                className=" relative lg:w-[60px] w-[40px] lg:top-[25px] lg:left-[-5px] top-[10px] left-[6px] "
+                className=" relative lg:w-[60px] w-[40px] lg:top-[25px] lg:left-[20px] top-[15px] left-[6px] "
               />
               Transform Your Career with Skill Sprint
             </h2>
@@ -128,7 +128,7 @@ function Index() {
         {/* Cards */}
         <div className="flex flex-col lg:grid lg:grid-cols-3 lg:items-center lg:gap-[20px] gap-[30px] relative lg:p-3 p-6">
           {cardChooseSkillSprint.map((card) => (
-            <SkillCard bg={card.bg} key={card.id} text={card.text}/>
+            <SkillCard bg={card.bg} key={card.id} text={card.text} />
           ))}
 
           {/* Button */}
