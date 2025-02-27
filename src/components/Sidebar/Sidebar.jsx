@@ -10,59 +10,18 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-
-// Menu items.
-const items = [
-  {
-    id: 1,
-    category: "",
-    links: [
-      {
-        title: "Home",
-        url: "/dashboard/",
-        icon: '/assets/Icons/home.png',
-      },
-      {
-        title: "Announcements",
-        url: "#",
-        icon: '/assets/Icons/announcements.png',
-      },
-    ],
-  },
-  {
-    id: 2,
-    category: "Learning",
-    links: [
-      {
-        title: "Classes",
-        url: "",
-        icon: '/assets/Icons/classes.png',
-      },
-      {
-        title: "Curriculum",
-        url: "#",
-        icon: '/assets/Icons/curriculum.png',
-      },
-      {
-        title: "Assignments",
-        url: "",
-        icon: '/assets/Icons/assignments.png',
-      },
-      {
-        title: "Quizzes",
-        url: "#",
-        icon: '/assets/Icons/quizzes.png',
-      },
-    ],
-  },
-];
+import sideNavData from "@/data/sideNavData";
+import { useLocation } from "@tanstack/react-router";
 
 const AppSidebar = () => {
   const [activeLink, setActiveLink] = useState("/dashboard/");
+  const {pathname} = useLocation()
+
+  console.log(activeLink, location)
 
   return (
     <Sidebar>
-      <SidebarContent>
+      <SidebarContent className={'relative'}>
         <SidebarGroup>
           <SidebarGroupLabel className={`p-2 flex`}>
             {/* Avatar */}
@@ -79,26 +38,26 @@ const AppSidebar = () => {
 
           <SidebarGroupContent>
             <SidebarMenu className="font-inter">
-              {items.map((group) => (
+              {sideNavData.map((group) => (
                 <div key={group.id}>
                   {group.category && (
-                    <p className="mt-[20px] text-[20px]">{group.category}</p>
+                    <p className="mt-[10px] text-[17px]">{group.category}</p>
                   )}
                   {group.links.map((item) => (
                     <SidebarMenuItem key={item.title}>
                       <SidebarMenuButton
                         asChild
-                        className={
-                          activeLink === item.url
-                            ? "bg-black py-6 px-3 text-white" // Active background color
-                            : "hover:bg-gray-700 mb-1 py-6 px-3" // Default hover color
+                        className={`${
+                          item.url === pathname
+                            ? "bg-black text-white" // Active background color
+                            : "hover:bg-black hover:text-white text-paragraph"} mb-1 py-6 px-3  cursor-pointer` // Default hover color
                         }
                         onClick={() => setActiveLink(item.url)}
                       >
-                        <p href={item.url}>
-                          <img src={item.icon} alt="" className="w-7" />
-                          <span className="text-[16px] font-[500]">{item.title}</span>
-                        </p>
+                        <a href={item.url}>
+                          <img src={item.icon} alt="" className="w-5" />
+                          <span className="text-[14px] font-[500]">{item.title}</span>
+                        </a>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   ))}
@@ -107,6 +66,13 @@ const AppSidebar = () => {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        {/* Image */}
+              <div className="absolute bottom-3 w-full grid place-content-center">
+               <img src="/assets/logo.png" alt="" className="w-[90px] object-cover" />
+              </div>
+        {/* Image */}
+
       </SidebarContent>
     </Sidebar>
   );

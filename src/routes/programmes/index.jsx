@@ -64,7 +64,7 @@ function RouteComponent() {
                   bg={card.bg} 
                   key={card.id} 
                   text={card.text} 
-                  textSize="15px"
+                  textSize="17px"
                   height="300px"
                   
                   />

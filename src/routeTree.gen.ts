@@ -8,20 +8,20 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router'
-
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as DashboardImport } from './routes/dashboard'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as ProgrammesIndexImport } from './routes/programmes/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
-import { Route as DashboardDashboardLayoutImport } from './routes/dashboard/_dashboardLayout'
-
-// Create Virtual Routes
-
-const DashboardImport = createFileRoute('/dashboard')()
+import { Route as DashboardSettingsImport } from './routes/dashboard/settings'
+import { Route as DashboardQuizzesImport } from './routes/dashboard/quizzes'
+import { Route as DashboardCurriculumImport } from './routes/dashboard/curriculum'
+import { Route as DashboardClassesImport } from './routes/dashboard/classes'
+import { Route as DashboardAssignmentsImport } from './routes/dashboard/assignments'
+import { Route as DashboardAnnouncementsImport } from './routes/dashboard/announcements'
 
 // Create/Update Routes
 
@@ -55,8 +55,39 @@ const DashboardIndexRoute = DashboardIndexImport.update({
   getParentRoute: () => DashboardRoute,
 } as any)
 
-const DashboardDashboardLayoutRoute = DashboardDashboardLayoutImport.update({
-  id: '/_dashboardLayout',
+const DashboardSettingsRoute = DashboardSettingsImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardQuizzesRoute = DashboardQuizzesImport.update({
+  id: '/quizzes',
+  path: '/quizzes',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardCurriculumRoute = DashboardCurriculumImport.update({
+  id: '/curriculum',
+  path: '/curriculum',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardClassesRoute = DashboardClassesImport.update({
+  id: '/classes',
+  path: '/classes',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardAssignmentsRoute = DashboardAssignmentsImport.update({
+  id: '/assignments',
+  path: '/assignments',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardAnnouncementsRoute = DashboardAnnouncementsImport.update({
+  id: '/announcements',
+  path: '/announcements',
   getParentRoute: () => DashboardRoute,
 } as any)
 
@@ -85,12 +116,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardImport
       parentRoute: typeof rootRoute
     }
-    '/dashboard/_dashboardLayout': {
-      id: '/dashboard/_dashboardLayout'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardDashboardLayoutImport
-      parentRoute: typeof DashboardRoute
+    '/dashboard/announcements': {
+      id: '/dashboard/announcements'
+      path: '/announcements'
+      fullPath: '/dashboard/announcements'
+      preLoaderRoute: typeof DashboardAnnouncementsImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/assignments': {
+      id: '/dashboard/assignments'
+      path: '/assignments'
+      fullPath: '/dashboard/assignments'
+      preLoaderRoute: typeof DashboardAssignmentsImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/classes': {
+      id: '/dashboard/classes'
+      path: '/classes'
+      fullPath: '/dashboard/classes'
+      preLoaderRoute: typeof DashboardClassesImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/curriculum': {
+      id: '/dashboard/curriculum'
+      path: '/curriculum'
+      fullPath: '/dashboard/curriculum'
+      preLoaderRoute: typeof DashboardCurriculumImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/quizzes': {
+      id: '/dashboard/quizzes'
+      path: '/quizzes'
+      fullPath: '/dashboard/quizzes'
+      preLoaderRoute: typeof DashboardQuizzesImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/settings': {
+      id: '/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardSettingsImport
+      parentRoute: typeof DashboardImport
     }
     '/dashboard/': {
       id: '/dashboard/'
@@ -112,12 +178,22 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface DashboardRouteChildren {
-  DashboardDashboardLayoutRoute: typeof DashboardDashboardLayoutRoute
+  DashboardAnnouncementsRoute: typeof DashboardAnnouncementsRoute
+  DashboardAssignmentsRoute: typeof DashboardAssignmentsRoute
+  DashboardClassesRoute: typeof DashboardClassesRoute
+  DashboardCurriculumRoute: typeof DashboardCurriculumRoute
+  DashboardQuizzesRoute: typeof DashboardQuizzesRoute
+  DashboardSettingsRoute: typeof DashboardSettingsRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
-  DashboardDashboardLayoutRoute: DashboardDashboardLayoutRoute,
+  DashboardAnnouncementsRoute: DashboardAnnouncementsRoute,
+  DashboardAssignmentsRoute: DashboardAssignmentsRoute,
+  DashboardClassesRoute: DashboardClassesRoute,
+  DashboardCurriculumRoute: DashboardCurriculumRoute,
+  DashboardQuizzesRoute: DashboardQuizzesRoute,
+  DashboardSettingsRoute: DashboardSettingsRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 
@@ -128,7 +204,13 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/dashboard': typeof DashboardDashboardLayoutRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/dashboard/announcements': typeof DashboardAnnouncementsRoute
+  '/dashboard/assignments': typeof DashboardAssignmentsRoute
+  '/dashboard/classes': typeof DashboardClassesRoute
+  '/dashboard/curriculum': typeof DashboardCurriculumRoute
+  '/dashboard/quizzes': typeof DashboardQuizzesRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/programmes': typeof ProgrammesIndexRoute
 }
@@ -136,6 +218,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard/announcements': typeof DashboardAnnouncementsRoute
+  '/dashboard/assignments': typeof DashboardAssignmentsRoute
+  '/dashboard/classes': typeof DashboardClassesRoute
+  '/dashboard/curriculum': typeof DashboardCurriculumRoute
+  '/dashboard/quizzes': typeof DashboardQuizzesRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard': typeof DashboardIndexRoute
   '/programmes': typeof ProgrammesIndexRoute
 }
@@ -145,22 +233,53 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/dashboard': typeof DashboardRouteWithChildren
-  '/dashboard/_dashboardLayout': typeof DashboardDashboardLayoutRoute
+  '/dashboard/announcements': typeof DashboardAnnouncementsRoute
+  '/dashboard/assignments': typeof DashboardAssignmentsRoute
+  '/dashboard/classes': typeof DashboardClassesRoute
+  '/dashboard/curriculum': typeof DashboardCurriculumRoute
+  '/dashboard/quizzes': typeof DashboardQuizzesRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/programmes/': typeof ProgrammesIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/dashboard' | '/dashboard/' | '/programmes'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/dashboard'
+    | '/dashboard/announcements'
+    | '/dashboard/assignments'
+    | '/dashboard/classes'
+    | '/dashboard/curriculum'
+    | '/dashboard/quizzes'
+    | '/dashboard/settings'
+    | '/dashboard/'
+    | '/programmes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/dashboard' | '/programmes'
+  to:
+    | '/'
+    | '/about'
+    | '/dashboard/announcements'
+    | '/dashboard/assignments'
+    | '/dashboard/classes'
+    | '/dashboard/curriculum'
+    | '/dashboard/quizzes'
+    | '/dashboard/settings'
+    | '/dashboard'
+    | '/programmes'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/dashboard'
-    | '/dashboard/_dashboardLayout'
+    | '/dashboard/announcements'
+    | '/dashboard/assignments'
+    | '/dashboard/classes'
+    | '/dashboard/curriculum'
+    | '/dashboard/quizzes'
+    | '/dashboard/settings'
     | '/dashboard/'
     | '/programmes/'
   fileRoutesById: FileRoutesById
@@ -203,14 +322,39 @@ export const routeTree = rootRoute
       "filePath": "about.jsx"
     },
     "/dashboard": {
-      "filePath": "dashboard",
+      "filePath": "dashboard.jsx",
       "children": [
-        "/dashboard/_dashboardLayout",
+        "/dashboard/announcements",
+        "/dashboard/assignments",
+        "/dashboard/classes",
+        "/dashboard/curriculum",
+        "/dashboard/quizzes",
+        "/dashboard/settings",
         "/dashboard/"
       ]
     },
-    "/dashboard/_dashboardLayout": {
-      "filePath": "dashboard/_dashboardLayout.jsx",
+    "/dashboard/announcements": {
+      "filePath": "dashboard/announcements.jsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/assignments": {
+      "filePath": "dashboard/assignments.jsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/classes": {
+      "filePath": "dashboard/classes.jsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/curriculum": {
+      "filePath": "dashboard/curriculum.jsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/quizzes": {
+      "filePath": "dashboard/quizzes.jsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/settings": {
+      "filePath": "dashboard/settings.jsx",
       "parent": "/dashboard"
     },
     "/dashboard/": {

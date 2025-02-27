@@ -9,7 +9,6 @@ import SectionHeader from "@/components/Sections/SectionHeader";
 import SkillCard from "@/components/Cards/SkillCard";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/footer/Footer";
-import NavBar from "@/components/NavBar/NavBar";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -112,7 +111,7 @@ function Index() {
                 icon={card.icon}
                 mainText={card.mainText}
                 subText={card.subText}
-                // desktopImage={card.desktopImage}
+                desktopImage={card.desktopImage}
                 mobileImage={card.mobileImage}
                 position={card.position}
               />
