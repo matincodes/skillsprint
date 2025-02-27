@@ -4,11 +4,11 @@ import * as React from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
+  // DropdownMenuGroup,
+  // DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
+  // DropdownMenuSeparator,
+  // DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Button from "./Button";
@@ -16,10 +16,10 @@ import Button from "./Button";
 const NavBarButton = () => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex">
+      <DropdownMenuTrigger className="flex w-fit">
         <Button text="Login to portal" nav />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className={"w-[155px] space-y-4 py-3 max-w-[155px] overflow-hidden"}>
+      <DropdownMenuContent className={"w-[146px] space-y-4 py-3 lg:w-[155px] overflow-hidden"}>
         <DropdownMenuLabel className={"border"}>
           <Button text="As Instructor" nav />
         </DropdownMenuLabel>

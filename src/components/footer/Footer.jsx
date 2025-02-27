@@ -1,16 +1,16 @@
 import React from "react";
 
-import logo from "../../assets/icons/logo.svg";
-import line from "../../assets/icons/line.svg";
-import textIcon from "../../assets/icons/textIcon.svg";
-import phone from "../../assets/icons/phone.svg";
-import email from "../../assets/icons/email.svg";
-import linkedln from "../../assets/icons/linkedln.svg";
-import twitter from "../../assets/icons/twitter.svg";
-import insta from "../../assets/icons/insta.svg";
-import facebook from "../../assets/icons/facebook.svg";
-import divider from "../../assets/icons/divider.svg";
-import deskfootericon from "../../assets/icons/deskfootericon.svg";
+import logo from "/assets/Icons/logo.svg";
+import line from "/assets/Icons/line.svg";
+import textIcon from "/assets/Icons/textIcon.svg";
+import phone from "/assets/Icons/phone.svg";
+import email from "/assets/Icons/email.svg";
+import linkedln from "/assets/Icons/linkedln.svg";
+import twitter from "/assets/Icons/twitter.svg";
+import insta from "/assets/Icons/insta.svg";
+import facebook from "/assets/Icons/facebook.svg";
+import divider from "/assets/Icons/divider.svg";
+import deskfootericon from "/assets/Icons/deskfootericon.svg";
 
 const Footer = () => {
   return (

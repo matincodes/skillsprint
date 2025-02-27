@@ -1,6 +1,6 @@
 import React from "react";
 
-const WhyChooseSkillSprintCard = (e) => {
+const SkillCard = (e) => {
   return (
     <div className="bg-[#121212] rounded-[10px] text-white font-inter relative lg:h-[380px] h-[430px] p-[20px] flex flex-col space-y-3 overflow-hidden">
       <>
@@ -26,4 +26,4 @@ const WhyChooseSkillSprintCard = (e) => {
   );
 };
 
-export default WhyChooseSkillSprintCard;
+export default SkillCard;
