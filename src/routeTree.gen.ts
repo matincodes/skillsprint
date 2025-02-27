@@ -8,14 +8,28 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as ProgrammesIndexImport } from './routes/programmes/index'
+import { Route as DashboardIndexImport } from './routes/dashboard/index'
+import { Route as DashboardDashboardLayoutImport } from './routes/dashboard/_dashboardLayout'
+
+// Create Virtual Routes
+
+const DashboardImport = createFileRoute('/dashboard')()
 
 // Create/Update Routes
+
+const DashboardRoute = DashboardImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AboutRoute = AboutImport.update({
   id: '/about',
@@ -33,6 +47,17 @@ const ProgrammesIndexRoute = ProgrammesIndexImport.update({
   id: '/programmes/',
   path: '/programmes/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardIndexRoute = DashboardIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardDashboardLayoutRoute = DashboardDashboardLayoutImport.update({
+  id: '/_dashboardLayout',
+  getParentRoute: () => DashboardRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -53,6 +78,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/_dashboardLayout': {
+      id: '/dashboard/_dashboardLayout'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardDashboardLayoutImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexImport
+      parentRoute: typeof DashboardImport
+    }
     '/programmes/': {
       id: '/programmes/'
       path: '/programmes'
@@ -65,15 +111,32 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
+interface DashboardRouteChildren {
+  DashboardDashboardLayoutRoute: typeof DashboardDashboardLayoutRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardDashboardLayoutRoute: DashboardDashboardLayoutRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard': typeof DashboardDashboardLayoutRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/programmes': typeof ProgrammesIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard': typeof DashboardIndexRoute
   '/programmes': typeof ProgrammesIndexRoute
 }
 
@@ -81,27 +144,39 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/dashboard/_dashboardLayout': typeof DashboardDashboardLayoutRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/programmes/': typeof ProgrammesIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/programmes'
+  fullPaths: '/' | '/about' | '/dashboard' | '/dashboard/' | '/programmes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/programmes'
-  id: '__root__' | '/' | '/about' | '/programmes/'
+  to: '/' | '/about' | '/dashboard' | '/programmes'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/dashboard'
+    | '/dashboard/_dashboardLayout'
+    | '/dashboard/'
+    | '/programmes/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
   ProgrammesIndexRoute: typeof ProgrammesIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  DashboardRoute: DashboardRouteWithChildren,
   ProgrammesIndexRoute: ProgrammesIndexRoute,
 }
 
@@ -117,6 +192,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/dashboard",
         "/programmes/"
       ]
     },
@@ -125,6 +201,21 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.jsx"
+    },
+    "/dashboard": {
+      "filePath": "dashboard",
+      "children": [
+        "/dashboard/_dashboardLayout",
+        "/dashboard/"
+      ]
+    },
+    "/dashboard/_dashboardLayout": {
+      "filePath": "dashboard/_dashboardLayout.jsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/": {
+      "filePath": "dashboard/index.jsx",
+      "parent": "/dashboard"
     },
     "/programmes/": {
       "filePath": "programmes/index.jsx"
