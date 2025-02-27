@@ -6,8 +6,11 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
+  // SheetHeader,
+  // SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+// import { Menu } from "lucide-react";
 
 const NavBar = () => {
   const pathname = useLocation();
@@ -38,8 +41,8 @@ const NavBar = () => {
             About
           </Link>
           <Link
-            to="/programme"
-            className={`${active == "/programme" ? "text-main" : ""} font-[300] text-[14px] hover:text-main`}
+            to="/programmes"
+            className={`${active == "/programmes" ? "text-main" : ""} font-[300] text-[14px] hover:text-main`}
           >
             Programme
           </Link>

@@ -1,8 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
-import Button from "./Button/Button";
+import Button from "../Button/Button";
 
-const ProgrammCard = ({ image , description , role }) => {
+const ProgrammeCard = ({ image , description , role }) => {
   return (
     <div className=" bg-[#121212] rounded-lg ">
       <img className="w-full rounded-t-lg " src={image} />
@@ -26,11 +25,5 @@ const ProgrammCard = ({ image , description , role }) => {
   );
 };
 
-ProgrammCard.propTypes = {
-  image: PropTypes.string,
-  role: PropTypes.string,
-  description: PropTypes.string,
 
-};
-
-export default ProgrammCard;
+export default ProgrammeCard;
