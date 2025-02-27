@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import faqs from "@/data/faq";
+import faqs from "@/data/faqData";
 
 const FAQ = () => {
   const [active, setActive] = useState("General Information");

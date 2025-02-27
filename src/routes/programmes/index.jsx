@@ -78,7 +78,7 @@ function RouteComponent() {
         {/* Header Section */}
         <div className="mt-36 flex justify-center">
           <span className=" flex flex-col items-start">
-            <img src={spack} alt="Skill Sprint Logo" className="-ml-7 lg:-mb-5 lg:-ml-5 " />
+            <img src={spack} alt="Skill Sprint Logo" className="-ml-7 lg:-mb-5 lg:-ml-5 lg:w-[60px]" />
             <h1 className="lg:text-6xl lg:leading-18 font-bold text-4xl text-center text-white font-mont tracking-[3px]">
               Explore Our <br /> Programmes
             </h1>
