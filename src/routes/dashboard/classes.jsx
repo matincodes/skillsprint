@@ -1,9 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/dashboard/classes')({
-  component: RouteComponent,
+  component: ClassesComponent,
 })
 
-function RouteComponent() {
-  return <div>Hello "/dashboard/classes"!</div>
+
+const ClassesComponent = ()=>{
+  return (
+    <>
+      <p>Classes</p>
+    </>
+  )
 }
