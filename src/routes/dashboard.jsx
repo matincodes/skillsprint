@@ -14,7 +14,7 @@ function DashboardLayout() {
       <SidebarProvider>
         <AppSidebar />
         <main className={cn(
-          'relative h-full overflow-hidden bg-gray-100 w-full',
+          'relative h-full overflow-hidden text-white w-full',
         )}>
             <Outlet />
         </main>
