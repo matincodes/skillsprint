@@ -7,8 +7,8 @@ export const Route = createFileRoute('/dashboard/classes')({
 
 const ClassesComponent = ()=>{
   return (
-    <>
+    <div className='border border-red-500 h-full'>
       <p>Classes</p>
-    </>
+    </div>
   )
 }

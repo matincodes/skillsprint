@@ -6,8 +6,8 @@ export const Route = createFileRoute('/dashboard/curriculum')({
 
 const CurriculumComponent = ()=>{
   return (
-    <>
+    <div className='border border-red-500 h-full'>
       <p>Curriculum</p>
-    </>
+    </div>
   )
 }
