@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 
 const TopNav = () => {
   return (
-    <div className="px-2 py-5 flex justify-between items-center">
+    <div className="px-2 py-5 flex justify-between items-center ">
       <div className="w-[45%] flex items-center bg-[#121212] rounded-[8px] px-2 py-1">
         <Search className="text-paragraph cursor-pointer" />
         <Input

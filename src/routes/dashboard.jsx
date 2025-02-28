@@ -11,7 +11,7 @@ export const Route = createFileRoute("/dashboard")({
 
 function DashboardLayout() {
   return (
-    <div className="relative h-full w-full bg-black flex px-[60px]">
+    <div className="relative h-full w-full bg-black flex lg:px-[60px] px-[10px]">
       <SidebarProvider>
         <AppSidebar />
         <main className={cn(
