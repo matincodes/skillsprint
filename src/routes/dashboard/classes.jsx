@@ -1,54 +1,58 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import connick from "../../assets/image/connick.svg";
-import liveStreamIcon from "../../assets/icons/liveStreamIcon.svg";
-import ClasseCard from "@/components/Card/ClasseCard";
+import ClasseCard from "@/components/Cards/ClasseCard";
 import classesData from "@/data/classesData";
 import "../../routes/programmes/programmes.css";
-import studentsImage from "../../assets/image/students.png"
+import studentsImage from "../../assets/image/students.png";
+import { Radio } from "lucide-react";
 export const Route = createFileRoute("/dashboard/classes")({
   component: ClassesComponent,
 });
 
 const ClassesComponent = () => {
   return (
-    <div className="flex flex-col   gap-8 lg:px-6 ">
+    <div className="flex flex-col   gap-8 ">
       <div className="flex flex-col gap-3 px-5 ">
         <p className="text-paragraph font-inter text-sm font-normal lg:text-base">
           Live classes
         </p>
         <div className="flex flex-col gap-3 lg:flex-row lg:justify-end lg:gap-7">
-          <img src={connick} className="lg:w-[50%] h-full" />
+          <img src={connick} className=" h-full" />
           <div className="flex flex-col gap-5  lg:justify-between">
             {/* text contentner */}
             <div className="flex flex-col gap-2.5 items-start  ">
-              <span className="bg-[#DC143C] text-black px-2 ">
-                <b className="font-inter font-medium text-[12px] px-1 lg:text-base">
+              <span className="bg-[#DC143C] text-black px-1 ">
+                <b className="font-inter font-medium text-[12px] lg:text-sm">
                   LIVE
                 </b>
               </span>
-              <p className="font-mono font-normal text-[22px] leading-6 lg:text-[23px]">
+              <p className="font-sora font-normal text-[22px] leading-7 lg:text-[23px]">
                 Understanding UI/UX Basics: Week 1 - Class 3
               </p>
-              <p className="text-paragraph text-[13px] font-inter font-normal leading-5 lg:text-base lg:leading-7">
+              <p className="text-paragraph text-[13px] font-inter font-normal lg:text-base lg:leading-7">
                 Learn the essentials of UI/UX design, including usability,
                 wireframing, and user-centered design principles.
               </p>
             </div>
             {/* buttons layout */}
             <div className="w-full flex items-center justify-between font-semibold lg:justify-start lg:gap-10">
-              <button className="bg-[#AE752C] flex items-center lg:text-base gap-1.5 py-1.5 px-6 rounded-[8px]  ">
-                Join Live Class
-                <img src={liveStreamIcon} />
-              </button>
-              {/* hidden at media with of 768px */}
-              <button className="text-[#AE752C] flex items-center gap-1.5 lg:hidden">
+              <Link
+                to="/"
+                className="font-[400] duration-300 ease-in-out lg:text-[15px] text-[12px] lg:px-8 px-4 py-2 bg-main text-white rounded-[7px] flex gap-2 items-center"
+              >
+                Join Live Class <Radio className="w-5" />{" "}
+              </Link>
+              <Link
+                to="/"
+                className="font-[400] lg:hidden duration-300 ease-in-out lg:text-[15px] text-[12px] lg:px-8 px-5 py-2 hover:bg-main hover:text-white text-main rounded-[7px] flex gap-2 items-center"
+              >
                 View Last Recording
-                <img src={liveStreamIcon} className="text-[!#AE752C]" />
-              </button>
+                <Radio className="w-5" />
+              </Link>
+              
               {/* flex at media with of 768px */}
               <span className="hidden lg:flex items-center gap-3 text-paragraph text-base ">
-                <img src={studentsImage}/>
-                5 students in class
+                <img src={studentsImage} />5 students in class
               </span>
             </div>
           </div>
@@ -65,7 +69,7 @@ const ClassesComponent = () => {
           </button>
         </span>
         <div className="custom-scroll">
-          <div className="flex gap-4 w-[750px] md:w-full">
+          <div className="flex gap-4 w-[750px] md:w-[900px] lg:w-full">
             {classesData.map((items) => (
               <ClasseCard
                 key={items.id}
