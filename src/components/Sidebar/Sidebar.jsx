@@ -26,7 +26,7 @@ const AppSidebar = () => {
           <SidebarGroupLabel className={`p-2 flex`}>
             {/* Avatar */}
             <Avatar>
-              <AvatarImage src="/assets/avatar.png" />
+              <AvatarImage src="/assets/avatar.png" className={'size-12'} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             {/* User Info */}
