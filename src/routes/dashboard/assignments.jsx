@@ -6,8 +6,8 @@ export const Route = createFileRoute('/dashboard/assignments')({
 
 const AssignmentComponent = ()=>{
   return (
-    <>
+    <div className='border border-red-500 h-full'>
       <p>Assigments</p>
-    </>
+    </div>
   )
 }
