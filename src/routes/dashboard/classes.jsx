@@ -19,7 +19,7 @@ const ClassesComponent = () => {
         <div className="flex flex-col gap-3 lg:flex-row lg:justify-end lg:gap-7">
           <img src={connick} className=" h-full" />
           <div className="flex flex-col gap-5  lg:justify-between">
-            {/* text contentner */}
+            {/* text container */}
             <div className="flex flex-col gap-2.5 items-start  ">
               <span className="bg-[#DC143C] text-black px-1 ">
                 <b className="font-inter font-medium text-[12px] lg:text-sm">
