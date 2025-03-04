@@ -18,6 +18,7 @@ import { Route as ProgrammesIndexImport } from './routes/programmes/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
 import { Route as DashboardSettingsImport } from './routes/dashboard/settings'
 import { Route as DashboardQuizzesImport } from './routes/dashboard/quizzes'
+import { Route as DashboardProfileImport } from './routes/dashboard/profile'
 import { Route as DashboardCurriculumImport } from './routes/dashboard/curriculum'
 import { Route as DashboardClassesImport } from './routes/dashboard/classes'
 import { Route as DashboardAssignmentsImport } from './routes/dashboard/assignments'
@@ -64,6 +65,12 @@ const DashboardSettingsRoute = DashboardSettingsImport.update({
 const DashboardQuizzesRoute = DashboardQuizzesImport.update({
   id: '/quizzes',
   path: '/quizzes',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardProfileRoute = DashboardProfileImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => DashboardRoute,
 } as any)
 
@@ -144,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardCurriculumImport
       parentRoute: typeof DashboardImport
     }
+    '/dashboard/profile': {
+      id: '/dashboard/profile'
+      path: '/profile'
+      fullPath: '/dashboard/profile'
+      preLoaderRoute: typeof DashboardProfileImport
+      parentRoute: typeof DashboardImport
+    }
     '/dashboard/quizzes': {
       id: '/dashboard/quizzes'
       path: '/quizzes'
@@ -182,6 +196,7 @@ interface DashboardRouteChildren {
   DashboardAssignmentsRoute: typeof DashboardAssignmentsRoute
   DashboardClassesRoute: typeof DashboardClassesRoute
   DashboardCurriculumRoute: typeof DashboardCurriculumRoute
+  DashboardProfileRoute: typeof DashboardProfileRoute
   DashboardQuizzesRoute: typeof DashboardQuizzesRoute
   DashboardSettingsRoute: typeof DashboardSettingsRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
@@ -192,6 +207,7 @@ const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardAssignmentsRoute: DashboardAssignmentsRoute,
   DashboardClassesRoute: DashboardClassesRoute,
   DashboardCurriculumRoute: DashboardCurriculumRoute,
+  DashboardProfileRoute: DashboardProfileRoute,
   DashboardQuizzesRoute: DashboardQuizzesRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
   DashboardIndexRoute: DashboardIndexRoute,
@@ -209,6 +225,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/assignments': typeof DashboardAssignmentsRoute
   '/dashboard/classes': typeof DashboardClassesRoute
   '/dashboard/curriculum': typeof DashboardCurriculumRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/quizzes': typeof DashboardQuizzesRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -222,6 +239,7 @@ export interface FileRoutesByTo {
   '/dashboard/assignments': typeof DashboardAssignmentsRoute
   '/dashboard/classes': typeof DashboardClassesRoute
   '/dashboard/curriculum': typeof DashboardCurriculumRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/quizzes': typeof DashboardQuizzesRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard': typeof DashboardIndexRoute
@@ -237,6 +255,7 @@ export interface FileRoutesById {
   '/dashboard/assignments': typeof DashboardAssignmentsRoute
   '/dashboard/classes': typeof DashboardClassesRoute
   '/dashboard/curriculum': typeof DashboardCurriculumRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
   '/dashboard/quizzes': typeof DashboardQuizzesRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -253,6 +272,7 @@ export interface FileRouteTypes {
     | '/dashboard/assignments'
     | '/dashboard/classes'
     | '/dashboard/curriculum'
+    | '/dashboard/profile'
     | '/dashboard/quizzes'
     | '/dashboard/settings'
     | '/dashboard/'
@@ -265,6 +285,7 @@ export interface FileRouteTypes {
     | '/dashboard/assignments'
     | '/dashboard/classes'
     | '/dashboard/curriculum'
+    | '/dashboard/profile'
     | '/dashboard/quizzes'
     | '/dashboard/settings'
     | '/dashboard'
@@ -278,6 +299,7 @@ export interface FileRouteTypes {
     | '/dashboard/assignments'
     | '/dashboard/classes'
     | '/dashboard/curriculum'
+    | '/dashboard/profile'
     | '/dashboard/quizzes'
     | '/dashboard/settings'
     | '/dashboard/'
@@ -328,6 +350,7 @@ export const routeTree = rootRoute
         "/dashboard/assignments",
         "/dashboard/classes",
         "/dashboard/curriculum",
+        "/dashboard/profile",
         "/dashboard/quizzes",
         "/dashboard/settings",
         "/dashboard/"
@@ -347,6 +370,10 @@ export const routeTree = rootRoute
     },
     "/dashboard/curriculum": {
       "filePath": "dashboard/curriculum.jsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/profile": {
+      "filePath": "dashboard/profile.jsx",
       "parent": "/dashboard"
     },
     "/dashboard/quizzes": {
