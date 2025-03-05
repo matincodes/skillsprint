@@ -13,39 +13,37 @@ const UpSkillCard = ({
 }) => {
   return (
     <div
-      className={cn(
-        "flex items-center relative bg-center bg-no-repeat",
-        width && `w-[${width}]`,
-        height && `h-[${height}]`,
-        `bg-[${bg}]`
-      )}
+      className="flex items-center relative bg-center bg-no-repeat"
+      style={{ 
+        backgroundImage: `url(${bg})`, 
+        backgroundSize: bgSize,
+        width: width,
+        height: height 
+      }}
     >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-[#1414146c]" />
-
-      {/* Main Text */}
-      <p
-        className={cn(
-          "absolute bottom-0 font-inter font-semibold text-white p-6",
-          textSize && `text-[${textSize}]`
-        )}
+      <div className="absolute top-0 left-0 h-full w-full bg-[#1414146c]"></div>
+      <p 
+        className="absolute bottom-0 font-inter font-[600] p-6 text-white"
+        style={{ fontSize: textSize }}
       >
         {text}
       </p>
 
-      {/* Responsive adjustments */}
-      <div className="md:hidden">
-        <p
-          className={cn(
-            "absolute bottom-0 text-white p-3",
-            textMobileSize && `text-[${textMobileSize}]`,
-            mobileWidth && `w-[${mobileWidth}]`,
-            mobileHeight && `h-[${mobileHeight}]`
-          )}
-        >
-          {text}
-        </p>
-      </div>
+      {/* Mobile Styles */}
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .flex {
+              width: ${mobileWidth} !important;
+              height: ${mobileHeight} !important;
+            }
+            .absolute p {
+              font-size: ${textMobileSize} !important;
+              padding: 12px;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };
