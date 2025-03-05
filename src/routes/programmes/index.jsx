@@ -8,6 +8,7 @@ import UpSkillCard from "@/components/Cards/UpSkillCard";
 import { upskillCard } from "@/data/homeCardData";
 import NavBar from "@/components/Navbar/NavBar";
 import Footer from "@/components/Footer/Footer";
+import ExploreCard from "@/components/Cards/ExploreCard";
 
 // Route Configuration
 export const Route = createFileRoute("/programmes/")({
@@ -17,20 +18,46 @@ export const Route = createFileRoute("/programmes/")({
 // Categories & Filtering Logic
 const categories = [
   { label: "All", filter: () => programmeData },
-  { label: "Tech & Software Development", filter: () => programmeData.filter((item) => item.category === "Development") },
-  { label: "Product & Graphic Design", filter: () => programmeData.filter((item) => item.category === "Design") },
-  { label: "Cybersecurity & Cloud Computing", filter: () => programmeData.filter((item) => item.category === "Security & Cloud") },
-  { label: "Data Analytics & Artificial Intelligence", filter: () => programmeData.filter((item) => item.category === "Data & AI") },
-  { label: "Business & Marketing", filter: () => programmeData.filter((item) => item.category === "Business & Marketing") },
-  { label: "Engineering & Hardware", filter: () => programmeData.filter((item) => item.category === "Engineering & Hardware") },
+  {
+    label: "Tech & Software Development",
+    filter: () =>
+      programmeData.filter((item) => item.category === "Development"),
+  },
+  {
+    label: "Product & Graphic Design",
+    filter: () => programmeData.filter((item) => item.category === "Design"),
+  },
+  {
+    label: "Cybersecurity & Cloud Computing",
+    filter: () =>
+      programmeData.filter((item) => item.category === "Security & Cloud"),
+  },
+  {
+    label: "Data Analytics & Artificial Intelligence",
+    filter: () => programmeData.filter((item) => item.category === "Data & AI"),
+  },
+  {
+    label: "Business & Marketing",
+    filter: () =>
+      programmeData.filter((item) => item.category === "Business & Marketing"),
+  },
+  {
+    label: "Engineering & Hardware",
+    filter: () =>
+      programmeData.filter(
+        (item) => item.category === "Engineering & Hardware"
+      ),
+  },
 ];
 
 // Button Component for Reusability
 const CategoryButton = ({ label, isActive, onClick }) => (
   <button
     onClick={onClick}
-    className={`text-sm px-5 py-2 text-white flex items-center justify-center rounded-2xl cursor-pointer font-inter ${
-      isActive ? "bg-[#121212] font-bold" : "font-normal border border-[#808080]"
+    className={`lg:text-lg text-sm px-5 py-2 text-white flex items-center justify-center rounded-3xl cursor-pointer font-inter ${
+      isActive
+        ? "bg-[#121212] font-bold"
+        : "font-light border-[3px] border-[#121212]"
     }`}
   >
     {label}
@@ -47,53 +74,46 @@ function RouteComponent() {
       {/* NavBar */}
 
       {/* Main Content */}
-      <div className="bg-black flex justify-center">
-        <div className="w-[90%] lg:w-[100%] flex flex-col items-center">
-          {/* Header Section */}
-          <div className="mt-36 w-80">
-            <img src={spack} alt="Skill Sprint Logo" className="-mb-5 ml-2 lg:-ml-5" />
-            <h1 className="lg:text-[45px] font-bold text-4xl text-center text-white font-mont tracking-[3px]">
-              Explore Our Programmes
+      <div className="bg-black flex flex-col ">
+        {/* Header Section */}
+        <div className="mt-36 flex justify-center">
+          <span className=" flex flex-col items-start">
+            <img src={spack} alt="Skill Sprint Logo" className="-ml-7 lg:-mb-5 lg:-ml-5 lg:w-[60px]" />
+            <h1 className="lg:text-6xl lg:leading-18 font-bold text-4xl text-center text-white font-mont tracking-[3px]">
+              Explore Our <br /> Programmes
             </h1>
-          </div>
+          </span>
+        </div>
 
-          {/* Explore Card Section */}
-          <div className="w-full md:flex md:flex-row justify-center gap-2 mt-20">
-              {upskillCard.map((card) => (
-                <UpSkillCard 
-                  bg={card.bg} 
-                  key={card.id} 
-                  text={card.text} 
-                  textSize="15px"
-                  height="300px"
-                  
-                  />
+        {/* Explore Card Section */}
+        <div className=" lg:gap-3 w-full grid grid-cols-3 h-72 lg:flex lg:flex-row justify-center gap-2 mt-20">
+          {upskillCard.map((card) => (
+            <ExploreCard bg={card.bg} key={card.id} text={card.text} />
+          ))}
+        </div>
+
+        {/* Programme Category Selection */}
+        <div className="w-full lg:gap-12  flex flex-col items-center gap-7 mt-40">
+          <h2 className="lg:text-[45px] tracking-[1px] font-bold text-2xl text-white  text-center lg:w-full font-mont">
+            Choose Programme <br className="lg:hidden"/> Category
+          </h2>
+          <div className="custom-scroll">
+            <div className=" lg:w-full flex lg:gap-x-10 lg:gap-y-5 gap-x-5 lg:flex-wrap px-7   lg:justify-center">
+              {categories.map((category, index) => (
+                <CategoryButton
+                  key={index}
+                  label={category.label}
+                  isActive={activeCategory === index}
+                  onClick={() => setActiveCategory(index)}
+                />
               ))}
-          </div>
-
-          {/* Programme Category Selection */}
-          <div className="w-full lg:w-[80%] flex flex-col items-center gap-7 mt-40">
-            <h2 className="lg:text-3xl tracking-[3px] font-bold text-2xl text-white w-80 text-center lg:w-full font-mont">
-              Choose a Programme Category
-            </h2>
-            <div className="custom-scroll">
-              <div className="w-[1700px] lg:w-full flex justify-center gap-8 gap-x-16 lg:flex-wrap">
-                {categories.map((category, index) => (
-                  <CategoryButton
-                    key={index}
-                    label={category.label}
-                    isActive={activeCategory === index}
-                    onClick={() => setActiveCategory(index)}
-                  />
-                ))}
-              </div>
             </div>
           </div>
+        </div>
 
-          {/* Programme Cards Display */}
-          <div className="w-full lg:w-[80%] mt-14 grid grid-cols-1 gap-20 md:gap-10 md:grid-cols-2 md:mb-56">
-            <Programmes data={categories[activeCategory].filter()} />
-          </div>
+        {/* Programme Cards Display */}
+        <div className="lg:mt-[120px] pb-55 w-full px-7 lg:px-40 mt-14 grid grid-cols-1 gap-20 md:gap-10 md:grid-cols-2 md:mb-56">
+          <Programmes data={categories[activeCategory].filter()} />
         </div>
       </div>
       {/* Main Content */}
