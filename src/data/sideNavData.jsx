@@ -10,7 +10,7 @@ const sideNavData = [
          },
          {
            title: "Announcements",
-           url: "/dashboard/announcements",
+          //  url: "/dashboard/announcements",
            icon: '/assets/Icons/announcements.png',
          },
        ],

@@ -13,7 +13,7 @@ export const Route = createFileRoute("/dashboard/")({
 
 const DashboardComponent = () => {
   return (
-    <div className="grid h-full p-2 ">
+    <div className="grid p-2">
       {/* TopSection */}
       <div className="flex">
         {/* Left */}
@@ -100,10 +100,15 @@ const DashboardComponent = () => {
           </span>
 
           <div className="rounded-[6px] space-y-2">
-            {LeaderBoardCard.map(user=>(
-               <LeaderBoard fullName={user.fullName} image={user.image} point={user.point} level={user.level} type={user.type} />
+            {LeaderBoardCard.map((user) => (
+              <LeaderBoard
+                fullName={user.fullName}
+                image={user.image}
+                point={user.point}
+                level={user.level}
+                type={user.type}
+              />
             ))}
-
           </div>
         </div>
         {/* Right */}
@@ -112,4 +117,3 @@ const DashboardComponent = () => {
     </div>
   );
 };
-
