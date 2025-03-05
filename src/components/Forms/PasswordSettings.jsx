@@ -37,7 +37,7 @@ export function PasswordSettings() {
             <div className="h-8 border-b-2 w-full flex justify-between border-[#282828]">
               <input
                 type={hidePassword1 ? "password" : ""}
-                className="outline-0 w-full font-inter text-xs font-light px-3 text-paragraph lg:text-sm"
+                className="outline-0 w-full font-inter text-xs font-light px-3 text-white placeholder:text-white lg:text-sm"
                 placeholder={hidePassword1 ? "*************" : "Current Password"}
                 {...register("Password", { required: true })}
               />
@@ -47,7 +47,7 @@ export function PasswordSettings() {
                 <LockKeyholeOpen onClick={() => setHidePassword1(true)} height={18} className="text-[#AE752C] cursor-pointer" />
               )}
             </div>
-            {errors.Password && <span className="font-normal text-sm text-red-500">fill cannot be empty</span>}
+            {errors.Password && <span className="font-normal text-xs text-red-500">fill cannot be empty</span>}
           </div>
 
           {/* Confirm Password */}
@@ -55,9 +55,9 @@ export function PasswordSettings() {
             <div className="h-8 border-b-2 w-full flex justify-between border-[#282828]">
               <input
                 type={hidePassword2 ? "password" : ""}
-                className="outline-0 w-full font-inter text-xs font-light px-3 text-paragraph lg:text-sm"
+                className="outline-0 w-full font-inter text-xs font-light px-3 text-white placeholder:text-white lg:text-sm"
                 placeholder={hidePassword2 ? "*************" : "Current Password"}
-                {...register("comfirmedPassword")}
+                {...register("comfirmedPassword" , { required: true })}
               />
               {hidePassword2 ? (
                 <LockKeyhole onClick={() => setHidePassword2(false)} height={18} className="text-[#AE752C] cursor-pointer" />
@@ -65,7 +65,7 @@ export function PasswordSettings() {
                 <LockKeyholeOpen onClick={() => setHidePassword2(true)} height={18} className="text-[#AE752C] cursor-pointer" />
               )}
             </div>
-            {errors.Password && <span className="font-normal text-sm text-red-500">fill cannot be empty</span>}
+            {errors.comfirmedPassword && <span className="font-normal text-xs text-red-500">fill cannot be empty</span>}
           </div>
         </div>
 
