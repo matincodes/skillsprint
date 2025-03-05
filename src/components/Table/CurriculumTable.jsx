@@ -14,8 +14,11 @@ import curriculumData from "@/data/curriculumData";
 import { FolderOpen, CircleSmall, Ellipsis } from "lucide-react";
 
 export function CurriculumTable() {
+  const completed = "text-[#0950C3] bg-[#020E22]";
+  const inComplete = "text-[#C28B0A] bg-[#181101]";
+
   return (
-    <Table  className="text-paragraph font-medium text-base font-inter  bg-[#121212] rounded-sm mt-5 ">
+    <Table className="text-paragraph font-medium text-base font-inter  bg-[#121212] rounded-sm mt-5 ">
       <TableHeader>
         <TableRow className="!border-b-2 border-black ">
           <TableHead className="w-[40px]"></TableHead>
@@ -45,11 +48,12 @@ export function CurriculumTable() {
                 {items.instructor}
               </span>
             </TableCell>
-            <TableCell
-              className={`${items.status === "Completed" ? "text-[#0950C3]" : "text-[#C28B0A]"}`}
-            >
-              <span className="flex items-center">
+            <TableCell>
+              <span
+                className={`${items.status === "Completed" ? completed : inComplete} flex items-center w-[120px] rounded-sm`}
+              >
                 <CircleSmall
+                  height={19}
                   fill={`${items.status === "Completed" ? "#0950C3" : "#C28B0A"}`}
                 />
 
@@ -57,7 +61,7 @@ export function CurriculumTable() {
               </span>
             </TableCell>
             <TableCell>
-              <Ellipsis className="cursor-pointer" fill="#868C98" />
+              <Ellipsis className="cursor-pointer " fill="#868C98" />
             </TableCell>
           </TableRow>
         </TableBody>
