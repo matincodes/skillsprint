@@ -11,11 +11,26 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as DashboardImport } from './routes/dashboard'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as ProgrammesIndexImport } from './routes/programmes/index'
+import { Route as DashboardIndexImport } from './routes/dashboard/index'
+import { Route as DashboardSettingsImport } from './routes/dashboard/settings'
+import { Route as DashboardQuizzesImport } from './routes/dashboard/quizzes'
+import { Route as DashboardProfileImport } from './routes/dashboard/profile'
+import { Route as DashboardCurriculumImport } from './routes/dashboard/curriculum'
+import { Route as DashboardClassesImport } from './routes/dashboard/classes'
+import { Route as DashboardAssignmentsImport } from './routes/dashboard/assignments'
+import { Route as DashboardAnnouncementsImport } from './routes/dashboard/announcements'
 
 // Create/Update Routes
+
+const DashboardRoute = DashboardImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AboutRoute = AboutImport.update({
   id: '/about',
@@ -33,6 +48,54 @@ const ProgrammesIndexRoute = ProgrammesIndexImport.update({
   id: '/programmes/',
   path: '/programmes/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardIndexRoute = DashboardIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardSettingsRoute = DashboardSettingsImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardQuizzesRoute = DashboardQuizzesImport.update({
+  id: '/quizzes',
+  path: '/quizzes',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardProfileRoute = DashboardProfileImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardCurriculumRoute = DashboardCurriculumImport.update({
+  id: '/curriculum',
+  path: '/curriculum',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardClassesRoute = DashboardClassesImport.update({
+  id: '/classes',
+  path: '/classes',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardAssignmentsRoute = DashboardAssignmentsImport.update({
+  id: '/assignments',
+  path: '/assignments',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardAnnouncementsRoute = DashboardAnnouncementsImport.update({
+  id: '/announcements',
+  path: '/announcements',
+  getParentRoute: () => DashboardRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -53,6 +116,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/announcements': {
+      id: '/dashboard/announcements'
+      path: '/announcements'
+      fullPath: '/dashboard/announcements'
+      preLoaderRoute: typeof DashboardAnnouncementsImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/assignments': {
+      id: '/dashboard/assignments'
+      path: '/assignments'
+      fullPath: '/dashboard/assignments'
+      preLoaderRoute: typeof DashboardAssignmentsImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/classes': {
+      id: '/dashboard/classes'
+      path: '/classes'
+      fullPath: '/dashboard/classes'
+      preLoaderRoute: typeof DashboardClassesImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/curriculum': {
+      id: '/dashboard/curriculum'
+      path: '/curriculum'
+      fullPath: '/dashboard/curriculum'
+      preLoaderRoute: typeof DashboardCurriculumImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/profile': {
+      id: '/dashboard/profile'
+      path: '/profile'
+      fullPath: '/dashboard/profile'
+      preLoaderRoute: typeof DashboardProfileImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/quizzes': {
+      id: '/dashboard/quizzes'
+      path: '/quizzes'
+      fullPath: '/dashboard/quizzes'
+      preLoaderRoute: typeof DashboardQuizzesImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/settings': {
+      id: '/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardSettingsImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexImport
+      parentRoute: typeof DashboardImport
+    }
     '/programmes/': {
       id: '/programmes/'
       path: '/programmes'
@@ -65,15 +191,58 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
+interface DashboardRouteChildren {
+  DashboardAnnouncementsRoute: typeof DashboardAnnouncementsRoute
+  DashboardAssignmentsRoute: typeof DashboardAssignmentsRoute
+  DashboardClassesRoute: typeof DashboardClassesRoute
+  DashboardCurriculumRoute: typeof DashboardCurriculumRoute
+  DashboardProfileRoute: typeof DashboardProfileRoute
+  DashboardQuizzesRoute: typeof DashboardQuizzesRoute
+  DashboardSettingsRoute: typeof DashboardSettingsRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAnnouncementsRoute: DashboardAnnouncementsRoute,
+  DashboardAssignmentsRoute: DashboardAssignmentsRoute,
+  DashboardClassesRoute: DashboardClassesRoute,
+  DashboardCurriculumRoute: DashboardCurriculumRoute,
+  DashboardProfileRoute: DashboardProfileRoute,
+  DashboardQuizzesRoute: DashboardQuizzesRoute,
+  DashboardSettingsRoute: DashboardSettingsRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/dashboard/announcements': typeof DashboardAnnouncementsRoute
+  '/dashboard/assignments': typeof DashboardAssignmentsRoute
+  '/dashboard/classes': typeof DashboardClassesRoute
+  '/dashboard/curriculum': typeof DashboardCurriculumRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
+  '/dashboard/quizzes': typeof DashboardQuizzesRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/programmes': typeof ProgrammesIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard/announcements': typeof DashboardAnnouncementsRoute
+  '/dashboard/assignments': typeof DashboardAssignmentsRoute
+  '/dashboard/classes': typeof DashboardClassesRoute
+  '/dashboard/curriculum': typeof DashboardCurriculumRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
+  '/dashboard/quizzes': typeof DashboardQuizzesRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard': typeof DashboardIndexRoute
   '/programmes': typeof ProgrammesIndexRoute
 }
 
@@ -81,27 +250,74 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/dashboard/announcements': typeof DashboardAnnouncementsRoute
+  '/dashboard/assignments': typeof DashboardAssignmentsRoute
+  '/dashboard/classes': typeof DashboardClassesRoute
+  '/dashboard/curriculum': typeof DashboardCurriculumRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
+  '/dashboard/quizzes': typeof DashboardQuizzesRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/programmes/': typeof ProgrammesIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/programmes'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/dashboard'
+    | '/dashboard/announcements'
+    | '/dashboard/assignments'
+    | '/dashboard/classes'
+    | '/dashboard/curriculum'
+    | '/dashboard/profile'
+    | '/dashboard/quizzes'
+    | '/dashboard/settings'
+    | '/dashboard/'
+    | '/programmes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/programmes'
-  id: '__root__' | '/' | '/about' | '/programmes/'
+  to:
+    | '/'
+    | '/about'
+    | '/dashboard/announcements'
+    | '/dashboard/assignments'
+    | '/dashboard/classes'
+    | '/dashboard/curriculum'
+    | '/dashboard/profile'
+    | '/dashboard/quizzes'
+    | '/dashboard/settings'
+    | '/dashboard'
+    | '/programmes'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/dashboard'
+    | '/dashboard/announcements'
+    | '/dashboard/assignments'
+    | '/dashboard/classes'
+    | '/dashboard/curriculum'
+    | '/dashboard/profile'
+    | '/dashboard/quizzes'
+    | '/dashboard/settings'
+    | '/dashboard/'
+    | '/programmes/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
   ProgrammesIndexRoute: typeof ProgrammesIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  DashboardRoute: DashboardRouteWithChildren,
   ProgrammesIndexRoute: ProgrammesIndexRoute,
 }
 
@@ -117,6 +333,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/dashboard",
         "/programmes/"
       ]
     },
@@ -125,6 +342,51 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.jsx"
+    },
+    "/dashboard": {
+      "filePath": "dashboard.jsx",
+      "children": [
+        "/dashboard/announcements",
+        "/dashboard/assignments",
+        "/dashboard/classes",
+        "/dashboard/curriculum",
+        "/dashboard/profile",
+        "/dashboard/quizzes",
+        "/dashboard/settings",
+        "/dashboard/"
+      ]
+    },
+    "/dashboard/announcements": {
+      "filePath": "dashboard/announcements.jsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/assignments": {
+      "filePath": "dashboard/assignments.jsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/classes": {
+      "filePath": "dashboard/classes.jsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/curriculum": {
+      "filePath": "dashboard/curriculum.jsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/profile": {
+      "filePath": "dashboard/profile.jsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/quizzes": {
+      "filePath": "dashboard/quizzes.jsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/settings": {
+      "filePath": "dashboard/settings.jsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/": {
+      "filePath": "dashboard/index.jsx",
+      "parent": "/dashboard"
     },
     "/programmes/": {
       "filePath": "programmes/index.jsx"

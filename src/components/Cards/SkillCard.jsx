@@ -20,7 +20,7 @@ const SkillCard = (e) => {
 
 
       {/* responsive */}
-      <img src={`${e.mobileImage}`} alt="Images" className={` bottom-[0px] absolute  w-[340px] right-[-50px] flex `} />
+      <img src={`${e.mobileImage}`} alt="Images" className={` bottom-[0px] absolute  w-[340px] right-[-50px] flex lg:hidden `} />
       {/* desktop */}
     </div>
   );

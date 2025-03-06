@@ -10,7 +10,6 @@ import SkillCard from "@/components/Cards/SkillCard";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/footer/Footer";
 
-
 export const Route = createFileRoute("/")({
   component: Index,
 });
@@ -105,14 +104,14 @@ function Index() {
           </div>
 
           {/*  */}
-          <div className="gap-[40px] flex flex-col lg:grid lg:grid-cols-2 justify-center items-center lg:p-[90px] p-[10px]">
+          <div className="gap-[40px] border border-red-500 flex flex-col lg:grid lg:grid-cols-2 justify-center items-center lg:p-[90px] p-[10px]">
             {skillCard.map((card) => (
               <SkillCard
                 key={card.id}
                 icon={card.icon}
                 mainText={card.mainText}
                 subText={card.subText}
-                // desktopImage={card.desktopImage}
+                desktopImage={card.desktopImage}
                 mobileImage={card.mobileImage}
                 position={card.position}
               />
