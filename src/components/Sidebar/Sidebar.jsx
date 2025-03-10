@@ -32,13 +32,13 @@ const AppSidebar = () => {
 
   return (
     <div className="lg:w-51 relative">
-      <Sidebar className={'w-50'}>
+      <Sidebar className={"w-50"}>
         <SidebarContent className={"relative"}>
-          <SidebarGroup className={'py-6 px-2 space-y-[50px]'}>
+          <SidebarGroup className={"py-6 px-2 space-y-[50px]"}>
             <SidebarGroupLabel>
               <Link
                 to="/dashboard/profile"
-                className={`${pathname == '/dashboard/profile' ? 'bg-black w-[230px] p-1 cursor-pointer rounded-[50px]' : '' } flex gap-2 items-center`}
+                className={`${pathname == "/dashboard/profile" ? "bg-black w-[230px] p-1 cursor-pointer rounded-[50px]" : ""} flex gap-2 items-center`}
               >
                 {/* Avatar */}
                 <Avatar>
@@ -50,7 +50,9 @@ const AppSidebar = () => {
                   <h1 className="text-[13px] text-white font-[300]">
                     Sophia Williams
                   </h1>
-                  <p className="text-paragraph text-[10px] font-[400]">View Profile</p>
+                  <p className="text-paragraph text-[10px] font-[400]">
+                    View Profile
+                  </p>
                 </div>
               </Link>
             </SidebarGroupLabel>
@@ -60,12 +62,13 @@ const AppSidebar = () => {
                 {sideNavData.map((group) => (
                   <div key={group.id}>
                     {group.category && (
-                      <p className="mt-[15px] text-[13.9px] ml-1 mb-3 font-[400]">{group.category}</p>
+                      <p className="mt-[15px] text-[13.9px] ml-1 mb-3 font-[400]">
+                        {group.category}
+                      </p>
                     )}
                     {group.links.map((item) => (
                       <SidebarMenuItem key={item.title}>
-                          
-                          <SidebarMenuButton
+                        <SidebarMenuButton
                           asChild
                           className={
                             `${
@@ -76,16 +79,13 @@ const AppSidebar = () => {
                           }
                           onClick={() => setActiveLink(item.url)}
                         >
-
-                          {
-                            item.title == "Settings" ? (
+                          {item.title == "Settings" ? (
                             <Link to={item.url} className="mt-[80px]">
                               <img src={item.icon} alt="" className="w-5" />
                               <span className="text-[13px] font-[400]">
                                 {item.title}
                               </span>
                             </Link>
-                            
                           ) : item.url ? (
                             <Link to={item.url}>
                               <img src={item.icon} alt="" className="w-5" />
@@ -153,10 +153,7 @@ const AppSidebar = () => {
                               </SheetContent>
                             </Sheet>
                           )}
-
                         </SidebarMenuButton>
-                        
-                        
                       </SidebarMenuItem>
                     ))}
                   </div>

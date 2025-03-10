@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 const ExploreCard = (e) => {
   return (
     <>
@@ -13,7 +13,7 @@ const ExploreCard = (e) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ExploreCard
+export default ExploreCard;

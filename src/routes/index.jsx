@@ -20,8 +20,8 @@ function Index() {
       {/* NavBar */}
       <NavBar />
       {/* NavBar */}
-        
-        {/* Main Content */}
+
+      {/* Main Content */}
       <div className="bg-black">
         {/* banner */}
 
@@ -43,7 +43,6 @@ function Index() {
 
             <Button text="Join the Free Program" />
 
-
             {/* <div className="w-[100%] border flex items-center justify-center "> */}
             <img
               src="/assets/Icons/arrow.png"
@@ -61,11 +60,9 @@ function Index() {
               className="lg:w-[310px] absolute lg:right-[-17px] lg:top-[280px] right-[-100px] top-[200px] w-[180px]"
             />
             {/* </div> */}
-
           </div>
         </div>
         {/* banner */}
-
 
         {/* *********** why to join *********** */}
         <div className="text-white grid lg:mt-[10px] mt-[20px] lg:mb-[15px] mb-[170px] relative ">
@@ -152,23 +149,21 @@ function Index() {
 
         {/* FAQ */}
         <div className="text-white flex justify-center items-center flex-col lg:space-y-6 space-y-8 p-4 py-[170px]">
-            <h2 className="font-[700] lg:text-[45px] text-[24px] tracking-[2px] lg:leading-[60px] leading-[30px] text-center">
-              Frequently asked questions
-            </h2>
+          <h2 className="font-[700] lg:text-[45px] text-[24px] tracking-[2px] lg:leading-[60px] leading-[30px] text-center">
+            Frequently asked questions
+          </h2>
 
           {/* Accordion */}
           <FAQ />
           {/* Accordion */}
         </div>
         {/* FAQ */}
-
-
       </div>
       {/* Main Content */}
 
       {/* Footer */}
       <Footer />
       {/* Footer */}
-    </>  
+    </>
   );
 }

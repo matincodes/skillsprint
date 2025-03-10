@@ -46,7 +46,7 @@ const NavBar = () => {
         </div>
 
         <div className="border grid ">
-          <Button text="Login to portal" nav />
+          <Button text="Login to portal" location="/student/register" nav />
         </div>
       </div>
       {/* Dashboard */}
@@ -56,9 +56,13 @@ const NavBar = () => {
         <img src="/assets/logo.png" alt="" className="w-[50px] " />
         <Sheet>
           <SheetTrigger asChild className="item-end">
-          <div className="grid justify-end">
-            <img src="/assets/menu.png" alt="" className="w-[30px] cursor-pointer" />
-          </div>
+            <div className="grid justify-end">
+              <img
+                src="/assets/menu.png"
+                alt=""
+                className="w-[30px] cursor-pointer"
+              />
+            </div>
           </SheetTrigger>
           <SheetContent
             side="left"
@@ -73,7 +77,7 @@ const NavBar = () => {
                 to="/"
                 className={`${active == "/" ? "text-main" : ""} font-[300] text-[14px] hover:text-main py-4 px-5`}
               >
-                Home
+                Home page
               </Link>
               <Link
                 to="/about"
@@ -88,7 +92,7 @@ const NavBar = () => {
                 Programme
               </Link>
 
-              <Button text="Login to portal" nav />
+              <Button text="Login to portal" location="/student/regsiter" nav />
             </SheetDescription>
           </SheetContent>
         </Sheet>

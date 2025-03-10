@@ -28,7 +28,6 @@ const Footer = () => {
             <li className="cursor-pointer">Program highlight</li>
             <li className="cursor-pointer">Waitlist</li>
             <li className="cursor-pointer">Faq</li>
-
           </ul>
         </div>
         <div className="w-full flex flex-col gap-12 h-auto ">
@@ -72,7 +71,9 @@ const Footer = () => {
               </span>
             </div>
           </div>
-          <p className="text-white font-light">©2024 Thynkcity All rights reserved.</p>
+          <p className="text-white font-light">
+            ©2024 Thynkcity All rights reserved.
+          </p>
         </div>
       </div>
       <div className="flex justify-center w-[80%]">

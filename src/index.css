@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap");
 
-
 @import "tailwindcss";
 
 @theme {
@@ -13,7 +12,7 @@
   /* Colors */
   --color-main: #ae752c;
   --color-paragraph: #808080;
-  --color-secondary: #AE752C;
+  --color-secondary: #ae752c;
   /* Colors */
 }
 
