@@ -8,11 +8,11 @@ export const Route = createFileRoute("/dashboard/curriculum")({
 
 const CurriculumComponent = () => {
   return (
-    <div className="">
-      <p className="text-paragraph font-medium font-inter text-base">
-        Course curriculum
-      </p>
-      <CurriculumTable />
+    <div className="px-3  w-full">
+      <p className="text-paragraph font-medium font-inter text-base">Course curriculum</p>
+     <div>
+     <CurriculumTable />
+     </div>
     </div>
   );
 };

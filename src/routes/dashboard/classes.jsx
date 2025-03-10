@@ -11,7 +11,7 @@ export const Route = createFileRoute("/dashboard/classes")({
 
 const ClassesComponent = () => {
   return (
-    <div className="flex flex-col   gap-8 ">
+    <div className="flex flex-col    gap-8 ">
       <div className="flex flex-col gap-3 px-5 ">
         <p className="text-paragraph font-inter text-sm font-normal lg:text-base">
           Live classes

@@ -8,10 +8,10 @@ export const Route = createFileRoute("/dashboard/settings")({
 
 const SettingsComponent = () => {
   return (
-    <div className="bg-[#121212] px-3 py-5 h-full">
-      <PasswordSettings />
-      <div className="border-[1px] border-black mt-10" />
-      <NotificationSettings />
+    <div className='bg-[#121212] px-7 py-5 h-full'>
+      <PasswordSettings/>
+      <div className='border-[1px] border-black mt-10'/>
+      <NotificationSettings/>
     </div>
   );
 };

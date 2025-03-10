@@ -40,10 +40,8 @@ export function PasswordSettings() {
             <div className="h-8 border-b-2 w-full flex justify-between border-[#282828]">
               <input
                 type={hidePassword1 ? "password" : ""}
-                className="outline-0 w-full font-inter text-xs font-light px-3 text-paragraph lg:text-sm"
-                placeholder={
-                  hidePassword1 ? "*************" : "Current Password"
-                }
+                className="outline-0 w-full font-inter text-xs font-light px-3 text-white placeholder:text-white lg:text-sm"
+                placeholder={hidePassword1 ? "*************" : "Current Password"}
                 {...register("Password", { required: true })}
               />
               {hidePassword1 ? (
@@ -60,11 +58,7 @@ export function PasswordSettings() {
                 />
               )}
             </div>
-            {errors.Password && (
-              <span className="font-normal text-sm text-red-500">
-                fill cannot be empty
-              </span>
-            )}
+            {errors.Password && <span className="font-normal text-xs text-red-500">fill cannot be empty</span>}
           </div>
 
           {/* Confirm Password */}
@@ -72,11 +66,9 @@ export function PasswordSettings() {
             <div className="h-8 border-b-2 w-full flex justify-between border-[#282828]">
               <input
                 type={hidePassword2 ? "password" : ""}
-                className="outline-0 w-full font-inter text-xs font-light px-3 text-paragraph lg:text-sm"
-                placeholder={
-                  hidePassword2 ? "*************" : "Current Password"
-                }
-                {...register("comfirmedPassword")}
+                className="outline-0 w-full font-inter text-xs font-light px-3 text-white placeholder:text-white lg:text-sm"
+                placeholder={hidePassword2 ? "*************" : "Current Password"}
+                {...register("comfirmedPassword" , { required: true })}
               />
               {hidePassword2 ? (
                 <LockKeyhole
@@ -92,11 +84,7 @@ export function PasswordSettings() {
                 />
               )}
             </div>
-            {errors.Password && (
-              <span className="font-normal text-sm text-red-500">
-                fill cannot be empty
-              </span>
-            )}
+            {errors.comfirmedPassword && <span className="font-normal text-xs text-red-500">fill cannot be empty</span>}
           </div>
         </div>
 
