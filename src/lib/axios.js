@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const instance = axios.create({
-  baseURL: "skillsprint.up.railway.app",
+  baseURL: "https://skillsprint.up.railway.app",
   headers: {
     "Content-Type": "application/json",
   },

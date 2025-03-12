@@ -1,6 +1,8 @@
 import axios from '@/lib/axios';
 import { createContext, useContext, useState } from 'react';
 import { useRouter } from '@tanstack/react-router';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AuthContext = createContext();
 
@@ -21,14 +23,22 @@ export function AuthProvider({ children }) {
 
             if (response.status === 200) {
                 setUser(response.data.user);
+                console.log('User:', response.data.user);
                 setIsAuthenticated(true);
                 router.navigate('/');
             } else {
                 setError('Signup failed');
+                toast.error('Signup failed');
             }
         } catch (err) {
             console.error('Signup error:', err);
-            setError('Signup error');
+            if (err.response && err.response.status === 409) {
+                setError('Email is already taken');
+                toast.error('Email is already taken');
+            } else {
+                setError('Signup error');
+                toast.error('Signup error');
+            }
         }
     };
 
@@ -46,10 +56,12 @@ export function AuthProvider({ children }) {
             } else {
                 setIsAuthenticated(false);
                 setError('Invalid email or password');
+                toast.error('Invalid email or password');
             }
         } catch (err) {
             console.error('Login error:', err);
             setError('Login error');
+            toast.error('Login error');
         }
     };
 
@@ -64,10 +76,12 @@ export function AuthProvider({ children }) {
                 router.navigate('/');
             } else {
                 setError('Logout failed');
+                toast.error('Logout failed');
             }
         } catch (err) {
             console.error('Logout error:', err);
             setError('Logout error');
+            toast.error('Logout error');
         }
     };
 

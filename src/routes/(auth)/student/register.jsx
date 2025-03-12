@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import PasswordStep from "@/components/PasswordStep/PasswordStep";
 import EmailStep from "@/components/EmailStep/EmailStep";
-import { useAuth } from "@/context/AuthContext"; 
+import { useAuth } from "@/context/AuthContext";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; 
 
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -11,6 +14,7 @@ export const Route = createFileRoute("/(auth)/student/register")({
 
 function RouteComponent() {
   const { signup } = useAuth(); // Destructure signup from useAuth
+  const navigate = useNavigate(); // Initialize useNavigate hook
   const [step, setStep] = useState(1);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,8 +24,8 @@ function RouteComponent() {
 
   // Called when user clicks "Continue" in the email step
   const handleContinue = () => {
-    if (!email) {
-      setError("Please enter a valid email.");
+    if (!name || !email) {
+      toast.error("Please enter both your full name and a valid email.");
       return;
     }
     setError("");
@@ -31,16 +35,18 @@ function RouteComponent() {
   // Called when user clicks "Submit" in the password step
   const handleSubmit = async () => {
     if (password !== confirmPassword) {
-      setError("Passwords do not match.");
+      toast.error("Passwords do not match.");
       return;
     }
     setError("");
 
     try {
       await signup(name, email, password, "STUDENT");
-      alert("Registration successful!");
+      toast.success("Registration successful!");
+      navigate("/"); // Redirect to home page
     } catch (err) {
       setError(err.message || "An error occurred during registration.");
+      toast.error(err.message || "An error occurred during registration.");
     }
   };
 
@@ -48,7 +54,7 @@ function RouteComponent() {
     <div className="flex flex-col items-center bg-black h-screen p-8">
       <img src="/assets/logo.png" alt="" className="w-[50px]" />
 
-      <div className="w-full h-full flex flex-col items-center mt-25">
+      <div className="w-full flex flex-col items-center mt-25">
         <h2 className="font-[700] lg:text-[36px] text-[23px] lg:leading-[60px] relative text-white pb-12">
           <img
             src={"/assets/Icons/spark.png"}
@@ -76,6 +82,13 @@ function RouteComponent() {
             onSubmit={handleSubmit}
           />
         )}
+      </div>
+
+      <div className="text-paragraph flex justify-center text-center w-full mt-10 ml-16">
+        Already have an account? {"  "}
+        <Link to="/(auth)/student/login" className="underline">
+          Login
+        </Link>
       </div>
     </div>
   );
