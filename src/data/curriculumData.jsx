@@ -3,7 +3,7 @@ import React from "react";
 const curriculumData = [
   {
     period: 1,
-    topic: " Structuring a Web Page",
+    topic: `Structuring a Web Page`,
     instructor: "Abdulmatin",
     status: "Completed",
   },
