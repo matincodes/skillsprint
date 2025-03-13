@@ -6,7 +6,7 @@ import Programmes from "../../components/Programmes/Programmes";
 import { programmeData } from "@/data/programmeData";
 import { upskillCard } from "@/data/homeCardData";
 // import NavBar from "../../components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
+// import Footer from "@/components/Footer/Footer";
 import ExploreCard from "@/components/Cards/ExploreCard";
 
 
@@ -124,7 +124,7 @@ function RouteComponent() {
       {/* Main Content */}
 
       {/* Footer */}
-      <Footer />
+      // <Footer />
       {/* Footer */}
     </>
   );
