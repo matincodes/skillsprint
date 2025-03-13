@@ -6,8 +6,11 @@ import 'react-toastify/dist/ReactToastify.css';
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-    const [user, setUser] = useState(null);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState(() => {
+        const storedUser = localStorage.getItem('user');
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
+    const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('user'));
     const [error, setError] = useState(null);
 
     const signup = async (name, email, password, role) => {
@@ -21,7 +24,7 @@ export function AuthProvider({ children }) {
 
             if (response.status === 200 || response.status === 201) {
                 setUser(response.data.user);
-                console.log('User:', response.data.user);
+                localStorage.setItem('user', JSON.stringify(response.data.user));
                 setIsAuthenticated(true);
                 return true;
             } else {
@@ -48,8 +51,9 @@ export function AuthProvider({ children }) {
                 password,
             });
 
-            if (response.status === 200) {
+            if (response.status === 200 || response.status === 201) {
                 setUser(response.data.user);
+                localStorage.setItem('user', JSON.stringify(response.data.user));
                 setIsAuthenticated(true);
                 setError(null);
             } else {
@@ -70,6 +74,7 @@ export function AuthProvider({ children }) {
 
             if (response.status === 200) {
                 setUser(null);
+                localStorage.removeItem('user');
                 setIsAuthenticated(false);
                 setError(null);
             } else {
