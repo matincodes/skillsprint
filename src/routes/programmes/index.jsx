@@ -5,7 +5,7 @@ import "./programmes.css";
 import Programmes from "../../components/Programmes/Programmes";
 import { programmeData } from "@/data/programmeData";
 import { upskillCard } from "@/data/homeCardData";
-import NavBar from "../../components/Navbar/NavBar";
+import NavBar from "../../components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import ExploreCard from "@/components/Cards/ExploreCard";
 
