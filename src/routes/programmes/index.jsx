@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import spack from "../../assets/icons/spack.svg";
 import "./programmes.css";
@@ -10,42 +10,69 @@ import NavBar from "@/components/Navbar/NavBar";
 import Footer from "@/components/Footer/Footer";
 import ExploreCard from "@/components/Cards/ExploreCard";
 import SectionHeader from "@/components/Sections/SectionHeader";
+import axios from "@/lib/axios";
 
 // Route Configuration
 export const Route = createFileRoute("/programmes/")({
   component: RouteComponent,
 });
 
-// Categories & Filtering Logic
+
+function RouteComponent() {
+  const [activeCategory, setActiveCategory] = useState(0);
+  const data = window.localStorage.getItem("user");
+  const user = JSON.parse(data);
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get('/api/courses');
+        setCourses(response.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+
+  // Categories & Filtering Logic
 const categories = [
-  { label: "All", filter: () => programmeData },
+  { label: "All", filter: () => courses },
   {
     label: "Tech & Software Development",
     filter: () =>
-      programmeData.filter((item) => item.category === "Development"),
+      courses.filter((item) => item.category === "Development"),
   },
   {
     label: "Product & Graphic Design",
-    filter: () => programmeData.filter((item) => item.category === "Design"),
+    filter: () => courses.filter((item) => item.category === "Design"),
   },
   {
     label: "Cybersecurity & Cloud Computing",
     filter: () =>
-      programmeData.filter((item) => item.category === "Security & Cloud"),
+      courses.filter((item) => item.category === "Security & Cloud"),
   },
   {
     label: "Data Analytics & Artificial Intelligence",
-    filter: () => programmeData.filter((item) => item.category === "Data & AI"),
+    filter: () => courses.filter((item) => item.category === "Data & AI"),
   },
   {
     label: "Business & Marketing",
     filter: () =>
-      programmeData.filter((item) => item.category === "Business & Marketing"),
+      courses.filter((item) => item.category === "Business & Marketing"),
   },
   {
     label: "Engineering & Hardware",
     filter: () =>
-      programmeData.filter(
+      courses.filter(
         (item) => item.category === "Engineering & Hardware",
       ),
   },
@@ -65,11 +92,8 @@ const CategoryButton = ({ label, isActive, onClick }) => (
   </button>
 );
 
-function RouteComponent() {
-  const [activeCategory, setActiveCategory] = useState(0);
-  const data = window.localStorage.getItem("user");
-  const user = JSON.parse(data);
 
+  
   return (
     <>
       {/* NavBar */}

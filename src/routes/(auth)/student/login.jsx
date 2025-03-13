@@ -11,7 +11,7 @@ export const Route = createFileRoute("/(auth)/student/login")({
 });
 
 function RouteComponent() {
-  const { login } = useAuth(); 
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -37,58 +37,60 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col items-center bg-black h-screen p-8">
-          <img src="/assets/logo.png" alt="" className="w-[50px]" />
-    
-          <div className="w-full flex flex-col items-center mt-25">
-            <h2 className="font-[700] lg:text-[36px] text-[23px] lg:leading-[60px] relative text-white pb-12">
-              <img
-                src={"/assets/Icons/spark.png"}
-                className="absolute lg:w-[60px] w-[40px] lg:-top-[25px] lg:-left-[45px] top-[15px] left-[6px] "
-              />
-              Welcome back to skill sprint 
-            </h2>
+      <img src="/assets/logo.png" alt="" className="w-[50px]" />
 
-              <div className="w-1/3 ml-16 flex flex-col items-center">
-                <input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter email"
-                  className="w-full border-2 border-[#121212] text-paragraph outline-none rounded-md py-2 pl-6 mb-5"
-                />
-  
-                <div className="relative w-full mb-5">
-                  <input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter password"
-                    className="w-full border-2 border-[#121212] text-paragraph outline-none rounded-md py-2 pl-6 pr-10"
-                  />
-                  {/*<img
+      <div className="w-full flex flex-col items-center mt-25">
+        <h2 className="font-[700] lg:text-[36px] text-[23px] lg:leading-[60px] relative text-white pb-12">
+          <img
+            src={"/assets/Icons/spark.png"}
+            className="absolute lg:w-[60px] w-[40px] lg:-top-[25px] lg:-left-[45px] top-[15px] left-[6px] "
+          />
+          Welcome back to skill sprint
+        </h2>
+
+        <div className="w-1/3 ml-16 flex flex-col items-center">
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter email"
+            className="w-full border-2 border-[#121212] text-paragraph outline-none rounded-md py-2 pl-6 mb-5"
+          />
+
+          <div className="relative w-full mb-5">
+            <input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter password"
+              className="w-full border-2 border-[#121212] text-paragraph outline-none rounded-md py-2 pl-6 pr-10"
+            />
+            {/*<img
                     src={showPassword ? hideIcon : showIcon}
                     alt="Toggle Password Visibility"
                     onClick={toggleShowPassword}
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
                     style={{ width: "20px", height: "20px" }}
                   />*/}
-                </div>
-  
-                <Button onClick={handleSubmit} className="text-white w-full bg-main cursor-pointer">
-                  Login
-                </Button>
-              </div>
           </div>
-          
-    
-          <div className="text-paragraph flex justify-center text-center w-full mt-10 ml-16">
-            Don't have an account?
-            <Link to="/student/register" className="underline">
-              Signup
-            </Link>
-          </div>
+
+          <Button
+            onClick={handleSubmit}
+            className="text-white w-full bg-main cursor-pointer"
+          >
+            Login
+          </Button>
+        </div>
+      </div>
+
+      <div className="text-paragraph flex justify-center text-center w-full mt-10 ml-16">
+        Don't have an account?
+        <Link to="/student/register" className="underline">
+          Signup
+        </Link>
+      </div>
     </div>
   );
 }

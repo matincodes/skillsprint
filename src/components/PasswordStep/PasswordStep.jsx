@@ -29,7 +29,10 @@ export default function PasswordStep({
         className="w-full border-2 border-[#121212] text-paragraph outline-none rounded-md py-2 pl-6 mb-5"
       />
 
-      <Button onClick={onSubmit} className="text-white w-full bg-main cursor-pointer">
+      <Button
+        onClick={onSubmit}
+        className="text-white w-full bg-main cursor-pointer"
+      >
         Submit
       </Button>
     </div>

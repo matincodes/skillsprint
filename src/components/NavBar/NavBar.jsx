@@ -7,11 +7,9 @@ import {
   SheetContent,
   SheetDescription,
   SheetTrigger,
-  SheetTitle 
+  SheetTitle,
 } from "@/components/ui/Sheets/NavBarSheet";
 import UserAvatar from "../UserAvatar/UserAvatar";
-
-
 
 const NavBar = () => {
   const pathname = useLocation();
@@ -54,12 +52,20 @@ const NavBar = () => {
             <Button text="Login to portal" nav />
           ) : (
             <div className="flex gap-2 items-center">
-              <UserAvatar profile={user.profilePicture ? user.profilePicture : '/assets/avatar.png'} />
+              <UserAvatar
+                profile={
+                  user.profilePicture
+                    ? user.profilePicture
+                    : "/assets/avatar.png"
+                }
+              />
               <div className="flex flex-col font-sora">
                 <h1 className="text-[13px] text-white font-[300]">
                   {user.name}
                 </h1>
-                <p className="text-paragraph text-[10px] font-[400]">{user.email}</p>
+                <p className="text-paragraph text-[10px] font-[400]">
+                  {user.email}
+                </p>
               </div>
             </div>
           )}
@@ -109,10 +115,16 @@ const NavBar = () => {
               </Link>
 
               {user == null ? (
-                <Button text="Login to portal"  nav />
+                <Button text="Login to portal" nav />
               ) : (
                 <div className="flex gap-2">
-                <UserAvatar profile={user.profilePicture ? user.profilePicture : '/assets/avatar.png'} />
+                  <UserAvatar
+                    profile={
+                      user.profilePicture
+                        ? user.profilePicture
+                        : "/assets/avatar.png"
+                    }
+                  />
 
                   <div className="flex flex-col font-sora">
                     <h1 className="text-[13px] text-white font-[300]">
@@ -124,8 +136,6 @@ const NavBar = () => {
                   </div>
                 </div>
               )}
-
-              
             </SheetDescription>
           </SheetContent>
         </Sheet>

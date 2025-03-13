@@ -27,9 +27,7 @@ import UserAvatar from "../UserAvatar/UserAvatar";
 const AppSidebar = () => {
   const [activeLink, setActiveLink] = useState("/dashboard/");
   const { pathname } = useLocation();
-  const userImage = JSON.parse(window.localStorage.getItem('user'))?.image
-
-
+  const userImage = JSON.parse(window.localStorage.getItem("user"))?.image;
 
   console.log(activeLink, location);
 

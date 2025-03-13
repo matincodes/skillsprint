@@ -6,9 +6,11 @@ const Programmes = ({ data }) => {
       {data.map((items, index) => (
         <ProgrammeCard
           key={index}
-          image={items.image}
-          role={items.role}
+          image={items.coverImage}
+          title={items.title}
           description={items.description}
+          price={items.price}
+          duration={items.duration}
         />
       ))}
     </>

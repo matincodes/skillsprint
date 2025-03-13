@@ -10,7 +10,6 @@ import SkillCard from "@/components/Cards/SkillCard";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/footer/Footer";
 
-
 export const Route = createFileRoute("/")({
   component: Index,
 });
@@ -47,7 +46,7 @@ function Index() {
             </section>
 
             {user != null ? (
-              <Button text="Go to Dashboard" location='dashboard/' />
+              <Button text="Go to Dashboard" location="dashboard/" />
             ) : (
               <Button text="Join the Free Program" />
             )}
