@@ -4,11 +4,11 @@ import spack from "../../assets/icons/spack.svg";
 import "./programmes.css";
 import Programmes from "../../components/Programmes/Programmes";
 import { programmeData } from "@/data/programmeData";
-import UpSkillCard from "@/components/Cards/UpSkillCard";
 import { upskillCard } from "@/data/homeCardData";
 import NavBar from "@/components/Navbar/NavBar";
 import Footer from "@/components/Footer/Footer";
 import ExploreCard from "@/components/Cards/ExploreCard";
+
 
 // Route Configuration
 export const Route = createFileRoute("/programmes/")({
@@ -45,7 +45,7 @@ const categories = [
     label: "Engineering & Hardware",
     filter: () =>
       programmeData.filter(
-        (item) => item.category === "Engineering & Hardware"
+        (item) => item.category === "Engineering & Hardware",
       ),
   },
 ];
@@ -67,6 +67,7 @@ const CategoryButton = ({ label, isActive, onClick }) => (
 function RouteComponent() {
   const [activeCategory, setActiveCategory] = useState(0);
 
+
   return (
     <>
       {/* NavBar */}
@@ -78,7 +79,11 @@ function RouteComponent() {
         {/* Header Section */}
         <div className="mt-36 flex justify-center">
           <span className=" flex flex-col items-start">
-            <img src={spack} alt="Skill Sprint Logo" className="-ml-7 lg:-mb-5 lg:-ml-5 lg:w-[60px]" />
+            <img
+              src={spack}
+              alt="Skill Sprint Logo"
+              className="-ml-7 lg:-mb-5 lg:-ml-5 lg:w-[60px]"
+            />
             <h1 className="lg:text-6xl lg:leading-18 font-bold text-4xl text-center text-white font-mont tracking-[3px]">
               Explore Our <br /> Programmes
             </h1>
@@ -95,7 +100,7 @@ function RouteComponent() {
         {/* Programme Category Selection */}
         <div className="w-full lg:gap-12  flex flex-col items-center gap-7 mt-40">
           <h2 className="lg:text-[45px] tracking-[1px] font-bold text-2xl text-white  text-center lg:w-full font-mont">
-            Choose Programme <br className="lg:hidden"/> Category
+            Choose Programme <br className="lg:hidden" /> Category
           </h2>
           <div className="custom-scroll">
             <div className=" lg:w-full flex lg:gap-x-10 lg:gap-y-5 gap-x-5 lg:flex-wrap px-7   lg:justify-center">

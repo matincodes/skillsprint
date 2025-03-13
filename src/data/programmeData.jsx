@@ -58,6 +58,8 @@ export const programmeData = [
       "Develop your creative skills using tools like Adobe Photoshop and Illustrator to craft compelling visuals and brand identities.",
     category: "Design",
   },
+
+
   {
     image: dataAnalyticsImage,
     role: "Data Analytics",
@@ -79,6 +81,8 @@ export const programmeData = [
       "Explore deep learning, neural networks, and AI-driven solutions using frameworks like TensorFlow and PyTorch.",
     category: "Data & AI",
   },
+
+
   {
     image: cyberSecurityImage,
     role: "Cybersecurity ",
@@ -93,6 +97,11 @@ export const programmeData = [
       "Get hands-on experience with Amazon Web Services (AWS) to deploy and manage cloud-based applications.",
     category: "Security & Cloud",
   },
+
+
+
+
+
   {
     image: digitalImage,
     role: "Digital Marketing",
@@ -100,25 +109,25 @@ export const programmeData = [
       "Learn SEO, content marketing, social media strategies, and paid advertising to grow businesses online.",
     category: "Business & Marketing",
   },
-  {
-    image: virtualImage,
-    role: "Virtual Assistant",
-    description:
-      "Develop skills in administrative support, task automation, and digital tools to enhance productivity.",
-    category: "Business & Marketing",
-  },
-  {
-    image: projectImage,
-    role: "Project Management",
-    description:
-      "Gain expertise in Agile, Scrum, and traditional project management methodologies to lead successful projects.",
-    category: "Business & Marketing",
-  },
+  // {
+  //   image: virtualImage,
+  //   role: "Virtual Assistant",
+  //   description:
+  //     "Develop skills in administrative support, task automation, and digital tools to enhance productivity.",
+  //   category: "Business & Marketing",
+  // },
+  // {
+  //   image: projectImage,
+  //   role: "Project Management",
+  //   description:
+  //     "Gain expertise in Agile, Scrum, and traditional project management methodologies to lead successful projects.",
+  //   category: "Business & Marketing",
+  // },
   {
     image: roboticImage,
     role: "Robotics & Embedded Systems",
     description:
       "Explore the world of robotics, IoT, and microcontrollers to design and program intelligent systems.",
-    category: "Engineering & Hardware"
+    category: "Engineering & Hardware",
   },
 ];

@@ -1,12 +1,9 @@
-import * as React from "react"
-import * as SwitchPrimitive from "@radix-ui/react-switch"
+import * as React from "react";
+import * as SwitchPrimitive from "@radix-ui/react-switch";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
-function Switch({
-  className,
-  ...props
-}) {
+function Switch({ className, ...props }) {
   return (
     <SwitchPrimitive.Root
       data-slot="switch"
@@ -14,7 +11,8 @@ function Switch({
         "peer cursor-pointer  data-[state=checked]:border-[#AE752C]  data-[state=unchecked]:border-[#525866] focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-4 w-7 shrink-0 items-center rounded-full border-2  shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
-      {...props}>
+      {...props}
+    >
       <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
         className={cn(
@@ -24,4 +22,4 @@ function Switch({
   );
 }
 
-export { Switch }
+export { Switch };

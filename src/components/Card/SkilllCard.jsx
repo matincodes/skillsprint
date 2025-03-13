@@ -17,5 +17,4 @@ const SkillCard = (e) => {
   );
 };
 
-
-export default SkillCard
+export default SkillCard;

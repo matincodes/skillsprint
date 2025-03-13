@@ -49,7 +49,7 @@ const ClassesComponent = () => {
                 View Last Recording
                 <Radio className="w-5" />
               </Link>
-              
+
               {/* flex at media with of 768px */}
               <span className="hidden lg:flex items-center gap-3 text-paragraph text-base ">
                 <img src={studentsImage} />5 students in class

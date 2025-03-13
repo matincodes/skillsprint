@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 
-
-
 const UpcomingSession = (e) => {
   return (
     <>
@@ -13,7 +11,10 @@ const UpcomingSession = (e) => {
           <p className="font-[400]">{e.title}</p>
         </div>
 
-        <Link to={`${e.url}`} className="text-paragraph font-[300] text-[15px] flex items-center gap-1">
+        <Link
+          to={`${e.url}`}
+          className="text-paragraph font-[300] text-[15px] flex items-center gap-1"
+        >
           View Task <ArrowUpRight className="w-5" />
         </Link>
       </div>
@@ -21,5 +22,4 @@ const UpcomingSession = (e) => {
   );
 };
 
-
-export default UpcomingSession
+export default UpcomingSession;

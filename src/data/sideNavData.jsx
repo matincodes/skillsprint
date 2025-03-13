@@ -5,12 +5,12 @@ const sideNavData = [
        links: [
          {
            title: "Home",
-           url: "/dashboard/",
+           url: "/dashboard/" || "/dashboard",
            icon: '/assets/Icons/home.png',
          },
          {
            title: "Announcements",
-           url: "/dashboard/announcements",
+          //  url: "/dashboard/announcements",
            icon: '/assets/Icons/announcements.png',
          },
        ],
@@ -54,5 +54,4 @@ const sideNavData = [
      },
    ];
 
-
-export default sideNavData
+export default sideNavData;

@@ -5,7 +5,6 @@ const HomePageSection = (e) => {
   return (
     <>
       <div className="text-white grid lg:p-[90px] p-[20px] place-content-center space-y-[90px]">
-
         <SectionHeader header={e.header} paragraph={e.paragraph} />
 
         <div className="flex flex-col">
@@ -29,5 +28,4 @@ const HomePageSection = (e) => {
   );
 };
 
-
-export default HomePageSection
+export default HomePageSection;

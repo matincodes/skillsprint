@@ -10,45 +10,52 @@ import SkillCard from "@/components/Cards/SkillCard";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/footer/Footer";
 
+
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
 function Index() {
+  const data = window.localStorage.getItem("user");
+  const user = JSON.parse(data);
+
   return (
     <>
       {/* NavBar */}
       <NavBar />
       {/* NavBar */}
-        
-        {/* Main Content */}
+
+      {/* Main Content */}
       <div className="bg-black">
         {/* banner */}
 
-        <div className="lg:p-[105px] p-[40px] bg-black flex flex-col justify-center items-center w-full text-white relative overflow-hidden">
+        <div className="lg:p-[105px] py-[40px] px-[20px] bg-black flex flex-col justify-center items-center w-full text-white relative overflow-hidden">
           <div className="font-mont text-center space-y-[50px] flex flex-col items-center justify-center ">
-            <section className="space-y-3 flex flex-col items-center justify-center">
-              <h2 className="font-[700] lg:text-[45px] text-[23px] tracking-[2px] lg:leading-[60px] relative lg:w-[70%] w-[99%] ">
+            <section className="space-y-3 flex flex-col items-center justify-center relative ">
+              <h2 className="font-[700] lg:text-[45px] text-[37px] tracking-[2px] lg:leading-[60px] relative lg:w-[70%] w-full flex ">
                 <img
                   src={"/assets/Icons/spark.png"}
-                  className=" relative lg:w-[60px] w-[40px] lg:top-[25px] lg:left-[20px] top-[15px] left-[6px] "
+                  className=" absolute lg:w-[60px] w-[40px] lg:top-[-32px] lg:left-[2px] top-[-13px] left-[-20px] "
                 />
                 Transform Your Career with Skill Sprint
               </h2>
+
               <p className="font-inter text-[#808080] lg:text-[18px] text-[15px]">
                 Learn in-demand tech and non-tech skills with live classes,
                 gamified learning, <br /> and industry mentors.
               </p>
             </section>
 
-            <Button text="Join the Free Program" />
+            {user != null ? (
+              <Button text="Go to Dashboard" location='dashboard/' />
+            ) : (
+              <Button text="Join the Free Program" />
+            )}
 
-
-            {/* <div className="w-[100%] border flex items-center justify-center "> */}
             <img
               src="/assets/Icons/arrow.png"
               alt=""
-              className="lg:w-[190px] absolute left-[0px] lg:top-[290px] w-[85px] top-[200px]"
+              className="lg:w-[190px] absolute left-[0px] lg:top-[290px] w-[85px] top-[220px]"
             />
             <img
               src="/assets/Icons/curvy_arrow.png"
@@ -61,11 +68,9 @@ function Index() {
               className="lg:w-[310px] absolute lg:right-[-17px] lg:top-[280px] right-[-100px] top-[200px] w-[180px]"
             />
             {/* </div> */}
-
           </div>
         </div>
         {/* banner */}
-
 
         {/* *********** why to join *********** */}
         <div className="text-white grid lg:mt-[10px] mt-[20px] lg:mb-[15px] mb-[170px] relative ">
@@ -98,7 +103,7 @@ function Index() {
         {/* Why Choose Skill Sprint Cards */}
         <div className="grid place-content-center space-y-2 lg:mt-[80px] mt-[250px] relative">
           <div className="text-center">
-            <h2 className="font-[700] lg:text-[45px] text-[28px] tracking-[2px] leading-[60px] text-white">
+            <h2 className="font-[700] lg:text-[45px] text-[30px] tracking-[2px] lg:leading-[60px] text-white">
               Why choose Skill Sprint
             </h2>
           </div>
@@ -135,7 +140,7 @@ function Index() {
           />
 
           {/* Cards */}
-          <div className="flex flex-col lg:grid lg:grid-cols-3 lg:items-center lg:gap-[20px] gap-[30px] relative lg:p-3 p-6">
+          <div className="flex flex-col lg:grid lg:grid-cols-3 lg:items-center lg:gap-[20px] gap-[30px] relative lg:p-3 p-6  ">
             {upskillCard.map((card) => (
               <UpSkillCard bg={card.bg} key={card.id} text={card.text} />
             ))}
@@ -152,23 +157,21 @@ function Index() {
 
         {/* FAQ */}
         <div className="text-white flex justify-center items-center flex-col lg:space-y-6 space-y-8 p-4 py-[170px]">
-            <h2 className="font-[700] lg:text-[45px] text-[24px] tracking-[2px] lg:leading-[60px] leading-[30px] text-center">
-              Frequently asked questions
-            </h2>
+          <h2 className="font-[700] lg:text-[45px] text-[24px] tracking-[2px] lg:leading-[60px] leading-[30px] text-center">
+            Frequently asked questions
+          </h2>
 
           {/* Accordion */}
           <FAQ />
           {/* Accordion */}
         </div>
         {/* FAQ */}
-
-
       </div>
       {/* Main Content */}
 
       {/* Footer */}
       <Footer />
       {/* Footer */}
-    </>  
+    </>
   );
 }
