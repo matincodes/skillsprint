@@ -14,12 +14,14 @@ function DashboardLayout() {
     <div className="relative h-full w-full flex bg-black lg:px-[20px] px-[10px]">
       <SidebarProvider>
         <AppSidebar />
-        <main className={cn(
-          'relative h-full overflow-hidden text-white w-full font-inter gap-4 flex flex-col ',
-        )}>
-        {/* <SidebarTrigger /> */}
+        <main
+          className={cn(
+            "relative h-full overflow-hidden text-white w-full font-inter gap-4 flex flex-col ",
+          )}
+        >
+          {/* <SidebarTrigger /> */}
           <TopNav />
-            <Outlet />
+          <Outlet />
         </main>
       </SidebarProvider>
     </div>

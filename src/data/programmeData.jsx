@@ -128,6 +128,6 @@ export const programmeData = [
     role: "Robotics & Embedded Systems",
     description:
       "Explore the world of robotics, IoT, and microcontrollers to design and program intelligent systems.",
-    category: "Engineering & Hardware"
+    category: "Engineering & Hardware",
   },
 ];

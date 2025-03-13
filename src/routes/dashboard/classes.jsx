@@ -11,7 +11,7 @@ export const Route = createFileRoute("/dashboard/classes")({
 
 const ClassesComponent = () => {
   return (
-    <div className="flex flex-col   gap-8 ">
+    <div className="flex flex-col    gap-8 ">
       <div className="flex flex-col gap-3 px-5 ">
         <p className="text-paragraph font-inter text-sm font-normal lg:text-base">
           Live classes
@@ -49,7 +49,7 @@ const ClassesComponent = () => {
                 View Last Recording
                 <Radio className="w-5" />
               </Link>
-              
+
               {/* flex at media with of 768px */}
               <span className="hidden lg:flex items-center gap-3 text-paragraph text-base ">
                 <img src={studentsImage} />5 students in class

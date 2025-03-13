@@ -52,7 +52,6 @@ function Index() {
               <Button text="Join the Free Program" />
             )}
 
-            {/* <div className="w-[100%] border flex items-center justify-center "> */}
             <img
               src="/assets/Icons/arrow.png"
               alt=""

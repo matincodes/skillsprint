@@ -54,5 +54,4 @@ const sideNavData = [
      },
    ];
 
-
-export default sideNavData
+export default sideNavData;

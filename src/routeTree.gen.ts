@@ -10,196 +10,224 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as DashboardImport } from './routes/dashboard'
-import { Route as AboutImport } from './routes/about'
-import { Route as IndexImport } from './routes/index'
-import { Route as ProgrammesIndexImport } from './routes/programmes/index'
-import { Route as DashboardIndexImport } from './routes/dashboard/index'
-import { Route as DashboardSettingsImport } from './routes/dashboard/settings'
-import { Route as DashboardQuizzesImport } from './routes/dashboard/quizzes'
-import { Route as DashboardProfileImport } from './routes/dashboard/profile'
-import { Route as DashboardCurriculumImport } from './routes/dashboard/curriculum'
-import { Route as DashboardClassesImport } from './routes/dashboard/classes'
-import { Route as DashboardAssignmentsImport } from './routes/dashboard/assignments'
-import { Route as DashboardAnnouncementsImport } from './routes/dashboard/announcements'
+import { Route as rootRoute } from "./routes/__root";
+import { Route as DashboardImport } from "./routes/dashboard";
+import { Route as AboutImport } from "./routes/about";
+import { Route as IndexImport } from "./routes/index";
+import { Route as ProgrammesIndexImport } from "./routes/programmes/index";
+import { Route as DashboardIndexImport } from "./routes/dashboard/index";
+import { Route as DashboardSettingsImport } from "./routes/dashboard/settings";
+import { Route as DashboardQuizzesImport } from "./routes/dashboard/quizzes";
+import { Route as DashboardProfileImport } from "./routes/dashboard/profile";
+import { Route as DashboardCurriculumImport } from "./routes/dashboard/curriculum";
+import { Route as DashboardClassesImport } from "./routes/dashboard/classes";
+import { Route as DashboardAssignmentsImport } from "./routes/dashboard/assignments";
+import { Route as DashboardAnnouncementsImport } from "./routes/dashboard/announcements";
+import { Route as authStudentRegisterImport } from "./routes/(auth)/student/register";
+import { Route as authStudentLoginImport } from "./routes/(auth)/student/login";
 
 // Create/Update Routes
 
 const DashboardRoute = DashboardImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
+  id: "/dashboard",
+  path: "/dashboard",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const AboutRoute = AboutImport.update({
-  id: '/about',
-  path: '/about',
+  id: "/about",
+  path: "/about",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const IndexRoute = IndexImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const ProgrammesIndexRoute = ProgrammesIndexImport.update({
-  id: '/programmes/',
-  path: '/programmes/',
+  id: "/programmes/",
+  path: "/programmes/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const DashboardIndexRoute = DashboardIndexImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => DashboardRoute,
-} as any)
+} as any);
 
 const DashboardSettingsRoute = DashboardSettingsImport.update({
-  id: '/settings',
-  path: '/settings',
+  id: "/settings",
+  path: "/settings",
   getParentRoute: () => DashboardRoute,
-} as any)
+} as any);
 
 const DashboardQuizzesRoute = DashboardQuizzesImport.update({
-  id: '/quizzes',
-  path: '/quizzes',
+  id: "/quizzes",
+  path: "/quizzes",
   getParentRoute: () => DashboardRoute,
-} as any)
+} as any);
 
 const DashboardProfileRoute = DashboardProfileImport.update({
-  id: '/profile',
-  path: '/profile',
+  id: "/profile",
+  path: "/profile",
   getParentRoute: () => DashboardRoute,
-} as any)
+} as any);
 
 const DashboardCurriculumRoute = DashboardCurriculumImport.update({
-  id: '/curriculum',
-  path: '/curriculum',
+  id: "/curriculum",
+  path: "/curriculum",
   getParentRoute: () => DashboardRoute,
-} as any)
+} as any);
 
 const DashboardClassesRoute = DashboardClassesImport.update({
-  id: '/classes',
-  path: '/classes',
+  id: "/classes",
+  path: "/classes",
   getParentRoute: () => DashboardRoute,
-} as any)
+} as any);
 
 const DashboardAssignmentsRoute = DashboardAssignmentsImport.update({
-  id: '/assignments',
-  path: '/assignments',
+  id: "/assignments",
+  path: "/assignments",
   getParentRoute: () => DashboardRoute,
-} as any)
+} as any);
 
 const DashboardAnnouncementsRoute = DashboardAnnouncementsImport.update({
-  id: '/announcements',
-  path: '/announcements',
+  id: "/announcements",
+  path: "/announcements",
   getParentRoute: () => DashboardRoute,
-} as any)
+} as any);
+
+const authStudentRegisterRoute = authStudentRegisterImport.update({
+  id: "/(auth)/student/register",
+  path: "/student/register",
+  getParentRoute: () => rootRoute,
+} as any);
+
+const authStudentLoginRoute = authStudentLoginImport.update({
+  id: "/(auth)/student/login",
+  path: "/student/login",
+  getParentRoute: () => rootRoute,
+} as any);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/announcements': {
-      id: '/dashboard/announcements'
-      path: '/announcements'
-      fullPath: '/dashboard/announcements'
-      preLoaderRoute: typeof DashboardAnnouncementsImport
-      parentRoute: typeof DashboardImport
-    }
-    '/dashboard/assignments': {
-      id: '/dashboard/assignments'
-      path: '/assignments'
-      fullPath: '/dashboard/assignments'
-      preLoaderRoute: typeof DashboardAssignmentsImport
-      parentRoute: typeof DashboardImport
-    }
-    '/dashboard/classes': {
-      id: '/dashboard/classes'
-      path: '/classes'
-      fullPath: '/dashboard/classes'
-      preLoaderRoute: typeof DashboardClassesImport
-      parentRoute: typeof DashboardImport
-    }
-    '/dashboard/curriculum': {
-      id: '/dashboard/curriculum'
-      path: '/curriculum'
-      fullPath: '/dashboard/curriculum'
-      preLoaderRoute: typeof DashboardCurriculumImport
-      parentRoute: typeof DashboardImport
-    }
-    '/dashboard/profile': {
-      id: '/dashboard/profile'
-      path: '/profile'
-      fullPath: '/dashboard/profile'
-      preLoaderRoute: typeof DashboardProfileImport
-      parentRoute: typeof DashboardImport
-    }
-    '/dashboard/quizzes': {
-      id: '/dashboard/quizzes'
-      path: '/quizzes'
-      fullPath: '/dashboard/quizzes'
-      preLoaderRoute: typeof DashboardQuizzesImport
-      parentRoute: typeof DashboardImport
-    }
-    '/dashboard/settings': {
-      id: '/dashboard/settings'
-      path: '/settings'
-      fullPath: '/dashboard/settings'
-      preLoaderRoute: typeof DashboardSettingsImport
-      parentRoute: typeof DashboardImport
-    }
-    '/dashboard/': {
-      id: '/dashboard/'
-      path: '/'
-      fullPath: '/dashboard/'
-      preLoaderRoute: typeof DashboardIndexImport
-      parentRoute: typeof DashboardImport
-    }
-    '/programmes/': {
-      id: '/programmes/'
-      path: '/programmes'
-      fullPath: '/programmes'
-      preLoaderRoute: typeof ProgrammesIndexImport
-      parentRoute: typeof rootRoute
-    }
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/about": {
+      id: "/about";
+      path: "/about";
+      fullPath: "/about";
+      preLoaderRoute: typeof AboutImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/dashboard": {
+      id: "/dashboard";
+      path: "/dashboard";
+      fullPath: "/dashboard";
+      preLoaderRoute: typeof DashboardImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/dashboard/announcements": {
+      id: "/dashboard/announcements";
+      path: "/announcements";
+      fullPath: "/dashboard/announcements";
+      preLoaderRoute: typeof DashboardAnnouncementsImport;
+      parentRoute: typeof DashboardImport;
+    };
+    "/dashboard/assignments": {
+      id: "/dashboard/assignments";
+      path: "/assignments";
+      fullPath: "/dashboard/assignments";
+      preLoaderRoute: typeof DashboardAssignmentsImport;
+      parentRoute: typeof DashboardImport;
+    };
+    "/dashboard/classes": {
+      id: "/dashboard/classes";
+      path: "/classes";
+      fullPath: "/dashboard/classes";
+      preLoaderRoute: typeof DashboardClassesImport;
+      parentRoute: typeof DashboardImport;
+    };
+    "/dashboard/curriculum": {
+      id: "/dashboard/curriculum";
+      path: "/curriculum";
+      fullPath: "/dashboard/curriculum";
+      preLoaderRoute: typeof DashboardCurriculumImport;
+      parentRoute: typeof DashboardImport;
+    };
+    "/dashboard/profile": {
+      id: "/dashboard/profile";
+      path: "/profile";
+      fullPath: "/dashboard/profile";
+      preLoaderRoute: typeof DashboardProfileImport;
+      parentRoute: typeof DashboardImport;
+    };
+    "/dashboard/quizzes": {
+      id: "/dashboard/quizzes";
+      path: "/quizzes";
+      fullPath: "/dashboard/quizzes";
+      preLoaderRoute: typeof DashboardQuizzesImport;
+      parentRoute: typeof DashboardImport;
+    };
+    "/dashboard/settings": {
+      id: "/dashboard/settings";
+      path: "/settings";
+      fullPath: "/dashboard/settings";
+      preLoaderRoute: typeof DashboardSettingsImport;
+      parentRoute: typeof DashboardImport;
+    };
+    "/dashboard/": {
+      id: "/dashboard/";
+      path: "/";
+      fullPath: "/dashboard/";
+      preLoaderRoute: typeof DashboardIndexImport;
+      parentRoute: typeof DashboardImport;
+    };
+    "/programmes/": {
+      id: "/programmes/";
+      path: "/programmes";
+      fullPath: "/programmes";
+      preLoaderRoute: typeof ProgrammesIndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/(auth)/student/login": {
+      id: "/(auth)/student/login";
+      path: "/student/login";
+      fullPath: "/student/login";
+      preLoaderRoute: typeof authStudentLoginImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/(auth)/student/register": {
+      id: "/(auth)/student/register";
+      path: "/student/register";
+      fullPath: "/student/register";
+      preLoaderRoute: typeof authStudentRegisterImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
 interface DashboardRouteChildren {
-  DashboardAnnouncementsRoute: typeof DashboardAnnouncementsRoute
-  DashboardAssignmentsRoute: typeof DashboardAssignmentsRoute
-  DashboardClassesRoute: typeof DashboardClassesRoute
-  DashboardCurriculumRoute: typeof DashboardCurriculumRoute
-  DashboardProfileRoute: typeof DashboardProfileRoute
-  DashboardQuizzesRoute: typeof DashboardQuizzesRoute
-  DashboardSettingsRoute: typeof DashboardSettingsRoute
-  DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardAnnouncementsRoute: typeof DashboardAnnouncementsRoute;
+  DashboardAssignmentsRoute: typeof DashboardAssignmentsRoute;
+  DashboardClassesRoute: typeof DashboardClassesRoute;
+  DashboardCurriculumRoute: typeof DashboardCurriculumRoute;
+  DashboardProfileRoute: typeof DashboardProfileRoute;
+  DashboardQuizzesRoute: typeof DashboardQuizzesRoute;
+  DashboardSettingsRoute: typeof DashboardSettingsRoute;
+  DashboardIndexRoute: typeof DashboardIndexRoute;
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
@@ -211,107 +239,121 @@ const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardQuizzesRoute: DashboardQuizzesRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
   DashboardIndexRoute: DashboardIndexRoute,
-}
+};
 
 const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
-)
+);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/dashboard': typeof DashboardRouteWithChildren
-  '/dashboard/announcements': typeof DashboardAnnouncementsRoute
-  '/dashboard/assignments': typeof DashboardAssignmentsRoute
-  '/dashboard/classes': typeof DashboardClassesRoute
-  '/dashboard/curriculum': typeof DashboardCurriculumRoute
-  '/dashboard/profile': typeof DashboardProfileRoute
-  '/dashboard/quizzes': typeof DashboardQuizzesRoute
-  '/dashboard/settings': typeof DashboardSettingsRoute
-  '/dashboard/': typeof DashboardIndexRoute
-  '/programmes': typeof ProgrammesIndexRoute
+  "/": typeof IndexRoute;
+  "/about": typeof AboutRoute;
+  "/dashboard": typeof DashboardRouteWithChildren;
+  "/dashboard/announcements": typeof DashboardAnnouncementsRoute;
+  "/dashboard/assignments": typeof DashboardAssignmentsRoute;
+  "/dashboard/classes": typeof DashboardClassesRoute;
+  "/dashboard/curriculum": typeof DashboardCurriculumRoute;
+  "/dashboard/profile": typeof DashboardProfileRoute;
+  "/dashboard/quizzes": typeof DashboardQuizzesRoute;
+  "/dashboard/settings": typeof DashboardSettingsRoute;
+  "/dashboard/": typeof DashboardIndexRoute;
+  "/programmes": typeof ProgrammesIndexRoute;
+  "/student/login": typeof authStudentLoginRoute;
+  "/student/register": typeof authStudentRegisterRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/dashboard/announcements': typeof DashboardAnnouncementsRoute
-  '/dashboard/assignments': typeof DashboardAssignmentsRoute
-  '/dashboard/classes': typeof DashboardClassesRoute
-  '/dashboard/curriculum': typeof DashboardCurriculumRoute
-  '/dashboard/profile': typeof DashboardProfileRoute
-  '/dashboard/quizzes': typeof DashboardQuizzesRoute
-  '/dashboard/settings': typeof DashboardSettingsRoute
-  '/dashboard': typeof DashboardIndexRoute
-  '/programmes': typeof ProgrammesIndexRoute
+  "/": typeof IndexRoute;
+  "/about": typeof AboutRoute;
+  "/dashboard/announcements": typeof DashboardAnnouncementsRoute;
+  "/dashboard/assignments": typeof DashboardAssignmentsRoute;
+  "/dashboard/classes": typeof DashboardClassesRoute;
+  "/dashboard/curriculum": typeof DashboardCurriculumRoute;
+  "/dashboard/profile": typeof DashboardProfileRoute;
+  "/dashboard/quizzes": typeof DashboardQuizzesRoute;
+  "/dashboard/settings": typeof DashboardSettingsRoute;
+  "/dashboard": typeof DashboardIndexRoute;
+  "/programmes": typeof ProgrammesIndexRoute;
+  "/student/login": typeof authStudentLoginRoute;
+  "/student/register": typeof authStudentRegisterRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/dashboard': typeof DashboardRouteWithChildren
-  '/dashboard/announcements': typeof DashboardAnnouncementsRoute
-  '/dashboard/assignments': typeof DashboardAssignmentsRoute
-  '/dashboard/classes': typeof DashboardClassesRoute
-  '/dashboard/curriculum': typeof DashboardCurriculumRoute
-  '/dashboard/profile': typeof DashboardProfileRoute
-  '/dashboard/quizzes': typeof DashboardQuizzesRoute
-  '/dashboard/settings': typeof DashboardSettingsRoute
-  '/dashboard/': typeof DashboardIndexRoute
-  '/programmes/': typeof ProgrammesIndexRoute
+  __root__: typeof rootRoute;
+  "/": typeof IndexRoute;
+  "/about": typeof AboutRoute;
+  "/dashboard": typeof DashboardRouteWithChildren;
+  "/dashboard/announcements": typeof DashboardAnnouncementsRoute;
+  "/dashboard/assignments": typeof DashboardAssignmentsRoute;
+  "/dashboard/classes": typeof DashboardClassesRoute;
+  "/dashboard/curriculum": typeof DashboardCurriculumRoute;
+  "/dashboard/profile": typeof DashboardProfileRoute;
+  "/dashboard/quizzes": typeof DashboardQuizzesRoute;
+  "/dashboard/settings": typeof DashboardSettingsRoute;
+  "/dashboard/": typeof DashboardIndexRoute;
+  "/programmes/": typeof ProgrammesIndexRoute;
+  "/(auth)/student/login": typeof authStudentLoginRoute;
+  "/(auth)/student/register": typeof authStudentRegisterRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
-    | '/'
-    | '/about'
-    | '/dashboard'
-    | '/dashboard/announcements'
-    | '/dashboard/assignments'
-    | '/dashboard/classes'
-    | '/dashboard/curriculum'
-    | '/dashboard/profile'
-    | '/dashboard/quizzes'
-    | '/dashboard/settings'
-    | '/dashboard/'
-    | '/programmes'
-  fileRoutesByTo: FileRoutesByTo
+    | "/"
+    | "/about"
+    | "/dashboard"
+    | "/dashboard/announcements"
+    | "/dashboard/assignments"
+    | "/dashboard/classes"
+    | "/dashboard/curriculum"
+    | "/dashboard/profile"
+    | "/dashboard/quizzes"
+    | "/dashboard/settings"
+    | "/dashboard/"
+    | "/programmes"
+    | "/student/login"
+    | "/student/register";
+  fileRoutesByTo: FileRoutesByTo;
   to:
-    | '/'
-    | '/about'
-    | '/dashboard/announcements'
-    | '/dashboard/assignments'
-    | '/dashboard/classes'
-    | '/dashboard/curriculum'
-    | '/dashboard/profile'
-    | '/dashboard/quizzes'
-    | '/dashboard/settings'
-    | '/dashboard'
-    | '/programmes'
+    | "/"
+    | "/about"
+    | "/dashboard/announcements"
+    | "/dashboard/assignments"
+    | "/dashboard/classes"
+    | "/dashboard/curriculum"
+    | "/dashboard/profile"
+    | "/dashboard/quizzes"
+    | "/dashboard/settings"
+    | "/dashboard"
+    | "/programmes"
+    | "/student/login"
+    | "/student/register";
   id:
-    | '__root__'
-    | '/'
-    | '/about'
-    | '/dashboard'
-    | '/dashboard/announcements'
-    | '/dashboard/assignments'
-    | '/dashboard/classes'
-    | '/dashboard/curriculum'
-    | '/dashboard/profile'
-    | '/dashboard/quizzes'
-    | '/dashboard/settings'
-    | '/dashboard/'
-    | '/programmes/'
-  fileRoutesById: FileRoutesById
+    | "__root__"
+    | "/"
+    | "/about"
+    | "/dashboard"
+    | "/dashboard/announcements"
+    | "/dashboard/assignments"
+    | "/dashboard/classes"
+    | "/dashboard/curriculum"
+    | "/dashboard/profile"
+    | "/dashboard/quizzes"
+    | "/dashboard/settings"
+    | "/dashboard/"
+    | "/programmes/"
+    | "/(auth)/student/login"
+    | "/(auth)/student/register";
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  DashboardRoute: typeof DashboardRouteWithChildren
-  ProgrammesIndexRoute: typeof ProgrammesIndexRoute
+  IndexRoute: typeof IndexRoute;
+  AboutRoute: typeof AboutRoute;
+  DashboardRoute: typeof DashboardRouteWithChildren;
+  ProgrammesIndexRoute: typeof ProgrammesIndexRoute;
+  authStudentLoginRoute: typeof authStudentLoginRoute;
+  authStudentRegisterRoute: typeof authStudentRegisterRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -319,11 +361,13 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   DashboardRoute: DashboardRouteWithChildren,
   ProgrammesIndexRoute: ProgrammesIndexRoute,
-}
+  authStudentLoginRoute: authStudentLoginRoute,
+  authStudentRegisterRoute: authStudentRegisterRoute,
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* ROUTE_MANIFEST_START
 {
@@ -334,7 +378,9 @@ export const routeTree = rootRoute
         "/",
         "/about",
         "/dashboard",
-        "/programmes/"
+        "/programmes/",
+        "/(auth)/student/login",
+        "/(auth)/student/register"
       ]
     },
     "/": {
@@ -390,6 +436,12 @@ export const routeTree = rootRoute
     },
     "/programmes/": {
       "filePath": "programmes/index.jsx"
+    },
+    "/(auth)/student/login": {
+      "filePath": "(auth)/student/login.jsx"
+    },
+    "/(auth)/student/register": {
+      "filePath": "(auth)/student/register.jsx"
     }
   }
 }

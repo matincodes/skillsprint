@@ -2,8 +2,6 @@ import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Triangle } from "lucide-react";
 
-
-
 const LeaderBoardCard = (e) => {
   return (
     <>

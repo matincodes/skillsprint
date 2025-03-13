@@ -39,15 +39,16 @@ const FAQ = () => {
                   className="w-full"
                   key={faq.id}
                 >
-                  <AccordionItem value={`item-${faq.id}`} className={'bg-[#1A1A1A] rounded-[7px]'}>
+                  <AccordionItem
+                    value={`item-${faq.id}`}
+                    className={"bg-[#1A1A1A] rounded-[7px]"}
+                  >
                     <AccordionTrigger
-                      className={
-                        "cursor-pointer font-[400] text-[15px] "
-                      }
+                      className={"cursor-pointer font-[400] text-[15px] "}
                     >
                       {faq.question} {/* Render the question */}
                     </AccordionTrigger>
-                    <AccordionContent className={'text-[15px] leading-[27px]'}>
+                    <AccordionContent className={"text-[15px] leading-[27px]"}>
                       {faq.answer} {/* Render the answer */}
                     </AccordionContent>
                   </AccordionItem>

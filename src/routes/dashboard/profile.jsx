@@ -5,7 +5,6 @@ import Form from "@/components/Form/Form";
 import { useRef, useState } from "react";
 
 
-
 export const Route = createFileRoute("/dashboard/profile")({
   component: ProfileComponent,
 });
@@ -17,7 +16,6 @@ const ProfileComponent = () => {
   
   // Change Image
   const handleImageChange = (e) =>{
-      console.log(userprofile.current.files[0])
       const image = (userprofile.current.files[0])
       if(image){
         const reader = new FileReader()
@@ -28,7 +26,6 @@ const ProfileComponent = () => {
         }
         reader.readAsDataURL(image)
       }
-      console.log(profile)
     }
 
 
@@ -44,13 +41,12 @@ const ProfileComponent = () => {
         <label htmlFor="avatar" className="font-sora text-main font-[700] cursor-pointer text-[14px]" >Change Avatar</label>
       </div>
 
-      
       <div className="lg:basis-[70%] flex items-center justify-center flex-col px-[10px] lg:px-[30px] py-[30px] ">
         <div className="lg:w-[90%] w-full grid gap-6 items-center">
-            <h2 className='font-sora text-[16px]'>My Profile</h2>
-            {/* form */}
-                <Form />            
-            {/* form */}
+          <h2 className="font-sora text-[16px]">My Profile</h2>
+          {/* form */}
+          <Form />
+          {/* form */}
         </div>
       </div>
     </div>
