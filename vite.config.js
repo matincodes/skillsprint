@@ -17,4 +17,15 @@ export default defineConfig({
       "@": path.resolve(path.dirname(fileURLToPath(import.meta.url)), "src"),
     },
   },
+  optimizeDeps: {
+    include: ["@tanstack/react-router"],
+  },
+  build: {
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+    rollupOptions: {
+      external: ["react-toastify"],
+    },
+  },
 });

@@ -4,12 +4,11 @@ import spack from "../../assets/icons/spack.svg";
 import "./programmes.css";
 import Programmes from "../../components/Programmes/Programmes";
 import { programmeData } from "@/data/programmeData";
-import UpSkillCard from "@/components/Cards/UpSkillCard";
 import { upskillCard } from "@/data/homeCardData";
 import NavBar from "@/components/Navbar/NavBar";
 import Footer from "@/components/Footer/Footer";
 import ExploreCard from "@/components/Cards/ExploreCard";
-import SectionHeader from "@/components/Sections/SectionHeader";
+
 
 // Route Configuration
 export const Route = createFileRoute("/programmes/")({
@@ -67,8 +66,7 @@ const CategoryButton = ({ label, isActive, onClick }) => (
 
 function RouteComponent() {
   const [activeCategory, setActiveCategory] = useState(0);
-  const data = window.localStorage.getItem("user");
-  const user = JSON.parse(data);
+
 
   return (
     <>
