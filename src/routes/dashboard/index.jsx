@@ -4,7 +4,7 @@ import { Link } from "@tanstack/react-router";
 import { Radio } from "lucide-react";
 import UpcomingSession from "@/components/Cards/UpcomingSession";
 import { UpcomingSessionCard } from "@/data/dashboard";
-import LeaderBoardCard from "@/components/Cards/LeaderBoard";
+import LeaderBoard from "@/components/Cards/LeaderBoard";
 import { LeaderBoardCard } from "@/data/dashboard";
 
 export const Route = createFileRoute("/dashboard/")({
@@ -101,7 +101,7 @@ const DashboardComponent = () => {
 
           <div className="rounded-[6px] space-y-2">
             {LeaderBoardCard.map((user) => (
-              <LeaderBoardCard
+              <LeaderBoard
                 fullName={user.fullName}
                 image={user.image}
                 point={user.point}
