@@ -47,24 +47,27 @@ export function AuthProvider({ children }) {
     const login = async (email, password) => {
         try {
             const response = await axios.post('/api/auth/sign-in', {
-                email,
-                password,
+                email: email.trim(),
+                password: password.trim(),
             });
 
-            if (response.status === 200 || response.status === 201) {
+            if (response.status === 200 || response.data.message === 'Login successful') {
                 setUser(response.data.user);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
                 setIsAuthenticated(true);
                 setError(null);
+                return true;
             } else {
                 setIsAuthenticated(false);
                 setError('Invalid email or password');
                 toast.error('Invalid email or password');
+                return false;
             }
         } catch (err) {
-            console.error('Login error:', err);
+            console.error('Login error:', err.response?.data || err.message);
             setError('Login error');
-            toast.error('Login error');
+            toast.error(err.response?.data?.error || 'Login failed');
+            return false;
         }
     };
 
@@ -77,14 +80,17 @@ export function AuthProvider({ children }) {
                 localStorage.removeItem('user');
                 setIsAuthenticated(false);
                 setError(null);
+                return true;
             } else {
                 setError('Logout failed');
                 toast.error('Logout failed');
+                return false;
             }
         } catch (err) {
             console.error('Logout error:', err);
             setError('Logout error');
             toast.error('Logout error');
+            return false;
         }
     };
 
