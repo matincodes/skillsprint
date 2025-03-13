@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import React, { useEffect, useState } from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -23,10 +22,14 @@ import {
 } from "@/components/ui/Sheets/AnnouncementSheet";
 import NotificationModal from "../Notification/NotificationModal";
 import { AnnouncementData } from "@/data/dashboard";
+import UserAvatar from "../UserAvatar/UserAvatar";
 
 const AppSidebar = () => {
   const [activeLink, setActiveLink] = useState("/dashboard/");
   const { pathname } = useLocation();
+  const userImage = JSON.parse(window.localStorage.getItem('user'))?.image
+
+
 
   console.log(activeLink, location);
 
@@ -41,10 +44,7 @@ const AppSidebar = () => {
                 className={`${pathname == "/dashboard/profile" ? "bg-black w-[230px] p-1 cursor-pointer rounded-[50px]" : ""} flex gap-2 items-center`}
               >
                 {/* Avatar */}
-                <Avatar>
-                  <AvatarImage src="/assets/avatar.png" className={"size-8"} />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
+                <UserAvatar profile={userImage} />
                 {/* User Info */}
                 <div className="flex flex-col font-sora">
                   <h1 className="text-[13px] text-white font-[300]">

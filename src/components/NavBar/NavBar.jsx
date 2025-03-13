@@ -7,12 +7,16 @@ import {
   SheetContent,
   SheetDescription,
   SheetTrigger,
+  SheetTitle 
 } from "@/components/ui/Sheets/NavBarSheet";
+import UserAvatar from "../UserAvatar/UserAvatar";
+
+
 
 const NavBar = () => {
   const pathname = useLocation();
   const [active, setActive] = useState("");
-  console.log(pathname.pathname);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     setActive(pathname.pathname);
@@ -45,14 +49,26 @@ const NavBar = () => {
           </Link>
         </div>
 
-        <div className="border grid ">
-          <Button text="Login to portal" location="/student/register" nav />
+        <div className="grid ">
+          {user === null ? (
+            <Button text="Login to portal" nav />
+          ) : (
+            <div className="flex gap-2 items-center">
+              <UserAvatar profile={user.profilePicture ? user.profilePicture : '/assets/avatar.png'} />
+              <div className="flex flex-col font-sora">
+                <h1 className="text-[13px] text-white font-[300]">
+                  {user.name}
+                </h1>
+                <p className="text-paragraph text-[10px] font-[400]">{user.email}</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       {/* Dashboard */}
 
       {/* Responsive */}
-      <div className="lg:hidden grid grid-cols-2">
+      <div className="lg:hidden flex items-center justify-between">
         <img src="/assets/logo.png" alt="" className="w-[50px] " />
         <Sheet>
           <SheetTrigger asChild className="item-end">
@@ -86,13 +102,30 @@ const NavBar = () => {
                 About
               </Link>
               <Link
-                to="/programme"
-                className={`${active == "/programme" ? "text-main" : ""} font-[300] text-[14px] hover:text-main py-4 px-5`}
+                to="/programmes"
+                className={`${active == "/programmes" ? "text-main" : ""} font-[300] text-[14px] hover:text-main py-4 px-5`}
               >
-                Programme
+                Programmes
               </Link>
 
-              <Button text="Login to portal" location="/student/regsiter" nav />
+              {user == null ? (
+                <Button text="Login to portal"  nav />
+              ) : (
+                <div className="flex gap-2">
+                <UserAvatar profile={user.profilePicture ? user.profilePicture : '/assets/avatar.png'} />
+
+                  <div className="flex flex-col font-sora">
+                    <h1 className="text-[13px] text-white font-[300]">
+                      {user.name}
+                    </h1>
+                    <p className="text-paragraph text-[10px] font-[400]">
+                      {user.email}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              
             </SheetDescription>
           </SheetContent>
         </Sheet>
