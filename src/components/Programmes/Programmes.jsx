@@ -1,6 +1,6 @@
 import React from "react";
 import ProgrammeCard from "../Cards/ProgrammeCard";
-const Programmes = ({ data }) => {
+const Programmes = ({ data, isAuthenticated }) => {
   return (
     <>
       {data.map((items, index) => (
@@ -11,6 +11,8 @@ const Programmes = ({ data }) => {
           description={items.description}
           price={items.price}
           duration={items.duration}
+          isAuthenticated={isAuthenticated}
+          startDate={items.startDate}
         />
       ))}
     </>

@@ -1,7 +1,8 @@
 import React from "react";
 import Button from "../Button/Button";
+import PopUp from "../Popup/Popup";
 
-const ProgrammeCard = ({ image, description, title, duration, price }) => {
+const ProgrammeCard = ({ image, description, title, duration, price, isAuthenticated, startDate }) => {
   return (
     <div className="w-auto bg-[#121212] rounded-2xl ">
       <img className="w-full rounded-t-2xl " src={image} />
@@ -21,7 +22,7 @@ const ProgrammeCard = ({ image, description, title, duration, price }) => {
           </p>
         </span>
         <button className="lg:text-base tracking-[1.5px] cursor-pointer font-semibold font-inter text-[10px] text-white py-3 px-6 bg-[#AE752C] rounded-md">
-          Join the Free Program
+          {isAuthenticated ? <PopUp text='Apply Now' courseTitle={title} startDate={startDate} /> : 'Join the Free Program'}
         </button>
       </div>
     </div>

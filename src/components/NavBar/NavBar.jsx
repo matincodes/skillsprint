@@ -49,7 +49,7 @@ const NavBar = () => {
 
         <div className="grid ">
           {user === null ? (
-            <Button text="Login to portal" nav />
+            <Button text="Login to portal" location="/student/login" nav />
           ) : (
             <div className="flex gap-2 items-center">
               <UserAvatar

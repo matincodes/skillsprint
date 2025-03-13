@@ -1,37 +1,55 @@
 import React, { useState, useContext } from "react";
-import { createFileRoute } from "@tanstack/react-router";
 import { useAuth } from "@/context/AuthContext"; // Make sure to replace with the correct path to your AuthContext
 import { Button } from "../../../components/ui/button";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate} from "@tanstack/react-router";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import showIcon from "../../../assets/show-icon.png"; // Make sure to replace with the correct path to your show icon
 // import hideIcon from "../../../assets/hide-icon.png"; // Make sure to replace with the correct path to your hide icon
+
+
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/(auth)/student/login")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const { login } = useAuth();
+  const navigate = useNavigate();
+  const { login } = useAuth(); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
+
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleSubmit = async () => {
-    if (password.length < 8) {
-      setError("Password must be at least 8 characters long");
+
+    if (!email || !password) {
+      toast.error("Please fill all fields");
       return;
     }
-    setError("");
+
+    if (password && password.length < 8) {
+      toast.error("Password must be at least 8 characters long");
+      return;
+    }
     try {
-      await login(email, password);
+      const success = await login(email, password);
+      console.log(success);
       // Redirect to the desired page after successful login
+      if (success) {
+        toast.success("Login successful!");
+        navigate({ to: "/" }); 
+      }
     } catch (err) {
-      setError("Failed to login. Please check your credentials.");
+      console.error("Login error:",
+        err
+      );
+      toast.error("Failed to login. Please check your credentials.");
     }
   };
 
