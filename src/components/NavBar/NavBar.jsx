@@ -7,6 +7,7 @@ import {
   SheetContent,
   SheetDescription,
   SheetTrigger,
+  SheetTitle 
 } from "@/components/ui/Sheets/NavBarSheet";
 import UserAvatar from "../UserAvatar/UserAvatar";
 
@@ -15,17 +16,7 @@ import UserAvatar from "../UserAvatar/UserAvatar";
 const NavBar = () => {
   const pathname = useLocation();
   const [active, setActive] = useState("");
-  const[userImage, setUserImage] = useState(null)
-  const data = window.localStorage.getItem("user");
-  const user = JSON.parse(data);
-  const firstName = user?.firstName;
-  const lastName = user?.lastName;
-  const email = user?.email;
-  
-  useEffect(()=>{
-    setUserImage(JSON.parse(window.localStorage.getItem('user'))?.image)
-  }, [window.localStorage])
-  // console.log(user);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     setActive(pathname.pathname);
@@ -59,16 +50,16 @@ const NavBar = () => {
         </div>
 
         <div className="grid ">
-          {user == null ? (
+          {user === null ? (
             <Button text="Login to portal" nav />
           ) : (
             <div className="flex gap-2 items-center">
-              <UserAvatar profile={userImage} />
+              <UserAvatar profile={user.profilePicture ? user.profilePicture : '/assets/avatar.png'} />
               <div className="flex flex-col font-sora">
                 <h1 className="text-[13px] text-white font-[300]">
-                  {firstName} {lastName}
+                  {user.name}
                 </h1>
-                <p className="text-paragraph text-[10px] font-[400]">{email}</p>
+                <p className="text-paragraph text-[10px] font-[400]">{user.email}</p>
               </div>
             </div>
           )}
@@ -81,13 +72,6 @@ const NavBar = () => {
         <img src="/assets/logo.png" alt="" className="w-[50px] " />
         <Sheet>
           <SheetTrigger asChild className="item-end">
-            <div className="grid justify-end">
-              <img
-                src="/assets/menu.png"
-                alt=""
-                className="w-[30px] cursor-pointer"
-              />
-            </div>
             <div className="grid justify-end">
               <img
                 src="/assets/menu.png"
@@ -125,17 +109,17 @@ const NavBar = () => {
               </Link>
 
               {user == null ? (
-                <Button text="Login to portal" nav />
+                <Button text="Login to portal"  nav />
               ) : (
                 <div className="flex gap-2">
-                <UserAvatar profile={userImage} />
+                <UserAvatar profile={user.profilePicture ? user.profilePicture : '/assets/avatar.png'} />
 
                   <div className="flex flex-col font-sora">
                     <h1 className="text-[13px] text-white font-[300]">
-                      {firstName} {lastName}
+                      {user.name}
                     </h1>
                     <p className="text-paragraph text-[10px] font-[400]">
-                      {email}
+                      {user.email}
                     </p>
                   </div>
                 </div>
