@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import spack from "../../assets/icons/spack.svg";
 import "./programmes.css";
-import Programmes from "../../components/Programmes/Programmes";
+import Programmes from "@/components/Programmes/Programmes";
 import { programmeData } from "@/data/programmeData";
 import { upskillCard } from "@/data/homeCardData";
-import NavBar from "../../components/Navbar/Navbar";
+import NavBar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import ExploreCard from "@/components/Cards/ExploreCard";
 
