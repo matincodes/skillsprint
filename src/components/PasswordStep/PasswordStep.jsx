@@ -10,7 +10,7 @@ export default function PasswordStep({
   onSubmit,
 }) {
   return (
-    <form className="w-1/3 ml-16 flex flex-col items-center">
+    <div className="w-1/3 ml-16 flex flex-col items-center">
       <input
         id="password"
         type="password"
@@ -32,6 +32,6 @@ export default function PasswordStep({
       <Button onClick={onSubmit} className="text-white w-full bg-main cursor-pointer">
         Submit
       </Button>
-    </form>
+    </div>
   );
 }

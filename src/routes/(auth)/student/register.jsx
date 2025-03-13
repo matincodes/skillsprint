@@ -23,9 +23,17 @@ function RouteComponent() {
   const [error, setError] = useState("");
 
   // Called when user clicks "Continue" in the email step
-  const handleContinue = () => {
+  const handleContinue = (e) => {
+    e.preventDefault();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!name || !email) {
       toast.error("Please enter both your full name and a valid email.");
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email.");
       return;
     }
     setError("");
@@ -33,7 +41,14 @@ function RouteComponent() {
   };
 
   // Called when user clicks "Submit" in the password step
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters long");
+      return;
+    }
+    console.log(name, email, password, confirmPassword);
     if (password !== confirmPassword) {
       toast.error("Passwords do not match.");
       return;
@@ -41,9 +56,12 @@ function RouteComponent() {
     setError("");
 
     try {
-      await signup(name, email, password, "STUDENT");
-      toast.success("Registration successful!");
-      navigate("/"); // Redirect to home page
+      const success = await signup(name, email, password, "STUDENT");
+      
+      if(success){
+        toast.success("Registration successful!"); // Display success message
+        navigate({ to: '/' }); // Redirect to home page
+      }
     } catch (err) {
       setError(err.message || "An error occurred during registration.");
       toast.error(err.message || "An error occurred during registration.");
@@ -64,32 +82,38 @@ function RouteComponent() {
         </h2>
 
         {step === 1 && (
-          <EmailStep
-            email={email}
-            setEmail={setEmail}
-            name={name}
-            setName={setName}
-            onContinue={handleContinue}
-          />
+          <form onSubmit={handleContinue} className="w-full flex flex-col items-center">
+            <EmailStep
+              email={email}
+              setEmail={setEmail}
+              name={name}
+              setName={setName}
+              onContinue={handleContinue}
+            />
+          </form>
         )}
 
         {step === 2 && (
-          <PasswordStep
-            password={password}
-            setPassword={setPassword}
-            confirmPassword={confirmPassword}
-            setConfirmPassword={setConfirmPassword}
-            onSubmit={handleSubmit}
-          />
+          <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
+            <PasswordStep
+              password={password}
+              setPassword={setPassword}
+              confirmPassword={confirmPassword}
+              setConfirmPassword={setConfirmPassword}
+              onSubmit={handleSubmit}
+            />
+          </form>
         )}
       </div>
 
       <div className="text-paragraph flex justify-center text-center w-full mt-10 ml-16">
         Already have an account? {"  "}
-        <Link to="/(auth)/student/login" className="underline">
+        <Link to="/student/login" className="underline">
           Login
         </Link>
       </div>
     </div>
   );
 }
+
+export default RouteComponent;

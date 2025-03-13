@@ -1,13 +1,11 @@
 import axios from '@/lib/axios';
 import { createContext, useContext, useState } from 'react';
-import { useRouter } from '@tanstack/react-router';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-    const router = useRouter();
     const [user, setUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [error, setError] = useState(null);
@@ -21,14 +19,15 @@ export function AuthProvider({ children }) {
                 role,
             });
 
-            if (response.status === 200) {
+            if (response.status === 200 || response.status === 201) {
                 setUser(response.data.user);
                 console.log('User:', response.data.user);
                 setIsAuthenticated(true);
-                router.navigate('/');
+                return true;
             } else {
                 setError('Signup failed');
                 toast.error('Signup failed');
+                return false;
             }
         } catch (err) {
             console.error('Signup error:', err);
@@ -73,7 +72,6 @@ export function AuthProvider({ children }) {
                 setUser(null);
                 setIsAuthenticated(false);
                 setError(null);
-                router.navigate('/');
             } else {
                 setError('Logout failed');
                 toast.error('Logout failed');

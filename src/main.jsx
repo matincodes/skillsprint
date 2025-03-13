@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -18,9 +18,15 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <AuthProvider>
-        <RouterProvider router={router} />
+        <App />
         <ToastContainer />
       </AuthProvider>
     </StrictMode>,
   );
 }
+
+export function App() {
+  const auth = useAuth()
+  return <RouterProvider router={router} context={{ ...auth }} />
+}
+

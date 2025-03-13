@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 export default function EmailStep({ name, setName, email, setEmail, onContinue }) {
   return (
-    <form className="w-1/3 ml-16 flex flex-col items-center">
+    <div className="w-1/3 ml-16 flex flex-col items-center">
       <input
         id="name"
         type="text"
@@ -27,6 +27,6 @@ export default function EmailStep({ name, setName, email, setEmail, onContinue }
       <Button onClick={onContinue} className="text-white w-full bg-main cursor-pointer">
         Proceed
       </Button>
-    </form>
+    </div>
   );
 }
