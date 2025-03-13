@@ -9,6 +9,7 @@ import { upskillCard } from "@/data/homeCardData";
 import NavBar from "@/components/Navbar/NavBar";
 import Footer from "@/components/Footer/Footer";
 import ExploreCard from "@/components/Cards/ExploreCard";
+import SectionHeader from "@/components/Sections/SectionHeader";
 
 // Route Configuration
 export const Route = createFileRoute("/programmes/")({
@@ -66,6 +67,8 @@ const CategoryButton = ({ label, isActive, onClick }) => (
 
 function RouteComponent() {
   const [activeCategory, setActiveCategory] = useState(0);
+  const data = window.localStorage.getItem("user");
+  const user = JSON.parse(data);
 
   return (
     <>
@@ -77,12 +80,34 @@ function RouteComponent() {
       <div className="bg-black flex flex-col ">
         {/* Header Section */}
         <div className="mt-36 flex justify-center">
-          <span className=" flex flex-col items-start">
-            <img src={spack} alt="Skill Sprint Logo" className="-ml-7 lg:-mb-5 lg:-ml-5 lg:w-[60px]" />
-            <h1 className="lg:text-6xl lg:leading-18 font-bold text-4xl text-center text-white font-mont tracking-[3px]">
-              Explore Our <br /> Programmes
-            </h1>
-          </span>
+          {user != null ? (
+            <section className="space-y-6 flex flex-col items-center justify-center relative text-center text-white font-inter ">
+
+              <h2 className="font-[200] lg:text-[45px] text-[37px] tracking-[2px] lg:leading-[54px] relative lg:w-[65%] w-full flex ">
+                <img
+                  src={"/assets/Icons/spark.png"}
+                  className=" absolute lg:w-[60px] w-[40px] lg:top-[-34px] lg:left-[-15px] top-[-13px] left-[-20px]"
+                />
+                Choose the program you want to join
+              </h2>
+
+              <p className="font-inter text-white lg:text-[18px] text-[15px] font-[600]">
+              Apply to only one program at a time, your application status is final, and to <br /> switch program, you must first cancel your current application.
+              </p>
+
+            </section>
+          ) : (
+            <span className=" flex flex-col items-start">
+              <img
+                src={spack}
+                alt="Skill Sprint Logo"
+                className="-ml-7 lg:-mb-5 lg:-ml-5 lg:w-[60px]"
+              />
+              <h1 className="lg:text-6xl lg:leading-18 leading-14 font-bold text-5xl text-center text-white font-mont tracking-[3px]">
+                Explore Our <br /> Programmes
+              </h1>
+            </span>
+          )}
         </div>
 
         {/* Explore Card Section */}
@@ -95,7 +120,7 @@ function RouteComponent() {
         {/* Programme Category Selection */}
         <div className="w-full lg:gap-12  flex flex-col items-center gap-7 mt-40">
           <h2 className="lg:text-[45px] tracking-[1px] font-bold text-2xl text-white  text-center lg:w-full font-mont">
-            Choose Programme <br className="lg:hidden"/> Category
+            Choose Programme <br className="lg:hidden" /> Category
           </h2>
           <div className="custom-scroll">
             <div className=" lg:w-full flex lg:gap-x-10 lg:gap-y-5 gap-x-5 lg:flex-wrap px-7   lg:justify-center">

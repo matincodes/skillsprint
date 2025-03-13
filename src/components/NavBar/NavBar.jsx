@@ -8,11 +8,24 @@ import {
   SheetDescription,
   SheetTrigger,
 } from "@/components/ui/Sheets/NavBarSheet";
+import UserAvatar from "../UserAvatar/UserAvatar";
+
+
 
 const NavBar = () => {
   const pathname = useLocation();
   const [active, setActive] = useState("");
-  console.log(pathname.pathname);
+  const[userImage, setUserImage] = useState(null)
+  const data = window.localStorage.getItem("user");
+  const user = JSON.parse(data);
+  const firstName = user?.firstName;
+  const lastName = user?.lastName;
+  const email = user?.email;
+  
+  useEffect(()=>{
+    setUserImage(JSON.parse(window.localStorage.getItem('user'))?.image)
+  }, [window.localStorage])
+  // console.log(user);
 
   useEffect(() => {
     setActive(pathname.pathname);
@@ -45,20 +58,36 @@ const NavBar = () => {
           </Link>
         </div>
 
-        <div className="border grid ">
-          <Button text="Login to portal" nav />
+        <div className="grid ">
+          {user == null ? (
+            <Button text="Login to portal" nav />
+          ) : (
+            <div className="flex gap-2 items-center">
+              <UserAvatar profile={userImage} />
+              <div className="flex flex-col font-sora">
+                <h1 className="text-[13px] text-white font-[300]">
+                  {firstName} {lastName}
+                </h1>
+                <p className="text-paragraph text-[10px] font-[400]">{email}</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       {/* Dashboard */}
 
       {/* Responsive */}
-      <div className="lg:hidden grid grid-cols-2">
+      <div className="lg:hidden flex items-center justify-between">
         <img src="/assets/logo.png" alt="" className="w-[50px] " />
         <Sheet>
           <SheetTrigger asChild className="item-end">
-          <div className="grid justify-end">
-            <img src="/assets/menu.png" alt="" className="w-[30px] cursor-pointer" />
-          </div>
+            <div className="grid justify-end">
+              <img
+                src="/assets/menu.png"
+                alt=""
+                className="w-[30px] cursor-pointer"
+              />
+            </div>
           </SheetTrigger>
           <SheetContent
             side="left"
@@ -82,13 +111,30 @@ const NavBar = () => {
                 About
               </Link>
               <Link
-                to="/programme"
-                className={`${active == "/programme" ? "text-main" : ""} font-[300] text-[14px] hover:text-main py-4 px-5`}
+                to="/programmes"
+                className={`${active == "/programmes" ? "text-main" : ""} font-[300] text-[14px] hover:text-main py-4 px-5`}
               >
-                Programme
+                Programmes
               </Link>
 
-              <Button text="Login to portal" nav />
+              {user == null ? (
+                <Button text="Login to portal" nav />
+              ) : (
+                <div className="flex gap-2">
+                <UserAvatar profile={userImage} />
+
+                  <div className="flex flex-col font-sora">
+                    <h1 className="text-[13px] text-white font-[300]">
+                      {firstName} {lastName}
+                    </h1>
+                    <p className="text-paragraph text-[10px] font-[400]">
+                      {email}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              
             </SheetDescription>
           </SheetContent>
         </Sheet>

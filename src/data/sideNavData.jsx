@@ -5,7 +5,7 @@ const sideNavData = [
        links: [
          {
            title: "Home",
-           url: "/dashboard/",
+           url: "/dashboard/" || "/dashboard",
            icon: '/assets/Icons/home.png',
          },
          {
