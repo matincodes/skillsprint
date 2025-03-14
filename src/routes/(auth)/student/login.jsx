@@ -16,12 +16,10 @@ export const Route = createFileRoute("/(auth)/student/login")({
 
 function RouteComponent() {
   const navigate = useNavigate();
-  const { login } = useAuth(); 
+  const { login,isSubmitting, setIsSubmitting } = useAuth(); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
-
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);

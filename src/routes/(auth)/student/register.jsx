@@ -7,21 +7,20 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { createFileRoute } from "@tanstack/react-router";
-import { set } from "react-hook-form";
+
 
 export const Route = createFileRoute("/(auth)/student/register")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const { signup } = useAuth(); // Destructure signup from useAuth
+  const { signup, isSubmitting, setIsSubmitting } = useAuth(); // Destructure signup from useAuth
   const navigate = useNavigate(); // Initialize useNavigate hook
   const [step, setStep] = useState(1);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Called when user clicks "Continue" in the email step
   const handleContinue = (e) => {
