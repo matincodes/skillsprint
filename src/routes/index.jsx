@@ -8,6 +8,7 @@ import HomePageSection from "@/components/Sections/HomePageSection";
 import SectionHeader from "@/components/Sections/SectionHeader";
 import SkillCard from "@/components/Cards/SkillCard";
 import NavBar from "@/components/NavBar/NavBar";
+import { useAuth } from "@/context/AuthContext";
 import Footer from "@/components/footer/Footer";
 
 
@@ -16,8 +17,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const data = window.localStorage.getItem("user");
-  const user = JSON.parse(data);
+  const { isAuthenticated } = useAuth()
 
   return (
     <>
@@ -46,10 +46,10 @@ function Index() {
               </p>
             </section>
 
-            {user != null ? (
+            {isAuthenticated ? (
               <Button text="Go to Dashboard" location='dashboard/' />
             ) : (
-              <Button text="Join the Free Program" />
+              <Button text="Join the Free Program" location="/student/register"/>
             )}
 
             <img
@@ -123,7 +123,7 @@ function Index() {
             ))}
 
             <div className="col-span-2 flex items-center justify-center relative mt-[50px]">
-              <Button text="Join the free program" />
+              <Button text="Join the free program" location="/student/register" />
             </div>
           </div>
           {/*  */}
@@ -147,7 +147,7 @@ function Index() {
 
             {/* Button */}
             <div className="col-span-3 flex items-center justify-center relative mt-[30px]">
-              <Button text="View all programs" location="/about" />
+              <Button text="View all programs" location="/programmes" />
             </div>
             {/* Button */}
           </div>

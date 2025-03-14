@@ -59,7 +59,6 @@ export const programmeData = [
     category: "Design",
   },
 
-
   {
     image: dataAnalyticsImage,
     role: "Data Analytics",
@@ -82,7 +81,6 @@ export const programmeData = [
     category: "Data & AI",
   },
 
-
   {
     image: cyberSecurityImage,
     role: "Cybersecurity ",
@@ -97,10 +95,6 @@ export const programmeData = [
       "Get hands-on experience with Amazon Web Services (AWS) to deploy and manage cloud-based applications.",
     category: "Security & Cloud",
   },
-
-
-
-
 
   {
     image: digitalImage,
