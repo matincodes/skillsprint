@@ -73,12 +73,14 @@ function RouteComponent() {
       <img src="/assets/logo.png" alt="" className="w-[50px]" />
 
       <div className="w-full flex flex-col items-center mt-25">
-        <h2 className="font-[700] lg:text-[36px] text-[23px] lg:leading-[60px] relative text-white pb-12">
+        <h2 className="text-center font-[700] lg:text-[36px] text-[23px] lg:leading-[60px] relative text-white pb-12">
           <img
             src={"/assets/Icons/spark.png"}
-            className="absolute lg:w-[60px] w-[40px] lg:-top-[25px] lg:-left-[45px] top-[15px] left-[6px] "
+            className="absolute lg:w-[60px] w-[40px] lg:-top-[25px] lg:-left-[45px] -top-[20px] left-[6px] "
           />
-          Create your skill sprint account
+          <span className="block lg:hidden">Create your</span>
+          <span className="hidden lg:block">Create your skill sprint account</span>
+          <span className="block lg:hidden">skill sprint account</span>
         </h2>
 
         {step === 1 && (
@@ -112,8 +114,8 @@ function RouteComponent() {
         )}
       </div>
 
-      <div className="text-paragraph flex justify-center text-center w-full mt-10 ml-16">
-        Already have an account? {"  "}
+      <div className="text-paragraph flex justify-center text-center w-full mt-10">
+        Already have an account? {" "}
         <Link to="/student/login" className="underline">
           Login
         </Link>

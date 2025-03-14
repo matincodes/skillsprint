@@ -27,7 +27,7 @@ const ProgrammeCard = ({ image, description, title, duration, price, isAuthentic
               <PopUp text='Apply Now' courseTitle={title} startDate={startDate} />
             </button>
           ): (
-            <Link to="/register/" className="lg:text-base tracking-[1.5px] cursor-pointer font-semibold font-inter text-[10px] text-white py-3 px-6 bg-[#AE752C] rounded-md">
+            <Link to="/student/register" className="lg:text-base tracking-[1.5px] cursor-pointer font-semibold font-inter text-[10px] text-white py-3 px-6 bg-[#AE752C] rounded-md">
               Join the Free Program
             </Link>
           )}

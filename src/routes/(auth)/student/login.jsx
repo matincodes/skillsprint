@@ -58,15 +58,15 @@ function RouteComponent() {
       <img src="/assets/logo.png" alt="" className="w-[50px]" />
 
       <div className="w-full flex flex-col items-center mt-25">
-        <h2 className="font-[700] lg:text-[36px] text-[23px] lg:leading-[60px] relative text-white pb-12">
+        <h2 className="font-[700] lg:text-[36px] text-[23px] lg:leading-[60px] relative text-white pb-12 text-center px-16">
           <img
             src={"/assets/Icons/spark.png"}
-            className="absolute lg:w-[60px] w-[40px] lg:-top-[25px] lg:-left-[45px] top-[15px] left-[6px] "
+            className="absolute lg:w-[60px] w-[40px] lg:-top-[25px] -top-[20px] left-[30px] lg:left-[20px]"
           />
           Welcome back to skill sprint
         </h2>
 
-        <div className="w-1/3 ml-16 flex flex-col items-center">
+        <div className="w-full md:w-1/3 flex flex-col items-center">
           <input
             id="email"
             type="email"
@@ -103,8 +103,8 @@ function RouteComponent() {
         </div>
       </div>
 
-      <div className="text-paragraph flex justify-center text-center w-full mt-10 ml-16">
-        Don't have an account?
+      <div className="text-paragraph flex justify-center text-center w-full mt-10">
+        Don't have an account?{" "}
         <Link to="/student/register" className="underline">
           Signup
         </Link>
