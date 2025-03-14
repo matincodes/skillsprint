@@ -4,7 +4,7 @@ import { Link } from "@tanstack/react-router";
 import { Radio } from "lucide-react";
 import UpcomingSession from "@/components/Cards/UpcomingSession";
 import { UpcomingSessionCard } from "@/data/dashboard";
-import LeaderBoard from "@/components/Cards/Leaderboard";
+import LeaderBoard from "@/components/Cards/LeaderBoard";
 import { LeaderBoardCard } from "@/data/dashboard";
 
 export const Route = createFileRoute("/dashboard/")({
