@@ -20,6 +20,7 @@ function RouteComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
 
 
   const toggleShowPassword = () => {
@@ -37,19 +38,24 @@ function RouteComponent() {
       toast.error("Password must be at least 8 characters long");
       return;
     }
+
+    setIsSubmitting(true); // Disable the button after the first click
+
     try {
       const success = await login(email, password);
       console.log(success);
       // Redirect to the desired page after successful login
       if (success) {
         toast.success("Login successful!");
-        navigate({ to: "/" }); 
+        navigate({ to: "/" });
+        setIsSubmitting(false); // Re-enable the button after a successful login 
       }
     } catch (err) {
       console.error("Login error:",
         err
       );
       toast.error("Failed to login. Please check your credentials.");
+      setIsSubmitting(false); // Re-enable the button if an error occurs
     }
   };
 
@@ -96,9 +102,36 @@ function RouteComponent() {
 
           <Button
             onClick={handleSubmit}
-            className="text-white w-full bg-main cursor-pointer"
+            className={`text-white w-full bg-main cursor-pointer ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
+            disabled={isSubmitting} // Disable the button if submitting
           >
-            Login
+            {isSubmitting ? (
+              <div className="flex items-center justify-center">
+                <svg
+                  className="animate-spin h-5 w-5 mr-3 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                  ></path>
+                </svg>
+                Submitting...
+              </div>
+            ) : (
+              "Login"
+            )}
           </Button>
         </div>
       </div>
@@ -112,3 +145,5 @@ function RouteComponent() {
     </div>
   );
 }
+
+export default RouteComponent;

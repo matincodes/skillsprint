@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { createFileRoute } from "@tanstack/react-router";
+import { set } from "react-hook-form";
 
 export const Route = createFileRoute("/(auth)/student/register")({
   component: RouteComponent,
@@ -20,7 +21,7 @@ function RouteComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Called when user clicks "Continue" in the email step
   const handleContinue = (e) => {
@@ -36,7 +37,6 @@ function RouteComponent() {
       toast.error("Please enter a valid email.");
       return;
     }
-    setError("");
     setStep(2);
   };
 
@@ -53,7 +53,8 @@ function RouteComponent() {
       toast.error("Passwords do not match.");
       return;
     }
-    setError("");
+
+    setIsSubmitting(true);
 
     try {
       const success = await signup(name, email, password, "STUDENT");
@@ -61,10 +62,12 @@ function RouteComponent() {
       if (success) {
         toast.success("Registration successful!"); // Display success message
         navigate({ to: "/" }); // Redirect to home page
+        setIsSubmitting(false);
       }
     } catch (err) {
       setError(err.message || "An error occurred during registration.");
       toast.error(err.message || "An error occurred during registration.");
+      setIsSubmitting(false);
     }
   };
 
@@ -109,6 +112,7 @@ function RouteComponent() {
               confirmPassword={confirmPassword}
               setConfirmPassword={setConfirmPassword}
               onSubmit={handleSubmit}
+              isSubmitting={isSubmitting}
             />
           </form>
         )}
