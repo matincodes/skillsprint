@@ -7,6 +7,7 @@ import "./index.css";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 import { AuthProvider, useAuth } from "./context/AuthContext";
+import { EnrollmentProvider, useEnrollment } from "./context/EnrollmentContext";
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -18,7 +19,9 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <AuthProvider>
-        <App />
+        <EnrollmentProvider>
+          <App />
+        </EnrollmentProvider>
         <ToastContainer />
       </AuthProvider>
     </StrictMode>,
@@ -27,5 +30,6 @@ if (!rootElement.innerHTML) {
 
 export function App() {
   const auth = useAuth();
-  return <RouterProvider router={router} context={{ ...auth }} />;
+  const enrollment = useEnrollment();
+  return <RouterProvider router={router} context={{ ...auth, ...enrollment }} />;
 }

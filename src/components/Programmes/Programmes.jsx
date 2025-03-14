@@ -3,9 +3,10 @@ import ProgrammeCard from "../Cards/ProgrammeCard";
 const Programmes = ({ data, isAuthenticated }) => {
   return (
     <>
-      {data.map((items, index) => (
+      {data.map((items) => (
         <ProgrammeCard
-          key={index}
+          key={items.id}
+          courseId={items.id}
           image={items.coverImage}
           title={items.title}
           description={items.description}
