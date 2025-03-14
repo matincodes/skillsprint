@@ -41,7 +41,9 @@ export function PasswordSettings() {
               <input
                 type={hidePassword1 ? "password" : ""}
                 className="outline-0 w-full font-inter text-xs font-light px-3 text-white placeholder:text-white lg:text-sm"
-                placeholder={hidePassword1 ? "*************" : "Current Password"}
+                placeholder={
+                  hidePassword1 ? "*************" : "Current Password"
+                }
                 {...register("Password", { required: true })}
               />
               {hidePassword1 ? (
@@ -58,7 +60,11 @@ export function PasswordSettings() {
                 />
               )}
             </div>
-            {errors.Password && <span className="font-normal text-xs text-red-500">fill cannot be empty</span>}
+            {errors.Password && (
+              <span className="font-normal text-xs text-red-500">
+                fill cannot be empty
+              </span>
+            )}
           </div>
 
           {/* Confirm Password */}
@@ -67,8 +73,10 @@ export function PasswordSettings() {
               <input
                 type={hidePassword2 ? "password" : ""}
                 className="outline-0 w-full font-inter text-xs font-light px-3 text-white placeholder:text-white lg:text-sm"
-                placeholder={hidePassword2 ? "*************" : "Current Password"}
-                {...register("comfirmedPassword" , { required: true })}
+                placeholder={
+                  hidePassword2 ? "*************" : "Current Password"
+                }
+                {...register("comfirmedPassword", { required: true })}
               />
               {hidePassword2 ? (
                 <LockKeyhole
@@ -84,7 +92,11 @@ export function PasswordSettings() {
                 />
               )}
             </div>
-            {errors.comfirmedPassword && <span className="font-normal text-xs text-red-500">fill cannot be empty</span>}
+            {errors.comfirmedPassword && (
+              <span className="font-normal text-xs text-red-500">
+                fill cannot be empty
+              </span>
+            )}
           </div>
         </div>
 
