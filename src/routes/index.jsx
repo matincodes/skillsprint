@@ -8,8 +8,9 @@ import HomePageSection from "@/components/Sections/HomePageSection";
 import SectionHeader from "@/components/Sections/SectionHeader";
 import SkillCard from "@/components/Cards/SkillCard";
 import NavBar from "@/components/NavBar/NavBar";
-import Footer from "@/components/Footer/Footer";
 import { useAuth } from "@/context/AuthContext";
+import Footer from "@/components/footer/Footer";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
