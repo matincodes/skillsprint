@@ -9,7 +9,7 @@ export default function EmailStep({
   onContinue,
 }) {
   return (
-    <div className="w-1/3 ml-16 flex flex-col items-center">
+    <div className="w-full md:w-1/3 flex flex-col items-center">
       <input
         id="name"
         type="text"

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Button from "../Button/Button";
-// import NavBarButton from "../Button/NavBarButton";
 import { Link, useLocation } from "@tanstack/react-router";
 import {
   Sheet,

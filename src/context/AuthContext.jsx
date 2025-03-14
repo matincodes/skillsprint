@@ -11,9 +11,10 @@ export function AuthProvider({ children }) {
         return storedUser ? JSON.parse(storedUser) : null;
     });
     const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('user'));
-    const [error, setError] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
 
     const signup = async (name, email, password, role) => {
+        setIsSubmitting(true); // Start submission
         try {
             const response = await axios.post('/api/auth/sign-up', {
                 name,
@@ -26,25 +27,27 @@ export function AuthProvider({ children }) {
                 setUser(response.data.user);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
                 setIsAuthenticated(true);
+                setIsSubmitting(false); // End submission
                 return true;
             } else {
-                setError('Signup failed');
                 toast.error('Signup failed');
+                setIsSubmitting(false); // End submission
                 return false;
             }
         } catch (err) {
             console.error('Signup error:', err);
             if (err.response && err.response.status === 409) {
-                setError('Email is already taken');
                 toast.error('Email is already taken');
             } else {
                 setError('Signup error');
                 toast.error('Signup error');
             }
+            setIsSubmitting(false); // End submission
         }
     };
 
     const login = async (email, password) => {
+        setIsSubmitting(true); // Start submission
         try {
             const response = await axios.post('/api/auth/sign-in', {
                 email: email.trim(),
@@ -55,23 +58,24 @@ export function AuthProvider({ children }) {
                 setUser(response.data.user);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
                 setIsAuthenticated(true);
-                setError(null);
+                setIsSubmitting(false); // End submission
                 return true;
             } else {
                 setIsAuthenticated(false);
-                setError('Invalid email or password');
                 toast.error('Invalid email or password');
+                setIsSubmitting(false); // End submission
                 return false;
             }
         } catch (err) {
             console.error('Login error:', err.response?.data || err.message);
-            setError('Login error');
             toast.error(err.response?.data?.error || 'Login failed');
+            setIsSubmitting(false); // End submission
             return false;
         }
     };
 
     const logout = async () => {
+        setIsSubmitting(true); // Start submission
         try {
             const response = await axios.post('/api/auth/sign-out');
 
@@ -79,23 +83,23 @@ export function AuthProvider({ children }) {
                 setUser(null);
                 localStorage.removeItem('user');
                 setIsAuthenticated(false);
-                setError(null);
+                setIsSubmitting(false); // End submission
                 return true;
             } else {
-                setError('Logout failed');
                 toast.error('Logout failed');
+                setIsSubmitting(false); // End submission
                 return false;
             }
         } catch (err) {
             console.error('Logout error:', err);
-            setError('Logout error');
             toast.error('Logout error');
+            setIsSubmitting(false); // End submission
             return false;
         }
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, signup, isAuthenticated, error }}>
+        <AuthContext.Provider value={{ user, login, logout, signup, isAuthenticated, isSubmitting, setIsSubmitting }}>
             {children}
         </AuthContext.Provider>
     );

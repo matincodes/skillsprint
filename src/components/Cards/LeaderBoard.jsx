@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Triangle } from "lucide-react";
 
-const LeaderBoardCard = (e) => {
+const LeaderBoard = (e) => {
   return (
     <>
       <div className="bg-[#121212a1] rounded-sm flex justify-between">
@@ -30,4 +30,4 @@ const LeaderBoardCard = (e) => {
   );
 };
 
-export default LeaderBoardCard;
+export default LeaderBoard;

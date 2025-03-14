@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import spack from "../../assets/icons/spack.svg";
 import "./programmes.css";
-import Programmes from "../../components/Programmes/Programmes";
-import { programmeData } from "@/data/programmeData";
-import UpSkillCard from "@/components/Cards/UpSkillCard";
+import Programmes from "@/components/Programmes/Programmes";
 import { upskillCard } from "@/data/homeCardData";
-import NavBar from "@/components/Navbar/NavBar";
-import Footer from "@/components/Footer/Footer";
-import ExploreCard from "@/components/Cards/ExploreCard";
-import SectionHeader from "@/components/Sections/SectionHeader";
+import NavBar from "@/components/NavBar/NavBar";
+import Footer from "@/components/footer/Footer";
+import ExploreCard from "@/components/Cards/ExploreCard";;
 import axios from "@/lib/axios";
 import { useAuth } from "@/context/AuthContext";
+
 
 // Route Configuration
 export const Route = createFileRoute("/programmes/")({
@@ -85,6 +83,7 @@ function RouteComponent() {
       {label}
     </button>
   );
+
 
   return (
     <>

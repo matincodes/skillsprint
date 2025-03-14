@@ -26,7 +26,7 @@ const PopUp = (e) => {
   return (
     <>
       <Dialog>
-        <DialogTrigger>{e.text}</DialogTrigger>
+        <DialogTrigger className='lg:text-base tracking-[1.5px] cursor-pointer font-semibold font-inter text-[10px] text-white py-3 px-6 bg-[#AE752C] rounded-md'>{e.text}</DialogTrigger>
         <DialogContent>
           <DialogHeader>
             <div className="flex flex-col justify-center items-center text-center space-y-5">

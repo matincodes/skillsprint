@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../Button/Button";
+import { Link } from "@tanstack/react-router";
 import PopUp from "../Popup/Popup";
 
 const ProgrammeCard = ({ image, description, title, duration, price, isAuthenticated, startDate }) => {
@@ -21,9 +21,14 @@ const ProgrammeCard = ({ image, description, title, duration, price, isAuthentic
             {description}
           </p>
         </span>
-        <button className="lg:text-base tracking-[1.5px] cursor-pointer font-semibold font-inter text-[10px] text-white py-3 px-6 bg-[#AE752C] rounded-md">
-          {isAuthenticated ? <PopUp text='Apply Now' courseTitle={title} startDate={startDate} /> : 'Join the Free Program'}
-        </button>
+        
+        {isAuthenticated ? (
+              <PopUp text='Apply Now' courseTitle={title} startDate={startDate} />
+          ): (
+            <Link to="/student/register" className="lg:text-base tracking-[1.5px] cursor-pointer font-semibold font-inter text-[10px] text-white py-3 px-6 bg-[#AE752C] rounded-md">
+              Join the Free Program
+            </Link>
+          )}
       </div>
     </div>
   );
