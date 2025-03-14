@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import spack from "../../assets/icons/spack.svg";
 import "./programmes.css";
 import Programmes from "@/components/Programmes/Programmes";
 import { programmeData } from "@/data/programmeData";
 import { upskillCard } from "@/data/homeCardData";
-import NavBar from "@/components/Navbar/Navbar";
+import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/Footer/Footer";
 import ExploreCard from "@/components/Cards/ExploreCard";
+import SectionHeader from "@/components/Sections/SectionHeader";
+import axios from "@/lib/axios";
+import { useAuth } from "@/context/AuthContext";
 
 
 // Route Configuration
@@ -15,57 +18,73 @@ export const Route = createFileRoute("/programmes/")({
   component: RouteComponent,
 });
 
-// Categories & Filtering Logic
-const categories = [
-  { label: "All", filter: () => programmeData },
-  {
-    label: "Tech & Software Development",
-    filter: () =>
-      programmeData.filter((item) => item.category === "Development"),
-  },
-  {
-    label: "Product & Graphic Design",
-    filter: () => programmeData.filter((item) => item.category === "Design"),
-  },
-  {
-    label: "Cybersecurity & Cloud Computing",
-    filter: () =>
-      programmeData.filter((item) => item.category === "Security & Cloud"),
-  },
-  {
-    label: "Data Analytics & Artificial Intelligence",
-    filter: () => programmeData.filter((item) => item.category === "Data & AI"),
-  },
-  {
-    label: "Business & Marketing",
-    filter: () =>
-      programmeData.filter((item) => item.category === "Business & Marketing"),
-  },
-  {
-    label: "Engineering & Hardware",
-    filter: () =>
-      programmeData.filter(
-        (item) => item.category === "Engineering & Hardware",
-      ),
-  },
-];
-
-// Button Component for Reusability
-const CategoryButton = ({ label, isActive, onClick }) => (
-  <button
-    onClick={onClick}
-    className={`lg:text-lg text-sm px-5 py-2 text-white flex items-center justify-center rounded-3xl cursor-pointer font-inter ${
-      isActive
-        ? "bg-[#121212] font-bold"
-        : "font-light border-[3px] border-[#121212]"
-    }`}
-  >
-    {label}
-  </button>
-);
-
 function RouteComponent() {
   const [activeCategory, setActiveCategory] = useState(0);
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { isAuthenticated } = useAuth();
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get("/api/courses");
+        setCourses(response.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  // Categories & Filtering Logic
+  const categories = [
+    { label: "All", filter: () => courses },
+    {
+      label: "Tech & Software Development",
+      filter: () => courses.filter((item) => item.category === "Development"),
+    },
+    {
+      label: "Product & Graphic Design",
+      filter: () => courses.filter((item) => item.category === "Design"),
+    },
+    {
+      label: "Cybersecurity & Cloud Computing",
+      filter: () =>
+        courses.filter((item) => item.category === "Security & Cloud"),
+    },
+    {
+      label: "Data Analytics & Artificial Intelligence",
+      filter: () => courses.filter((item) => item.category === "Data & AI"),
+    },
+    {
+      label: "Business & Marketing",
+      filter: () =>
+        courses.filter((item) => item.category === "Business & Marketing"),
+    },
+    {
+      label: "Engineering & Hardware",
+      filter: () =>
+        courses.filter((item) => item.category === "Engineering & Hardware"),
+    },
+  ];
+
+  // Button Component for Reusability
+  const CategoryButton = ({ label, isActive, onClick }) => (
+    <button
+      onClick={onClick}
+      className={`lg:text-lg text-sm px-5 py-2 text-white flex items-center justify-center rounded-3xl cursor-pointer font-inter ${
+        isActive
+          ? "bg-[#121212] font-bold"
+          : "font-light border-[3px] border-[#121212]"
+      }`}
+    >
+      {label}
+    </button>
+  );
 
 
   return (
@@ -79,14 +98,36 @@ function RouteComponent() {
         {/* Header Section */}
         <div className="mt-36 flex justify-center">
           <span className=" flex flex-col items-start">
-            <img
-              src={spack}
-              alt="Skill Sprint Logo"
-              className="-ml-7 lg:-mb-5 lg:-ml-5 lg:w-[60px]"
-            />
-            <h1 className="lg:text-6xl lg:leading-18 font-bold text-4xl text-center text-white font-mont tracking-[3px]">
-              Explore Our <br /> Programmes
-            </h1>
+            {isAuthenticated ? (
+              <div className="flex flex-col items-center space-y-4 lg:p-0 px-4">
+                <div className="relative">
+                  <img
+                    src={spack}
+                    alt="Skill Sprint Logo"
+                    className="lg:-left-10 lg:-top-10 left-[20px] top-[-30px] lg:w-[60px] absolute"
+                  />
+
+                  <h1 className="lg:text-6xl lg:leading-18 font-[100] text-4xl text-center text-white font-mont tracking-[3px]">
+                    Chooose the program <br /> you want to join
+                  </h1>
+                </div>
+
+                <b className='text-white text-center font-inter font-[500] lg:text-[17px] text-[14px] tracking-[0.5px]'>
+                  Apply to only one program at a time, your application status  is final, and to <br /> switch program, you must first cancel your current application.
+                </b>
+              </div>
+            ) : (
+              <>
+                <img
+                  src={spack}
+                  alt="Skill Sprint Logo"
+                  className="-ml-7 lg:-mb-5 lg:-ml-5 lg:w-[60px]"
+                />
+                <h1 className="lg:text-6xl lg:leading-18 font-bold text-4xl text-center text-white font-mont tracking-[3px]">
+                  Explore Our <br /> Programmes
+                </h1>
+              </>
+            )}
           </span>
         </div>
 
@@ -118,7 +159,9 @@ function RouteComponent() {
 
         {/* Programme Cards Display */}
         <div className="lg:mt-[120px] pb-55 w-full px-7 lg:px-40 mt-14 grid grid-cols-1 gap-20 md:gap-10 md:grid-cols-2 md:mb-56">
-          <Programmes data={categories[activeCategory].filter()} />
+          {loading && <div>Loading...</div>}
+          {error && <div>Error: {error}</div>}
+          <Programmes data={categories[activeCategory].filter()} isAuthenticated={isAuthenticated}/>
         </div>
       </div>
       {/* Main Content */}

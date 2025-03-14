@@ -4,7 +4,7 @@ import EmailStep from "@/components/EmailStep/EmailStep";
 import { useAuth } from "@/context/AuthContext";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; 
+import "react-toastify/dist/ReactToastify.css";
 
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -57,10 +57,10 @@ function RouteComponent() {
 
     try {
       const success = await signup(name, email, password, "STUDENT");
-      
-      if(success){
+
+      if (success) {
         toast.success("Registration successful!"); // Display success message
-        navigate({ to: '/' }); // Redirect to home page
+        navigate({ to: "/" }); // Redirect to home page
       }
     } catch (err) {
       setError(err.message || "An error occurred during registration.");
@@ -82,7 +82,10 @@ function RouteComponent() {
         </h2>
 
         {step === 1 && (
-          <form onSubmit={handleContinue} className="w-full flex flex-col items-center">
+          <form
+            onSubmit={handleContinue}
+            className="w-full flex flex-col items-center"
+          >
             <EmailStep
               email={email}
               setEmail={setEmail}
@@ -94,7 +97,10 @@ function RouteComponent() {
         )}
 
         {step === 2 && (
-          <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full flex flex-col items-center"
+          >
             <PasswordStep
               password={password}
               setPassword={setPassword}

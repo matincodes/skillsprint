@@ -29,9 +29,9 @@ export function CurriculumTable() {
         </TableRow>
       </TableHeader>
       {curriculumData.map((items, index) => (
-        <TableBody key={index} >
+        <TableBody key={index}>
           <TableRow className="h-[70px]">
-            <TableCell className="pl-5" >
+            <TableCell className="pl-5">
               {" "}
               <img src={arrowDown} alt="arrow" className="cursor-pointer" />
             </TableCell>
@@ -56,13 +56,12 @@ export function CurriculumTable() {
                   height={19}
                   fill={`${items.status === "Completed" ? "#0950C3" : "#C28B0A"}`}
                   className="rounded-sm"
-                  
                 />
 
                 {items.status}
               </div>
             </TableCell>
-            <TableCell  className="pr-1">
+            <TableCell className="pr-1">
               <Ellipsis width={20} className="cursor-pointer " fill="#868C98" />
             </TableCell>
           </TableRow>
