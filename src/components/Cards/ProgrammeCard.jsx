@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../Button/Button";
+import { Link } from "@tanstack/react-router";
 
 const ProgrammeCard = ({ image, description, role }) => {
   return (
@@ -19,9 +19,9 @@ const ProgrammeCard = ({ image, description, role }) => {
             {description}
           </p>
         </span>
-        <button className="lg:text-base tracking-[1.5px] cursor-pointer font-semibold font-inter text-[10px] text-white py-3 px-6 bg-[#AE752C] rounded-md">
+        <Link to="/register/" className="lg:text-base tracking-[1.5px] cursor-pointer font-semibold font-inter text-[10px] text-white py-3 px-6 bg-[#AE752C] rounded-md">
           Join the Free Program
-        </button>
+        </Link>
       </div>
     </div>
   );

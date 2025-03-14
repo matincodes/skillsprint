@@ -108,7 +108,7 @@ const NavBar = () => {
               </Link>
 
               {user == null ? (
-                <Button text="Login to portal"  nav />
+                <Button text="Login to portal" location="/student/login" nav />
               ) : (
                 <div className="flex gap-2">
                 <UserAvatar profile={user.profilePicture ? user.profilePicture : '/assets/avatar.png'} />
