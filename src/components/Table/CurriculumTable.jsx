@@ -30,20 +30,10 @@ export function CurriculumTable() {
       {curriculumData.map((items, index) => (
         <TableBody key={index}>
           <TableRow className="h-[70px]">
-<<<<<<< HEAD
             <TableCell className="px-5 ">
               <div className="flex items-center gap-3.5">
                 <img src={arrowDown} alt="arrow" className="cursor-pointer " />
                 <FolderOpen width={30} className="" fill="#868C98" />
-=======
-            <TableCell className="pl-5">
-              {" "}
-              <img src={arrowDown} alt="arrow" className="cursor-pointer" />
-            </TableCell>
-            <TableCell>
-              <span className="flex items-center gap-1.5">
-                <FolderOpen fill="#868C98" />
->>>>>>> origin/main
                 week {items.period}
               </div>
             </TableCell>
@@ -75,11 +65,7 @@ export function CurriculumTable() {
                 {items.status}
               </div>
             </TableCell>
-<<<<<<< HEAD
             <TableCell className="pr-3">
-=======
-            <TableCell className="pr-1">
->>>>>>> origin/main
               <Ellipsis width={20} className="cursor-pointer " fill="#868C98" />
             </TableCell>
           </TableRow>

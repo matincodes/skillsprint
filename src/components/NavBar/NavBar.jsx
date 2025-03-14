@@ -91,7 +91,7 @@ const NavBar = () => {
           >
             <SheetDescription
               className={
-                " flex h-full flex-col gap-[15px] font-inter py-[50px]"
+                " flex h-full flex-col  font-inter py-[50px] px-3 space-y-1 "
               }
             >
               <Link
@@ -114,9 +114,11 @@ const NavBar = () => {
               </Link>
 
               {user == null ? (
-                <Button text="Login to portal" location="/student/login" nav />
+                <div className="flex mt-10">
+                  <Button text="Login to portal" nav />
+                </div>
               ) : (
-                <div className="flex gap-2">
+                <div className="flex gap-2 w-fit ml-5 mt-[40px]">
                   <UserAvatar
                     profile={
                       user.profilePicture

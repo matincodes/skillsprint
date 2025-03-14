@@ -32,10 +32,10 @@ function Index() {
         <div className="lg:p-[105px] py-[40px] px-[20px] bg-black flex flex-col justify-center items-center w-full text-white relative overflow-hidden">
           <div className="font-mont text-center space-y-[50px] flex flex-col items-center justify-center ">
             <section className="space-y-3 flex flex-col items-center justify-center relative ">
-              <h2 className="font-[700] lg:text-[45px] text-[37px] tracking-[2px] lg:leading-[60px] relative lg:w-[70%] w-full flex ">
+              <h2 className="font-[700] lg:text-[45px] md:text-[37px] text-[35px] tracking-[2px] lg:leading-[60px] relative lg:w-[70%] w-full flex ">
                 <img
                   src={"/assets/Icons/spark.png"}
-                  className=" absolute lg:w-[60px] w-[40px] lg:top-[-32px] lg:left-[2px] top-[-13px] left-[-20px] "
+                  className=" absolute lg:w-[60px] w-[50px] lg:top-[-32px] lg:left-[2px] md:top-[-13px] md:left-[-20px] left-[-15px] top-[-26px] "
                 />
                 Transform Your Career with Skill Sprint
               </h2>
@@ -55,17 +55,17 @@ function Index() {
             <img
               src="/assets/Icons/arrow.png"
               alt=""
-              className="lg:w-[190px] absolute left-[0px] lg:top-[290px] w-[85px] top-[220px]"
+              className="lg:w-[190px] absolute left-[0px] lg:top-[290px] md:w-[85px] w-[65px] top-[220px]"
             />
             <img
               src="/assets/Icons/curvy_arrow.png"
               alt=""
-              className="lg:w-[115px] relative lg:left-[-60px] w-[90px] left-[-40px]"
+              className="lg:w-[115px] relative lg:left-[-60px] md:w-[90px] w-[70px] left-[-40px]"
             />
             <img
               src="/assets/Icons/laptop.png"
               alt=""
-              className="lg:w-[310px] absolute lg:right-[-17px] lg:top-[280px] right-[-100px] top-[200px] w-[180px]"
+              className="lg:w-[310px] absolute lg:right-[-17px] lg:top-[280px] right-[-100px] top-[200px] md:w-[180px] w-[160px]"
             />
             {/* </div> */}
           </div>
@@ -157,7 +157,7 @@ function Index() {
 
         {/* FAQ */}
         <div className="text-white flex justify-center items-center flex-col lg:space-y-6 space-y-8 p-4 py-[170px]">
-          <h2 className="font-[700] lg:text-[45px] text-[24px] tracking-[2px] lg:leading-[60px] leading-[30px] text-center">
+          <h2 className="font-[700] lg:text-[45px] text-[24px] tracking-[2px] lg:leading-[60px] leading-[30px] text-center font-mont">
             Frequently asked questions
           </h2>
 
