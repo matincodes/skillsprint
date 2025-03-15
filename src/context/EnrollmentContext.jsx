@@ -2,12 +2,10 @@ import { createContext, useContext, useState, useEffect, useMemo, useCallback } 
 import axios from '@/lib/axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useAuth } from '@/context/AuthContext'; // Assuming you have an AuthContext
 
 const EnrollmentContext = createContext();
 
 export function EnrollmentProvider({ children }) {
-  const { isAuthenticated } = useAuth(); // Get authentication status from AuthContext
   const [enrollments, setEnrollments] = useState([]);
   const [currentEnrollment, setCurrentEnrollment] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,17 +20,12 @@ export function EnrollmentProvider({ children }) {
       setCurrentEnrollment(activeEnrollment || null);
     } catch (err) {
       console.error('Error fetching enrollments:', err);
-      toast.error('Error fetching enrollments');
+      // toast.error('Error fetching enrollments');
     } finally {
       setIsLoading(false);
     }
   }, []);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchEnrollments();
-    }
-  }, [isAuthenticated, fetchEnrollments]);
 
   const handleEnroll = useCallback(async (courseId) => {
     setIsLoading(true);
