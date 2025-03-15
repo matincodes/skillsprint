@@ -19,7 +19,7 @@ export const useEnrollmentStatus = () => {
     };
 
     checkEnrollment();
-  }, []);
+  }, [checkEnrollment, setHasActiveEnrollment]);
 
-  return { hasActiveEnrollment, isLoading };
+  return { hasActiveEnrollment, isLoading, checkEnrollment };
 };

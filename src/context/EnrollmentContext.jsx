@@ -1,57 +1,74 @@
-// contexts/EnrollmentContext.js
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import axios from '@/lib/axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from '@/context/AuthContext'; // Assuming you have an AuthContext
 
 const EnrollmentContext = createContext();
 
 export function EnrollmentProvider({ children }) {
+  const { isAuthenticated } = useAuth(); // Get authentication status from AuthContext
   const [enrollments, setEnrollments] = useState([]);
   const [currentEnrollment, setCurrentEnrollment] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleEnroll = async (courseId) => {
+  const fetchEnrollments = useCallback(async () => {
     setIsLoading(true);
-    setError(null); // Reset error state before starting the request
     try {
-      const response = await axios.post(`/api/courses/${courseId}/enroll`, {
-        courseId,
-      });
-
-      const data = response.data;
-
-      // Check if the response status is not 200 or 201
-      if (response.status !== 200 && response.status !== 201) {
-        throw new Error(data.error || 'Failed to enroll');
-      }
-
-      // Check if the enrollment status is ACTIVE
-      if (data.status === 'ACTIVE') {
-        setEnrollments((prev) => [...prev, data]);
-        setCurrentEnrollment(data);
-        return true; // Enrollment successful
-      } else {
-        throw new Error('Enrollment status is not ACTIVE');
-      }
+      const { data } = await axios.get('/api/courses/enrollments');
+      setEnrollments(data);
+      const activeEnrollment = data.find(e => e.status === 'ACTIVE');
+      setCurrentEnrollment(activeEnrollment || null);
     } catch (err) {
-      setError(err.message || 'An error occurred during enrollment');
-      return false; // Enrollment failed
+      console.error('Error fetching enrollments:', err);
+      toast.error('Error fetching enrollments');
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchEnrollments();
+    }
+  }, [isAuthenticated, fetchEnrollments]);
+
+  const handleEnroll = useCallback(async (courseId) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const { data } = await axios.post(`/api/courses/${courseId}/enroll`, { courseId });
+      
+      setEnrollments(prev => [...prev, data]);
+      if (data.status === 'ACTIVE') {
+        setCurrentEnrollment(data);
+        console.log('Enrollment successful:', data);
+        return true;
+      }
+      throw new Error('Enrollment status is not ACTIVE');
+    } catch (err) {
+      const message = err.response?.data?.error || err.message || 'Enrollment failed';
+      setError(message);
+      toast.error(message);
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const value = useMemo(() => ({
+    enrollments,
+    currentEnrollment,
+    isLoading,
+    error,
+    handleEnroll,
+    setEnrollments,
+    fetchEnrollments
+  }), [enrollments, currentEnrollment, isLoading, error, handleEnroll, fetchEnrollments]);
 
   return (
-    <EnrollmentContext.Provider
-      value={{
-        enrollments,
-        currentEnrollment,
-        isLoading,
-        error,
-        handleEnroll,
-        setEnrollments,
-      }}
-    >
+    <EnrollmentContext.Provider value={value}>
       {children}
     </EnrollmentContext.Provider>
   );

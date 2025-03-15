@@ -1,53 +1,44 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
+
+const baseURL = "https://skillsprint.up.railway.app";
 
 const instance = axios.create({
-  baseURL: "https://skillsprint.up.railway.app",
+  baseURL,
   headers: {
     "Content-Type": "application/json",
   },
   withCredentials: true,
 });
 
-// Request interceptor to add access token to headers
-instance.interceptors.request.use(
-  (config) => {
-    const accessToken = Cookies.get("accessToken");
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error),
-);
-
-// Response interceptor to handle token expiration
+// Response interceptor for handling token refresh
 instance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
+
+    // If error is 401 and we haven't tried to refresh the token yet
+    if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
+
       try {
-        const refreshToken = Cookies.get("refreshToken");
-        const response = await axios.post(
-          "https://skillsprint.up.railway.app/api/auth/refresh-token",
-          { refreshToken },
+        // Call the refresh token endpoint
+        await axios.get(
+          `${baseURL}/api/auth/token`,
+          {},
           { withCredentials: true },
         );
-        if (response.status === 200) {
-          Cookies.set("accessToken", response.data.accessToken, {
-            httpOnly: true,
-          });
-          originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
-          return axios(originalRequest);
-        }
-      } catch (err) {
-        console.error("Token refresh error:", err);
+
+        // Retry the original request
+        return instance(originalRequest);
+      } catch (refreshError) {
+        // If refresh token fails, redirect to login
+        window.location.href = "/student/login";
+        return Promise.reject(refreshError);
       }
     }
+
     return Promise.reject(error);
   },
 );
-
 export default instance;
