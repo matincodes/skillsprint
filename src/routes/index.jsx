@@ -24,12 +24,7 @@ function Index() {
   const { refetchEnrollments } = useEnrollments();
 
  console.log(isAuthenticated, hasActiveEnrollment, isLoading)
-//  useEffect(() => {
-//   if (isAuthenticated && !authLoading) {
-//     checkEnrollment();
-//     refetchEnrollments();
-//   }
-// }, [isAuthenticated, authLoading, checkEnrollment, refetchEnrollments]);
+
 useEffect(() => {
   const initializeAuth = async () => {
     await checkAuth();
@@ -40,17 +35,6 @@ useEffect(() => {
   initializeAuth();
 }, [isAuthenticated]);
 
-  // const renderButton = () => {
-  //   if (isAuthenticated) {
-  //     if (hasActiveEnrollment) {
-  //       return <Button text="Go to Dashboard" location="dashboard/" />;
-  //     } else {
-  //       return <Button text="Enroll in a Course" location="/programmes" />;
-  //     }
-  //   } else {
-  //     return <Button text="Join the Free Program" location="/student/register" />;
-  //   }
-  // };
 
   const renderButton = () => {
     if (authLoading) return <Button text="Loading..." disabled />;
