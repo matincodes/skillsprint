@@ -11,7 +11,15 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import { EnrollmentProvider, useEnrollment } from "./context/EnrollmentContext";
 
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 2,
+      refetchOnWindowFocus: false,
+      gcTime: 10 * 60 * 1000 // 10 minutes cache
+    }
+  }
+});
 
 // Create a new router instance
 const router = createRouter({ routeTree });

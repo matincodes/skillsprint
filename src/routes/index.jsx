@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import Button from "@/components/Button/Button";
 import { skillCard, upskillCard } from "@/data/homeCardData";
@@ -8,6 +8,7 @@ import HomePageSection from "@/components/Sections/HomePageSection";
 import SectionHeader from "@/components/Sections/SectionHeader";
 import SkillCard from "@/components/Cards/SkillCard";
 import NavBar from "@/components/NavBar/NavBar";
+import useEnrollmentStatus from "@/hooks/useEnrollmentStatus";
 import { useAuth } from "@/context/AuthContext";
 import Footer from "@/components/footer/Footer";
 
@@ -17,7 +18,28 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated } = useAuth();
+  const { hasActiveEnrollment, isLoading, refetch: checkEnrollment } = useEnrollmentStatus();
+
+ console.log(isAuthenticated, hasActiveEnrollment, isLoading)
+ useEffect(() => {
+  if (isAuthenticated) {
+    checkEnrollment();
+  }
+}, [isAuthenticated, checkEnrollment]);
+
+  const renderButton = () => {
+    if (isAuthenticated) {
+      if (hasActiveEnrollment) {
+        return <Button text="Go to Dashboard" location="dashboard/" />;
+      } else {
+        return <Button text="Enroll in a Course" location="/programmes" />;
+      }
+    } else {
+      return <Button text="Join the Free Program" location="/student/register" />;
+    }
+  };
+
 
   return (
     <>
@@ -46,10 +68,10 @@ function Index() {
               </p>
             </section>
 
-            {isAuthenticated ? (
-              <Button text="Go to Dashboard" location='dashboard/' />
+            {isLoading ? (
+              <Button text="Loading..." disabled />
             ) : (
-              <Button text="Join the Free Program" location="/student/register"/>
+              renderButton()
             )}
 
             <img

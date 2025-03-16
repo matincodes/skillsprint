@@ -1,9 +1,9 @@
 import React, { memo, useState, useMemo } from "react";
 import { Link } from "@tanstack/react-router";
 import PopUp from "../Popup/Popup";
-import { useEnrollment } from "@/context/EnrollmentContext";
+import { useEnrollments } from "@/hooks/useEnrollment";
 
-const ProgrammeCard = memo(({
+const ProgrammeCard = ({
   courseId,
   image,
   description,
@@ -13,26 +13,21 @@ const ProgrammeCard = memo(({
   isAuthenticated,
   startDate,
   isLoading: parentLoading,
-  checkEnrollment
+  hasActiveEnrollment
 }) => {
-  const { handleEnroll, enrollments, isLoading: contextLoading } = useEnrollment();
+  const { currentEnrollment, handleEnroll, enrollments, isLoading: queryLoading } = useEnrollments();
   const [showPopup, setShowPopup] = useState(false);
 
   const isEnrolledInThisCourse = useMemo(
-    () => enrollments.some(e => e.courseId === courseId),
-    [enrollments, courseId]
+    () => currentEnrollment?.courseId === courseId,
+    [currentEnrollment, courseId]
   );
 
-  const hasActiveEnrollment = useMemo(
-    () => enrollments.some(e => e.status === 'ACTIVE'),
-    [enrollments]
-  );
 
   const handleEnrollClick = async () => {
     const success = await handleEnroll(courseId);
     if (success) {
       setShowPopup(true);
-      checkEnrollment?.();
     }
   };
 
@@ -55,7 +50,7 @@ const ProgrammeCard = memo(({
         </span>
 
         {isAuthenticated ? (
-          (contextLoading || parentLoading) ? (
+          (queryLoading || parentLoading) ? (
             <button 
               className="lg:text-base tracking-[1.5px] cursor-not-allowed font-semibold font-inter text-[10px] text-white py-3 px-6 bg-gray-500 rounded-md" 
               disabled
@@ -98,6 +93,6 @@ const ProgrammeCard = memo(({
       </div>
     </div>
   );
-});
+};
 
 export default ProgrammeCard;

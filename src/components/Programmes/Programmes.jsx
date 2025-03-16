@@ -2,29 +2,11 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "@/lib/axios";
 import ProgrammeCard from "../Cards/ProgrammeCard";
 import { useEnrollment } from "@/context/EnrollmentContext";
+import useEnrollmentStatus from "@/hooks/useEnrollmentStatus";
 
 const Programmes = ({ data, isAuthenticated }) => {
-  const [hasActiveEnrollment, setHasActiveEnrollment] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const { fetchEnrollments } = useEnrollment();
+  const { isLoading, hasActiveEnrollment } = useEnrollmentStatus();
 
-  const checkEnrollment = useCallback(async () => {
-    try {
-      const { data } = await axios.get('/api/courses/enrollments/active');
-      setHasActiveEnrollment(data.hasActive);
-    } catch (error) {
-      console.error('Enrollment check error:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchEnrollments();
-      checkEnrollment();
-    }
-  }, [isAuthenticated, fetchEnrollments, checkEnrollment]);
 
   return (
     <>
@@ -40,7 +22,7 @@ const Programmes = ({ data, isAuthenticated }) => {
           isAuthenticated={isAuthenticated}
           startDate={course.startDate}
           isLoading={isLoading}
-          checkEnrollment={checkEnrollment}
+          hasActiveEnrollment={hasActiveEnrollment}
         />
       ))}
     </>

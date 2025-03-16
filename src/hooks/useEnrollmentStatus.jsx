@@ -1,25 +1,20 @@
-// hooks/useEnrollmentStatus.js
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import axios from '@/lib/axios';
 
-export const useEnrollmentStatus = () => {
-  const [hasActiveEnrollment, setHasActiveEnrollment] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const checkEnrollment = async () => {
-      try {
-        const response = await axios.get(`/api/courses/enrollments/active`);
-        setHasActiveEnrollment(response.data.hasActive);
-      } catch (error) {
-        console.error('Error checking enrollment:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    checkEnrollment();
-  }, [checkEnrollment, setHasActiveEnrollment]);
-
-  return { hasActiveEnrollment, isLoading, checkEnrollment };
+const fetchEnrollmentStatus = async () => {
+  const { data } = await axios.get('/api/courses/enrollments/active');
+  return data.hasActive;
 };
+
+const useEnrollmentStatus = () => {
+  const { data: hasActiveEnrollment, isLoading, refetch } = useQuery({
+    queryKey: ['enrollmentStatus'],
+    queryFn: fetchEnrollmentStatus,
+    staleTime: 5 * 60 * 1000,  // 5 minutes
+    gcTime: 10 * 60 * 1000,     // 10 minutes (formerly cacheTime)
+  });
+
+  return { hasActiveEnrollment, isLoading, refetch };
+};
+
+export default useEnrollmentStatus;

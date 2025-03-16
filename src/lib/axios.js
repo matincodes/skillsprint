@@ -3,7 +3,6 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "https://skillsprint.up.railway.app",
-  timeout: 15000,
   headers: {
     "Content-Type": "application/json",
   },
