@@ -1,6 +1,7 @@
 import axios from "axios";
 // import Cookies from "js-cookie";
 
+// lib/axios.js
 const instance = axios.create({
   baseURL: "https://skillsprint.up.railway.app",
   headers: {
@@ -9,27 +10,46 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-// Response interceptor for handling token refresh
+// Track if we have an active session
+let hasActiveSession = false;
+
 instance.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // If we get a successful response, mark session as active
+    if (response.config.url !== "/api/auth/token") {
+      hasActiveSession = true;
+    }
+    return response;
+  },
   async (error) => {
     const originalRequest = error.config;
 
-    // If error is 401 and we haven't tried to refresh the token yet
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // Only handle API routes (skip for public routes)
+    if (!originalRequest.url.startsWith("/api/")) {
+      return Promise.reject(error);
+    }
+
+    // Handle 401 errors
+    if (error.response?.status === 401) {
+      // If we've already tried to refresh, or no active session exists
+      if (originalRequest._retry || !hasActiveSession) {
+        // Only redirect if we previously had a session
+        if (hasActiveSession) {
+          window.location.href = "/student/login";
+          hasActiveSession = false;
+        }
+        return Promise.reject(error);
+      }
+
       originalRequest._retry = true;
 
       try {
-        // Call the refresh token endpoint
-        await axios.get("https://skillsprint.up.railway.app/api/auth/token", {
+        await axios.get(`${originalRequest.baseURL}/api/auth/token`, {
           withCredentials: true,
         });
-
-        // Retry the original request
         return instance(originalRequest);
       } catch (refreshError) {
-        // If refresh token fails, redirect to login
-        window.location.href = "/student/login";
+        hasActiveSession = false;
         return Promise.reject(refreshError);
       }
     }
@@ -37,4 +57,5 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
 export default instance;

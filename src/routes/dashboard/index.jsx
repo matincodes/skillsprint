@@ -25,7 +25,7 @@ const DashboardComponent = () => {
           <div>
             <p className="text-paragraph">Course</p>
             <h2 className="font-sora text-white text-[23px] font-[300]">
-              {currentEnrollment.title}
+              {currentEnrollment.course.title}
             </h2>
             <p className="text-paragraph text-[14px] leading-[25px] mt-2">
               Learn the essentials of UI/UX design, including usability,

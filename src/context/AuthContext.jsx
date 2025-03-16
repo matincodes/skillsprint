@@ -1,5 +1,5 @@
 import axios from '@/lib/axios';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -12,6 +12,24 @@ export function AuthProvider({ children }) {
     });
     const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('user'));
     const [isLoading, setIsLoading] = useState(false); // Track loading state
+
+    // context/AuthContext.js
+const checkAuth = async () => {
+    try {
+      const { data } = await axios.get('/api/auth/verify');
+        console.log("verifying authentication")
+        setIsAuthenticated(data.isAuthenticated)
+        setIsLoading(false)
+    } catch (error) {
+        setIsAuthenticated(false)
+        setIsLoading(false)
+    }
+  };
+
+  useEffect(() => {
+    checkAuth();
+}, []);
+
 
     const signup = async (name, email, password, role) => {
         setIsLoading(true); // Start loading
@@ -99,7 +117,7 @@ export function AuthProvider({ children }) {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, signup, isAuthenticated, isLoading }}>
+        <AuthContext.Provider value={{ user, login, logout, signup, isAuthenticated, isLoading, setIsLoading, checkAuth }}>
             {children}
         </AuthContext.Provider>
     );

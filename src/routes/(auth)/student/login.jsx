@@ -16,7 +16,7 @@ export const Route = createFileRoute("/(auth)/student/login")({
 
 function RouteComponent() {
   const navigate = useNavigate();
-  const { login,isSubmitting, setIsSubmitting } = useAuth(); 
+  const { login, isLoading, setIsLoading } = useAuth(); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -37,7 +37,7 @@ function RouteComponent() {
       return;
     }
 
-    setIsSubmitting(true); // Disable the button after the first click
+    setIsLoading(true); // Disable the button after the first click
 
     try {
       const success = await login(email, password);
@@ -46,14 +46,14 @@ function RouteComponent() {
       if (success) {
         toast.success("Login successful!");
         navigate({ to: "/" });
-        setIsSubmitting(false); // Re-enable the button after a successful login 
+        setIsLoading(false); // Re-enable the button after a successful login 
       }
     } catch (err) {
       console.error("Login error:",
         err
       );
       toast.error("Failed to login. Please check your credentials.");
-      setIsSubmitting(false); // Re-enable the button if an error occurs
+      setIsLoading(false); // Re-enable the button if an error occurs
     }
   };
 
@@ -100,10 +100,10 @@ function RouteComponent() {
 
           <Button
             onClick={handleSubmit}
-            className={`text-white w-full bg-main cursor-pointer ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
-            disabled={isSubmitting} // Disable the button if submitting
+            className={`text-white w-full bg-main cursor-pointer ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+            disabled={isLoading} // Disable the button if submitting
           >
-            {isSubmitting ? (
+            {isLoading ? (
               <div className="flex items-center justify-center">
                 <svg
                   className="animate-spin h-5 w-5 mr-3 text-white"

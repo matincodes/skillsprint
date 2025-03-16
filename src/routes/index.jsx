@@ -19,28 +19,51 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { isAuthenticated, isLoading: authLoading } = useAuth();
+  const { isAuthenticated, isLoading: authLoading, checkAuth } = useAuth();
   const { hasActiveEnrollment, isLoading, refetch: checkEnrollment } = useEnrollmentStatus();
   const { refetchEnrollments } = useEnrollments();
 
  console.log(isAuthenticated, hasActiveEnrollment, isLoading)
- useEffect(() => {
-  if (isAuthenticated && !authLoading) {
-    checkEnrollment();
-    refetchEnrollments();
-  }
-}, [isAuthenticated, authLoading, checkEnrollment, refetchEnrollments]);
+//  useEffect(() => {
+//   if (isAuthenticated && !authLoading) {
+//     checkEnrollment();
+//     refetchEnrollments();
+//   }
+// }, [isAuthenticated, authLoading, checkEnrollment, refetchEnrollments]);
+useEffect(() => {
+  const initializeAuth = async () => {
+    await checkAuth();
+    if (isAuthenticated) {
+      await Promise.all([checkEnrollment(), refetchEnrollments()]);
+    }
+  };
+  initializeAuth();
+}, [isAuthenticated]);
+
+  // const renderButton = () => {
+  //   if (isAuthenticated) {
+  //     if (hasActiveEnrollment) {
+  //       return <Button text="Go to Dashboard" location="dashboard/" />;
+  //     } else {
+  //       return <Button text="Enroll in a Course" location="/programmes" />;
+  //     }
+  //   } else {
+  //     return <Button text="Join the Free Program" location="/student/register" />;
+  //   }
+  // };
 
   const renderButton = () => {
-    if (isAuthenticated) {
-      if (hasActiveEnrollment) {
-        return <Button text="Go to Dashboard" location="dashboard/" />;
-      } else {
-        return <Button text="Enroll in a Course" location="/programmes" />;
-      }
-    } else {
-      return <Button text="Join the Free Program" location="/student/register" />;
-    }
+    if (authLoading) return <Button text="Loading..." disabled />;
+    
+    return isAuthenticated ? (
+      hasActiveEnrollment ? (
+        <Button text="Go to Dashboard" location="dashboard/" />
+      ) : (
+        <Button text="Enroll in a Course" location="/programmes" />
+      )
+    ) : (
+      <Button text="Join the Free Program" location="/student/register" />
+    );
   };
 
 
@@ -71,11 +94,7 @@ function Index() {
               </p>
             </section>
 
-            {isLoading ? (
-              <Button text="Loading..." disabled />
-            ) : (
-              renderButton()
-            )}
+            {renderButton()}
 
             <img
               src="/assets/Icons/arrow.png"
