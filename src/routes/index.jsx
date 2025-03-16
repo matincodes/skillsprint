@@ -26,7 +26,7 @@ function Index() {
   if (isAuthenticated) {
     checkEnrollment();
   }
-}, [isAuthenticated, checkEnrollment]);
+}, [checkEnrollment]);
 
   const renderButton = () => {
     if (isAuthenticated) {

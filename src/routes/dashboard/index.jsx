@@ -6,7 +6,7 @@ import UpcomingSession from "@/components/Cards/UpcomingSession";
 import { UpcomingSessionCard } from "@/data/dashboard";
 import LeaderBoard from "@/components/Cards/LeaderBoard";
 import { LeaderBoardCard } from "@/data/dashboard";
-import { useEnrollment } from "@/context/EnrollmentContext";
+import { useEnrollments } from "@/hooks/useEnrollment";
 
 export const Route = createFileRoute("/dashboard/")({
   component: DashboardComponent,
@@ -14,7 +14,7 @@ export const Route = createFileRoute("/dashboard/")({
 
 const DashboardComponent = () => {
 
-  const { currentEnrollment } = useEnrollment();
+  const { currentEnrollment } = useEnrollments();
   return (
     <div className="grid p-2">
       {/* TopSection */}
