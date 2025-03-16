@@ -14,7 +14,8 @@ export const Route = createFileRoute("/dashboard/")({
 
 const DashboardComponent = () => {
 
-  const { currentEnrollment } = useEnrollments();
+  const { currentEnrollment, enrollments } = useEnrollments();
+  console.log(currentEnrollment, enrollments);
   return (
     <div className="grid p-2">
       {/* TopSection */}
@@ -24,7 +25,7 @@ const DashboardComponent = () => {
           <div>
             <p className="text-paragraph">Course</p>
             <h2 className="font-sora text-white text-[23px] font-[300]">
-              {currentEnrollment.course.title}
+              {currentEnrollment.title}
             </h2>
             <p className="text-paragraph text-[14px] leading-[25px] mt-2">
               Learn the essentials of UI/UX design, including usability,

@@ -10,6 +10,7 @@ import SkillCard from "@/components/Cards/SkillCard";
 import NavBar from "@/components/NavBar/NavBar";
 import useEnrollmentStatus from "@/hooks/useEnrollmentStatus";
 import { useAuth } from "@/context/AuthContext";
+import useEnrollments from "@/hooks/useEnrollment";
 import Footer from "@/components/footer/Footer";
 
 
@@ -18,15 +19,17 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
   const { hasActiveEnrollment, isLoading, refetch: checkEnrollment } = useEnrollmentStatus();
+  const { refetchEnrollments } = useEnrollments();
 
  console.log(isAuthenticated, hasActiveEnrollment, isLoading)
  useEffect(() => {
-  if (isAuthenticated) {
+  if (isAuthenticated && !authLoading) {
     checkEnrollment();
+    refetchEnrollments();
   }
-}, [checkEnrollment]);
+}, [isAuthenticated, authLoading, checkEnrollment, refetchEnrollments]);
 
   const renderButton = () => {
     if (isAuthenticated) {
