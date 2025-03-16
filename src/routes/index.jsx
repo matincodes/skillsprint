@@ -29,11 +29,12 @@ useEffect(() => {
   const initializeAuth = async () => {
     await checkAuth();
     if (isAuthenticated) {
-      await Promise.all([checkEnrollment(), refetchEnrollments()]);
+      checkEnrollment()
     }
   };
   initializeAuth();
 }, [isAuthenticated]);
+
 
 
   const renderButton = () => {

@@ -26,9 +26,9 @@ const checkAuth = async () => {
     }
   };
 
-  useEffect(() => {
-    checkAuth();
-}, []);
+//   useEffect(() => {
+//     checkAuth();
+// }, []);
 
 
     const signup = async (name, email, password, role) => {
