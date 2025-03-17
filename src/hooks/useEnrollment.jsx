@@ -23,7 +23,7 @@ export const useEnrollments = () => {
       axios.post(`/api/courses/${courseId}/enroll`, { courseId }),
     onSuccess: (data) => {
       queryClient.setQueryData(["enrollments"], (old) => [...old, data.data]);
-      toast.success("Enrollment successful!");
+    //   toast.success("Enrollment successful!");
     },
     onError: (error) => {
       const message =

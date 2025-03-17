@@ -14,6 +14,7 @@ const ProgrammeCard = ({
   startDate,
   isLoading: parentLoading,
   hasActiveEnrollment,
+  checkEnrollment,
 }) => {
   const {
     currentEnrollment,
@@ -27,17 +28,18 @@ const ProgrammeCard = ({
     [currentEnrollment, courseId],
   );
 
-  const handleEnrollClick = async () => {
-    const success = await handleEnroll(courseId);
+  const handleEnrollClick = () => {
+    const success = handleEnroll(courseId);
     if (success) {
       setShowPopup(true);
+      checkEnrollment();
     }
   };
 
   return (
-    <div className="w-auto bg-[#121212] rounded-2xl">
+    <div className="w-auto bg-[#121212] rounded-2xl flex flex-col justify-between">
       <img className="w-full rounded-t-2xl" src={image} alt={title} />
-      <div className="py-5 px-4 flex flex-col gap-5 items-start">
+      <div className="py-5 px-4 flex flex-col gap-5 items-start flex-grow">
         <span className="flex flex-col gap-2.5">
           <b className="lg:text-[30px] font-semibold text-xl text-white font-inter tracking-[2px]">
             {title}
@@ -49,11 +51,12 @@ const ProgrammeCard = ({
             <b className="text-[#808080] line-through">₦ 100,000</b>{" "}
             <b>₦{price} (Free)</b>
           </p>
-          <p className="lg:text-[22px] lg:leading-7 text-[#808080] font-normal text-sm font-inter leading-4.5 tracking-[1px]">
+          <p className="lg:text-[20px] lg:leading-8 text-[#808080] font-normal text-sm font-inter leading-4.5 tracking-[1px] mb-2">
             {description}
           </p>
         </span>
-
+      </div>
+      <div className="px-4 pb-5 mb-2">
         {isAuthenticated ? (
           queryLoading || parentLoading ? (
             <button
@@ -90,14 +93,13 @@ const ProgrammeCard = ({
             Join the Free Program
           </Link>
         )}
-
-        <PopUp
-          open={showPopup}
-          onOpenChange={(open) => setShowPopup(open)}
-          courseTitle={title}
-          startDate={startDate}
-        />
       </div>
+      <PopUp
+        open={showPopup}
+        onOpenChange={(open) => setShowPopup(open)}
+        courseTitle={title}
+        startDate={startDate}
+      />
     </div>
   );
 };
