@@ -13,16 +13,19 @@ const ProgrammeCard = ({
   isAuthenticated,
   startDate,
   isLoading: parentLoading,
-  hasActiveEnrollment
+  hasActiveEnrollment,
 }) => {
-  const { currentEnrollment, handleEnroll, enrollments, isLoading: queryLoading } = useEnrollments();
+  const {
+    currentEnrollment,
+    handleEnroll,
+    isLoading: queryLoading,
+  } = useEnrollments();
   const [showPopup, setShowPopup] = useState(false);
 
   const isEnrolledInThisCourse = useMemo(
     () => currentEnrollment?.courseId === courseId,
-    [currentEnrollment, courseId]
+    [currentEnrollment, courseId],
   );
-
 
   const handleEnrollClick = async () => {
     const success = await handleEnroll(courseId);
@@ -40,9 +43,11 @@ const ProgrammeCard = ({
             {title}
           </b>
           <p className="lg:text-base text-white font-normal text-[11px] font-inter tracking-[1.5px]">
-            <b className="text-[#808080] line-through">8 months</b> <b>{duration}</b>
+            <b className="text-[#808080] line-through">8 months</b>{" "}
+            <b>{duration}</b>
             <span className="text-[#808080]">-</span>
-            <b className="text-[#808080] line-through">₦ 100,000</b> <b>₦{price} (Free)</b>
+            <b className="text-[#808080] line-through">₦ 100,000</b>{" "}
+            <b>₦{price} (Free)</b>
           </p>
           <p className="lg:text-[22px] lg:leading-7 text-[#808080] font-normal text-sm font-inter leading-4.5 tracking-[1px]">
             {description}
@@ -50,41 +55,43 @@ const ProgrammeCard = ({
         </span>
 
         {isAuthenticated ? (
-          (queryLoading || parentLoading) ? (
-            <button 
-              className="lg:text-base tracking-[1.5px] cursor-not-allowed font-semibold font-inter text-[10px] text-white py-3 px-6 bg-gray-500 rounded-md" 
+          queryLoading || parentLoading ? (
+            <button
+              className="lg:text-base tracking-[1.5px] cursor-not-allowed font-semibold font-inter text-[10px] text-white py-3 px-6 bg-gray-500 rounded-md"
               disabled
             >
               Loading...
             </button>
           ) : isEnrolledInThisCourse ? (
-            <button 
-              className="lg:text-base tracking-[1.5px] cursor-not-allowed font-semibold font-inter text-[10px] text-white py-3 px-6 bg-gray-500 rounded-md" 
+            <button
+              className="lg:text-base tracking-[1.5px] cursor-not-allowed font-semibold font-inter text-[10px] text-white py-3 px-6 bg-gray-500 rounded-md"
               disabled
             >
               Already Enrolled
             </button>
           ) : (
-            <button 
+            <button
               className={`lg:text-base tracking-[1.5px] font-semibold font-inter text-[10px] text-white py-3 px-6 rounded-md ${
-                hasActiveEnrollment ? 'bg-[#AE752C] bg-opacity-50 cursor-not-allowed' : 'bg-[#AE752C] cursor-pointer'
+                hasActiveEnrollment
+                  ? "bg-[#AE752C] bg-opacity-50 cursor-not-allowed"
+                  : "bg-[#AE752C] cursor-pointer"
               }`}
               onClick={handleEnrollClick}
-              disabled={hasActiveEnrollment || contextLoading}
+              disabled={hasActiveEnrollment || queryLoading}
             >
               Apply Now
             </button>
           )
         ) : (
-          <Link 
-            to="/student/register" 
+          <Link
+            to="/student/register"
             className="lg:text-base tracking-[1.5px] cursor-pointer font-semibold font-inter text-[10px] text-white py-3 px-6 bg-[#AE752C] rounded-md"
           >
             Join the Free Program
           </Link>
         )}
 
-        <PopUp 
+        <PopUp
           open={showPopup}
           onOpenChange={(open) => setShowPopup(open)}
           courseTitle={title}

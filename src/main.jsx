@@ -6,20 +6,10 @@ import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider, useAuth } from "./context/AuthContext";
-import { EnrollmentProvider, useEnrollment } from "./context/EnrollmentContext";
+import queryClient from "@/lib/queryClient.js";
 
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 2,
-      refetchOnWindowFocus: false,
-      gcTime: 10 * 60 * 1000 // 10 minutes cache
-    }
-  }
-});
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -31,12 +21,10 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <EnrollmentProvider>
-          <App />
-        </EnrollmentProvider>
-        <ToastContainer />
-      </AuthProvider>
+        <AuthProvider>
+            <App />
+          <ToastContainer />
+        </AuthProvider>
       </QueryClientProvider>
     </StrictMode>,
   );
@@ -44,6 +32,7 @@ if (!rootElement.innerHTML) {
 
 export function App() {
   const auth = useAuth();
-  const enrollment = useEnrollment();
-  return <RouterProvider router={router} context={{ ...auth, ...enrollment }} />;
+  return (
+    <RouterProvider router={router} context={{ ...auth}} />
+  );
 }

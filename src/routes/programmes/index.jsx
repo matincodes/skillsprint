@@ -6,10 +6,9 @@ import Programmes from "@/components/Programmes/Programmes";
 import { upskillCard } from "@/data/homeCardData";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/footer/Footer";
-import ExploreCard from "@/components/Cards/ExploreCard";;
+import ExploreCard from "@/components/Cards/ExploreCard";
 import axios from "@/lib/axios";
 import { useAuth } from "@/context/AuthContext";
-
 
 // Route Configuration
 export const Route = createFileRoute("/programmes/")({
@@ -84,7 +83,6 @@ function RouteComponent() {
     </button>
   );
 
-
   return (
     <>
       {/* NavBar */}
@@ -110,8 +108,10 @@ function RouteComponent() {
                   </h1>
                 </div>
 
-                <b className='text-white text-center font-inter font-[500] lg:text-[17px] text-[14px] tracking-[0.5px]'>
-                  Apply to only one program at a time, your application status  is final, and to <br /> switch program, you must first cancel your current application.
+                <b className="text-white text-center font-inter font-[500] lg:text-[17px] text-[14px] tracking-[0.5px]">
+                  Apply to only one program at a time, your application status
+                  is final, and to <br /> switch program, you must first cancel
+                  your current application.
                 </b>
               </div>
             ) : (
@@ -159,7 +159,10 @@ function RouteComponent() {
         <div className="lg:mt-[120px] pb-55 w-full px-7 lg:px-40 mt-14 grid grid-cols-1 gap-20 md:gap-10 md:grid-cols-2 md:mb-56">
           {loading && <div>Loading...</div>}
           {error && <div>Error: {error}</div>}
-          <Programmes data={categories[activeCategory].filter()} isAuthenticated={isAuthenticated}/>
+          <Programmes
+            data={categories[activeCategory].filter()}
+            isAuthenticated={isAuthenticated}
+          />
         </div>
       </div>
       {/* Main Content */}

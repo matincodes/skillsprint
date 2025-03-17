@@ -1,12 +1,11 @@
 import React, { useState, useContext } from "react";
 import { useAuth } from "@/context/AuthContext"; // Make sure to replace with the correct path to your AuthContext
 import { Button } from "../../../components/ui/button";
-import { Link, useNavigate} from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import showIcon from "../../../assets/show-icon.png"; // Make sure to replace with the correct path to your show icon
 // import hideIcon from "../../../assets/hide-icon.png"; // Make sure to replace with the correct path to your hide icon
-
 
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -16,7 +15,7 @@ export const Route = createFileRoute("/(auth)/student/login")({
 
 function RouteComponent() {
   const navigate = useNavigate();
-  const { login, isLoading, setIsLoading } = useAuth(); 
+  const { login, isLoading, setIsLoading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -26,7 +25,6 @@ function RouteComponent() {
   };
 
   const handleSubmit = async () => {
-
     if (!email || !password) {
       toast.error("Please fill all fields");
       return;
@@ -46,12 +44,10 @@ function RouteComponent() {
       if (success) {
         toast.success("Login successful!");
         navigate({ to: "/" });
-        setIsLoading(false); // Re-enable the button after a successful login 
+        setIsLoading(false); // Re-enable the button after a successful login
       }
     } catch (err) {
-      console.error("Login error:",
-        err
-      );
+      console.error("Login error:", err);
       toast.error("Failed to login. Please check your credentials.");
       setIsLoading(false); // Re-enable the button if an error occurs
     }
