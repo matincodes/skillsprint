@@ -1,5 +1,5 @@
 import axios from '@/lib/axios';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -11,10 +11,28 @@ export function AuthProvider({ children }) {
         return storedUser ? JSON.parse(storedUser) : null;
     });
     const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('user'));
-    const [isSubmitting, setIsSubmitting] = useState(false); // Track submission status
+    const [isLoading, setIsLoading] = useState(false); // Track loading state
+
+    // context/AuthContext.js
+const checkAuth = async () => {
+    try {
+      const { data } = await axios.get('/api/auth/verify');
+        console.log("verifying authentication")
+        setIsAuthenticated(data.isAuthenticated)
+        setIsLoading(false)
+    } catch (error) {
+        setIsAuthenticated(false)
+        setIsLoading(false)
+    }
+  };
+
+//   useEffect(() => {
+//     checkAuth();
+// }, []);
+
 
     const signup = async (name, email, password, role) => {
-        setIsSubmitting(true); // Start submission
+        setIsLoading(true); // Start loading
         try {
             const response = await axios.post('/api/auth/sign-up', {
                 name,
@@ -27,11 +45,11 @@ export function AuthProvider({ children }) {
                 setUser(response.data.user);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
                 setIsAuthenticated(true);
-                setIsSubmitting(false); // End submission
+                setIsLoading(false); // End loading
                 return true;
             } else {
                 toast.error('Signup failed');
-                setIsSubmitting(false); // End submission
+                setIsLoading(false); // End loading
                 return false;
             }
         } catch (err) {
@@ -39,15 +57,15 @@ export function AuthProvider({ children }) {
             if (err.response && err.response.status === 409) {
                 toast.error('Email is already taken');
             } else {
-                setError('Signup error');
                 toast.error('Signup error');
             }
-            setIsSubmitting(false); // End submission
+            setIsLoading(false); // End loading
+            return false;
         }
     };
 
     const login = async (email, password) => {
-        setIsSubmitting(true); // Start submission
+        setIsLoading(true); // Start loading
         try {
             const response = await axios.post('/api/auth/sign-in', {
                 email: email.trim(),
@@ -58,24 +76,24 @@ export function AuthProvider({ children }) {
                 setUser(response.data.user);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
                 setIsAuthenticated(true);
-                setIsSubmitting(false); // End submission
+                setIsLoading(false); // End loading
                 return true;
             } else {
                 setIsAuthenticated(false);
                 toast.error('Invalid email or password');
-                setIsSubmitting(false); // End submission
+                setIsLoading(false); // End loading
                 return false;
             }
         } catch (err) {
             console.error('Login error:', err.response?.data || err.message);
             toast.error(err.response?.data?.error || 'Login failed');
-            setIsSubmitting(false); // End submission
+            setIsLoading(false); // End loading
             return false;
         }
     };
 
     const logout = async () => {
-        setIsSubmitting(true); // Start submission
+        setIsLoading(true); // Start loading
         try {
             const response = await axios.post('/api/auth/sign-out');
 
@@ -83,23 +101,23 @@ export function AuthProvider({ children }) {
                 setUser(null);
                 localStorage.removeItem('user');
                 setIsAuthenticated(false);
-                setIsSubmitting(false); // End submission
+                setIsLoading(false); // End loading
                 return true;
             } else {
                 toast.error('Logout failed');
-                setIsSubmitting(false); // End submission
+                setIsLoading(false); // End loading
                 return false;
             }
         } catch (err) {
             console.error('Logout error:', err);
             toast.error('Logout error');
-            setIsSubmitting(false); // End submission
+            setIsLoading(false); // End loading
             return false;
         }
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, signup, isAuthenticated, isSubmitting, setIsSubmitting }}>
+        <AuthContext.Provider value={{ user, login, logout, signup, isAuthenticated, isLoading, setIsLoading, checkAuth }}>
             {children}
         </AuthContext.Provider>
     );

@@ -6,12 +6,16 @@ import UpcomingSession from "@/components/Cards/UpcomingSession";
 import { UpcomingSessionCard } from "@/data/dashboard";
 import LeaderBoard from "@/components/Cards/LeaderBoard";
 import { LeaderBoardCard } from "@/data/dashboard";
+import { useEnrollments } from "@/hooks/useEnrollment";
 
 export const Route = createFileRoute("/dashboard/")({
   component: DashboardComponent,
 });
 
 const DashboardComponent = () => {
+
+  const { currentEnrollment, enrollments } = useEnrollments();
+  console.log(currentEnrollment, enrollments);
   return (
     <div className="grid p-2">
       {/* TopSection */}
@@ -21,7 +25,7 @@ const DashboardComponent = () => {
           <div>
             <p className="text-paragraph">Course</p>
             <h2 className="font-sora text-white text-[23px] font-[300]">
-              Understanding UI/UX Basics
+              {currentEnrollment.course.title}
             </h2>
             <p className="text-paragraph text-[14px] leading-[25px] mt-2">
               Learn the essentials of UI/UX design, including usability,
