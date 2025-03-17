@@ -20,7 +20,7 @@ function RouteComponent() {
   const { data: courses, isLoading, error } = useCourses();
   const { isAuthenticated } = useAuth();
 
-
+  console.log(courses, isLoading);
   // Categories & Filtering Logic
   const categories = [
     { label: "All", filter: () => courses },
@@ -143,10 +143,12 @@ function RouteComponent() {
         <div className="lg:mt-[120px] pb-55 w-full px-7 lg:px-40 mt-14 grid grid-cols-1 gap-20 md:gap-10 md:grid-cols-2 md:mb-56">
           {isLoading && <div>Loading...</div>}
           {error && <div>Error: {error.message}</div>}
-          <Programmes
-            data={categories[activeCategory].filter()}
-            isAuthenticated={isAuthenticated}
-          />
+          {courses && (
+            <Programmes
+              data={categories[activeCategory].filter()}
+              isAuthenticated={isAuthenticated}
+            />
+          )}
         </div>
       </div>
       {/* Main Content */}
