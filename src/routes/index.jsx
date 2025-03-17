@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import Button from "@/components/Button/Button";
 import { skillCard, upskillCard } from "@/data/homeCardData";
@@ -13,33 +13,34 @@ import { useAuth } from "@/context/AuthContext";
 import useEnrollments from "@/hooks/useEnrollment";
 import Footer from "@/components/footer/Footer";
 
-
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
 function Index() {
   const { isAuthenticated, isLoading: authLoading, checkAuth } = useAuth();
-  const { hasActiveEnrollment, isLoading, refetch: checkEnrollment } = useEnrollmentStatus();
+  const {
+    hasActiveEnrollment,
+    isLoading,
+    refetch: checkEnrollment,
+  } = useEnrollmentStatus();
   const { refetchEnrollments } = useEnrollments();
 
- console.log(isAuthenticated, hasActiveEnrollment, isLoading)
+  console.log(isAuthenticated, hasActiveEnrollment, isLoading);
 
-useEffect(() => {
-  const initializeAuth = async () => {
-    await checkAuth();
-    if (isAuthenticated) {
-      checkEnrollment()
-    }
-  };
-  initializeAuth();
-}, [isAuthenticated]);
-
-
+  useEffect(() => {
+    const initializeAuth = async () => {
+      await checkAuth();
+      if (isAuthenticated) {
+        checkEnrollment();
+      }
+    };
+    initializeAuth();
+  }, [isAuthenticated]);
 
   const renderButton = () => {
     if (authLoading) return <Button text="Loading..." disabled />;
-    
+
     return isAuthenticated ? (
       hasActiveEnrollment ? (
         <Button text="Go to Dashboard" location="dashboard/" />
@@ -50,7 +51,6 @@ useEffect(() => {
       <Button text="Join the Free Program" location="/student/register" />
     );
   };
-
 
   return (
     <>
@@ -152,7 +152,10 @@ useEffect(() => {
             ))}
 
             <div className="col-span-2 flex items-center justify-center relative mt-[50px]">
-              <Button text="Join the free program" location="/student/register" />
+              <Button
+                text="Join the free program"
+                location="/student/register"
+              />
             </div>
           </div>
           {/*  */}

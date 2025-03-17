@@ -13,9 +13,21 @@ export const Route = createFileRoute("/dashboard/")({
 });
 
 const DashboardComponent = () => {
-
-  const { currentEnrollment, enrollments } = useEnrollments();
+  const { currentEnrollment, enrollments, isLoading } = useEnrollments();
   console.log(currentEnrollment, enrollments);
+
+  if (isLoading) {
+    return <div>Loading enrollment data...</div>;
+  }
+
+  if (!currentEnrollment) {
+    return (
+      <div className="grid p-2">
+        <p>No active enrollment found. Please enroll in a course.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="grid p-2">
       {/* TopSection */}
@@ -28,18 +40,14 @@ const DashboardComponent = () => {
               {currentEnrollment.course.title}
             </h2>
             <p className="text-paragraph text-[14px] leading-[25px] mt-2">
-              Learn the essentials of UI/UX design, including usability,
-              wireframing, and user-centered design principles. This course
-              provides a foundation to create intuitive and visually appealing
-              digital experiences. Perfect for beginners or anyone looking to
-              explore the world of design.
+              {currentEnrollment.course.description}
             </p>
           </div>
 
           <div className="flex items-center space-x-3">
             <Progress value={30} />
             <p className="text-paragraph text-[15px] ml-2 font-[300]">
-              30% completed
+              {`${currentEnrollment.progress}% completed`}
             </p>
           </div>
 

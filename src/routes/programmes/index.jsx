@@ -6,10 +6,9 @@ import Programmes from "@/components/Programmes/Programmes";
 import { upskillCard } from "@/data/homeCardData";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/footer/Footer";
-import ExploreCard from "@/components/Cards/ExploreCard";;
-import axios from "@/lib/axios";
+import ExploreCard from "@/components/Cards/ExploreCard";
+import useCourses from "@/hooks/useCourses";
 import { useAuth } from "@/context/AuthContext";
-
 
 // Route Configuration
 export const Route = createFileRoute("/programmes/")({
@@ -18,25 +17,9 @@ export const Route = createFileRoute("/programmes/")({
 
 function RouteComponent() {
   const [activeCategory, setActiveCategory] = useState(0);
-  const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data: courses, isLoading, error } = useCourses();
   const { isAuthenticated } = useAuth();
 
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const response = await axios.get("/api/courses");
-        setCourses(response.data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCourses();
-  }, []);
 
   // Categories & Filtering Logic
   const categories = [
@@ -84,7 +67,6 @@ function RouteComponent() {
     </button>
   );
 
-
   return (
     <>
       {/* NavBar */}
@@ -110,8 +92,10 @@ function RouteComponent() {
                   </h1>
                 </div>
 
-                <b className='text-white text-center font-inter font-[500] lg:text-[17px] text-[14px] tracking-[0.5px]'>
-                  Apply to only one program at a time, your application status  is final, and to <br /> switch program, you must first cancel your current application.
+                <b className="text-white text-center font-inter font-[500] lg:text-[17px] text-[14px] tracking-[0.5px]">
+                  Apply to only one program at a time, your application status
+                  is final, and to <br /> switch program, you must first cancel
+                  your current application.
                 </b>
               </div>
             ) : (
@@ -157,9 +141,12 @@ function RouteComponent() {
 
         {/* Programme Cards Display */}
         <div className="lg:mt-[120px] pb-55 w-full px-7 lg:px-40 mt-14 grid grid-cols-1 gap-20 md:gap-10 md:grid-cols-2 md:mb-56">
-          {loading && <div>Loading...</div>}
-          {error && <div>Error: {error}</div>}
-          <Programmes data={categories[activeCategory].filter()} isAuthenticated={isAuthenticated}/>
+          {isLoading && <div>Loading...</div>}
+          {error && <div>Error: {error.message}</div>}
+          <Programmes
+            data={categories[activeCategory].filter()}
+            isAuthenticated={isAuthenticated}
+          />
         </div>
       </div>
       {/* Main Content */}
