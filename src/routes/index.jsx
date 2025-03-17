@@ -24,6 +24,7 @@ function Index() {
     isLoading,
     refetch: checkEnrollment,
   } = useEnrollmentStatus();
+
   const { refetchEnrollments } = useEnrollments();
 
   console.log(isAuthenticated, hasActiveEnrollment, isLoading);
@@ -33,6 +34,7 @@ function Index() {
       await checkAuth();
       if (isAuthenticated) {
         checkEnrollment();
+        refetchEnrollments();
       }
     };
     initializeAuth();
