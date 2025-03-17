@@ -8,7 +8,7 @@ export default function PasswordStep({
   confirmPassword,
   setConfirmPassword,
   onSubmit,
-  isSubmitting,
+  isLoading,
 }) {
   return (
     <div className="w-full md:w-1/3 flex flex-col items-center">
@@ -32,10 +32,10 @@ export default function PasswordStep({
 
       <Button
             onClick={onSubmit}
-            className={`text-white w-full bg-main cursor-pointer ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
-            disabled={isSubmitting} // Disable the button if submitting
+            className={`text-white w-full bg-main cursor-pointer ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+            disabled={isLoading} // Disable the button if submitting
           >
-            {isSubmitting ? (
+            {isLoading ? (
               <div className="flex items-center justify-center">
                 <svg
                   className="animate-spin h-5 w-5 mr-3 text-white"

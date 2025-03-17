@@ -14,7 +14,7 @@ export const Route = createFileRoute("/(auth)/student/register")({
 });
 
 function RouteComponent() {
-  const { signup, isSubmitting, setIsSubmitting } = useAuth(); // Destructure signup from useAuth
+  const { signup, isLoading, setIsLoading } = useAuth(); // Destructure signup from useAuth
   const navigate = useNavigate(); // Initialize useNavigate hook
   const [step, setStep] = useState(1);
   const [name, setName] = useState("");
@@ -53,7 +53,7 @@ function RouteComponent() {
       return;
     }
 
-    setIsSubmitting(true);
+    setIsLoading(true);
 
     try {
       const success = await signup(name, email, password, "STUDENT");
@@ -61,12 +61,12 @@ function RouteComponent() {
       if (success) {
         toast.success("Registration successful!"); // Display success message
         navigate({ to: "/" }); // Redirect to home page
-        setIsSubmitting(false);
+        setIsLoading(false);
       }
     } catch (err) {
       setError(err.message || "An error occurred during registration.");
       toast.error(err.message || "An error occurred during registration.");
-      setIsSubmitting(false);
+      setIsLoading(false);
     }
   };
 
@@ -111,7 +111,7 @@ function RouteComponent() {
               confirmPassword={confirmPassword}
               setConfirmPassword={setConfirmPassword}
               onSubmit={handleSubmit}
-              isSubmitting={isSubmitting}
+              isLoading={isLoading}
             />
           </form>
         )}
