@@ -19,7 +19,7 @@ function RouteComponent() {
   const [activeCategory, setActiveCategory] = useState(0);
   const { data: courses, isLoading, error } = useCourses();
   const { isAuthenticated } = useAuth();
-
+  console.log(courses)
 
   // Categories & Filtering Logic
   const categories = [
