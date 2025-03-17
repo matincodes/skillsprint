@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import Button from "@/components/Button/Button";
 import { skillCard, upskillCard } from "@/data/homeCardData";
@@ -8,7 +8,9 @@ import HomePageSection from "@/components/Sections/HomePageSection";
 import SectionHeader from "@/components/Sections/SectionHeader";
 import SkillCard from "@/components/Cards/SkillCard";
 import NavBar from "@/components/NavBar/NavBar";
+import useEnrollmentStatus from "@/hooks/useEnrollmentStatus";
 import { useAuth } from "@/context/AuthContext";
+import useEnrollments from "@/hooks/useEnrollment";
 import Footer from "@/components/footer/Footer";
 
 
@@ -17,7 +19,38 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, isLoading: authLoading, checkAuth } = useAuth();
+  const { hasActiveEnrollment, isLoading, refetch: checkEnrollment } = useEnrollmentStatus();
+  const { refetchEnrollments } = useEnrollments();
+
+ console.log(isAuthenticated, hasActiveEnrollment, isLoading)
+
+useEffect(() => {
+  const initializeAuth = async () => {
+    await checkAuth();
+    if (isAuthenticated) {
+      checkEnrollment()
+    }
+  };
+  initializeAuth();
+}, [isAuthenticated]);
+
+
+
+  const renderButton = () => {
+    if (authLoading) return <Button text="Loading..." disabled />;
+    
+    return isAuthenticated ? (
+      hasActiveEnrollment ? (
+        <Button text="Go to Dashboard" location="dashboard/" />
+      ) : (
+        <Button text="Enroll in a Course" location="/programmes" />
+      )
+    ) : (
+      <Button text="Join the Free Program" location="/student/register" />
+    );
+  };
+
 
   return (
     <>
@@ -46,11 +79,7 @@ function Index() {
               </p>
             </section>
 
-            {isAuthenticated ? (
-              <Button text="Go to Dashboard" location='dashboard/' />
-            ) : (
-              <Button text="Join the Free Program" location="/student/register"/>
-            )}
+            {renderButton()}
 
             <img
               src="/assets/Icons/arrow.png"

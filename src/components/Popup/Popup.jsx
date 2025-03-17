@@ -10,8 +10,8 @@ import {
 import { CircleCheck } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
-const PopUp = (e) => {
-  const date = new Date([e.startDate]);
+const PopUp = ({ open, onOpenChange, startDate, courseTitle }) => {
+  const date = new Date([startDate]);
   const options = {
     year: "numeric",
     month: "2-digit",
@@ -25,8 +25,7 @@ const PopUp = (e) => {
   const localTime = date.toLocaleString("en-US", options);
   return (
     <>
-      <Dialog>
-        <DialogTrigger className='lg:text-base tracking-[1.5px] cursor-pointer font-semibold font-inter text-[10px] text-white py-3 px-6 bg-[#AE752C] rounded-md'>{e.text}</DialogTrigger>
+      <Dialog open={open} onOpenChange={onOpenChange}> 
         <DialogContent>
           <DialogHeader>
             <div className="flex flex-col justify-center items-center text-center space-y-5">
@@ -38,7 +37,7 @@ const PopUp = (e) => {
                 </DialogTitle>
               </span>
               <DialogDescription className={"font-sora font-[200] leading-[30px]"}>
-                You have successfully applied for the <span className='font-[500] text-main'>{e.courseTitle}</span> course <br />
+                You have successfully applied for the <span className='font-[500] text-main'>{courseTitle}</span> course <br />
                 Classes will start on the {localTime}. <br />
                 Your class schedule will be available on your dashboard
               </DialogDescription>

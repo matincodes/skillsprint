@@ -1,6 +1,6 @@
 import React from "react";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/Sidebar/Sidebar";
 import { cn } from "@/lib/utils";
 import TopNav from "@/components/TopNav/TopNav";
@@ -19,7 +19,6 @@ function DashboardLayout() {
             "relative h-full overflow-hidden text-white w-full font-inter gap-4 flex flex-col ",
           )}
         >
-          {/* <SidebarTrigger /> */}
           <TopNav />
           <Outlet />
         </main>
