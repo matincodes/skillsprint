@@ -8,7 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { createFileRoute } from "@tanstack/react-router";
 
-
 export const Route = createFileRoute("/(auth)/student/register")({
   component: RouteComponent,
 });
@@ -81,7 +80,9 @@ function RouteComponent() {
             className="absolute lg:w-[60px] w-[40px] lg:-top-[25px] lg:-left-[45px] -top-[20px] left-[6px] "
           />
           <span className="block lg:hidden">Create your</span>
-          <span className="hidden lg:block">Create your skill sprint account</span>
+          <span className="hidden lg:block">
+            Create your skill sprint account
+          </span>
           <span className="block lg:hidden">skill sprint account</span>
         </h2>
 
@@ -118,7 +119,7 @@ function RouteComponent() {
       </div>
 
       <div className="text-paragraph flex justify-center text-center w-full mt-10">
-        Already have an account? {" "}
+        Already have an account?{" "}
         <Link to="/student/login" className="underline">
           Login
         </Link>

@@ -1,12 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
-import axios from "@/lib/axios";
+import React from "react";
 import ProgrammeCard from "../Cards/ProgrammeCard";
-import { useEnrollment } from "@/context/EnrollmentContext";
 import useEnrollmentStatus from "@/hooks/useEnrollmentStatus";
 
 const Programmes = ({ data, isAuthenticated }) => {
-  const { isLoading, hasActiveEnrollment } = useEnrollmentStatus();
-
+  const { isLoading, hasActiveEnrollment, refetch: checkEnrollment } = useEnrollmentStatus();
 
   return (
     <>
@@ -16,13 +13,14 @@ const Programmes = ({ data, isAuthenticated }) => {
           courseId={course.id}
           image={course.coverImage}
           title={course.title}
-          description={course.description}
+          description={course.description.slice(0, 150) + "..."}
           price={course.price}
           duration={course.duration}
           isAuthenticated={isAuthenticated}
           startDate={course.startDate}
           isLoading={isLoading}
           hasActiveEnrollment={hasActiveEnrollment}
+          checkEnrollment={checkEnrollment}
         />
       ))}
     </>
