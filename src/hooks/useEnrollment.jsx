@@ -42,7 +42,7 @@ export const useEnrollments = () => {
   // Derived state
 
   const currentEnrollment = useMemo(
-    () => data?.find((e) => e?.status === "ACTIVE") || null,
+    () => queryClient.getQueryData(["enrollments"])?.find((e) => e?.status === "ACTIVE") || null,
     [data],
   );
 
