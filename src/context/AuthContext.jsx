@@ -20,8 +20,14 @@ export function AuthProvider({ children }) {
     try {
       const { data } = await axios.get("/api/auth/verify");
       console.log("verifying authentication");
-      setIsAuthenticated(data.isAuthenticated);
-      setIsLoading(false);
+      if (data.isAuthenticated) {
+        setIsAuthenticated(data.isAuthenticated);
+        setIsLoading(false);
+      }else{
+        localStorage.removeItem("user");
+        setIsAuthenticated(false);
+        setIsLoading(false);
+      }
     } catch (error) {
       setIsAuthenticated(false);
       setIsLoading(false);
