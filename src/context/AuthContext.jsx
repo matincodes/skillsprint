@@ -94,6 +94,7 @@ export function AuthProvider({ children }) {
         login: loginMutation.mutateAsync,
         signup: signupMutation.mutateAsync,
         logout: logoutMutation.mutateAsync,
+        checkAuth,
       }}
     >
       {children}

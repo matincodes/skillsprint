@@ -116,7 +116,7 @@ const NavBar = () => {
 
               {user == null ? (
                 <div className="flex mt-10">
-                  <Button text="Login to portal" nav />
+                  <Button text="Login to portal" nav location="/student/login"/>
                 </div>
               ) : (
                 <div className="flex gap-2 w-fit ml-5 mt-[40px]">
