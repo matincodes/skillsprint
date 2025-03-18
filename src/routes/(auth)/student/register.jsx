@@ -13,59 +13,70 @@ export const Route = createFileRoute("/(auth)/student/register")({
 });
 
 function RouteComponent() {
-  const { signup, isLoading, setIsLoading } = useAuth(); // Destructure signup from useAuth
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
+
+  // Destructure from AuthContext
+  const { signup, isLoading } = useAuth();
+
+  // Step management & form fields
   const [step, setStep] = useState(1);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  // Called when user clicks "Continue" in the email step
+
+
+  // Basic regex: Only letters/spaces, at least 3 chars
+  const nameRegex = /^[A-Za-z\s]{3,}$/;
+  // Basic email pattern
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Step 1: Validate name & email
   const handleContinue = (e) => {
     e.preventDefault();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!name || !email) {
-      toast.error("Please enter both your full name and a valid email.");
+      toast.error("Please enter both your full name and your email.");
       return;
     }
 
-    if (!emailRegex.test(email)) {
+    if (!nameRegex.test(name.trim())) {
+      toast.error("Please enter a valid name (at least 3 letters).");
+      return;
+    }
+
+    if (!emailRegex.test(email.trim())) {
       toast.error("Please enter a valid email.");
       return;
     }
+
+    // Move to password step
     setStep(2);
   };
 
-  // Called when user clicks "Submit" in the password step
+  // Step 2: Validate password & call signup
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password.length < 8) {
-      toast.error("Password must be at least 8 characters long");
+      toast.error("Password must be at least 8 characters long.");
       return;
     }
-    console.log(name, email, password, confirmPassword);
+
     if (password !== confirmPassword) {
       toast.error("Passwords do not match.");
       return;
     }
 
-    setIsLoading(true);
-
     try {
+      // Attempt signup
       const success = await signup(name, email, password, "STUDENT");
-
       if (success) {
-        toast.success("Registration successful!"); // Display success message
-        navigate({ to: "/" }); // Redirect to home page
-        setIsLoading(false);
+        navigate({ to: "/programmes" });
       }
     } catch (err) {
-      setError(err.message || "An error occurred during registration.");
-      toast.error(err.message || "An error occurred during registration.");
-      setIsLoading(false);
+      console.error("Signup error:", err);
     }
   };
 

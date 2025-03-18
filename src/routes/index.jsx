@@ -27,7 +27,7 @@ function Index() {
 
   const { refetchEnrollments } = useEnrollments();
 
-  console.log(isAuthenticated, hasActiveEnrollment, isLoading);
+  console.log(isAuthenticated, hasActiveEnrollment, authLoading, enrollmentLoading);
 
   useEffect(() => {
       if (isAuthenticated) {
