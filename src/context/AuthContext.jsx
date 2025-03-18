@@ -1,142 +1,99 @@
-import axios from "@/lib/axios";
 import { createContext, useContext, useState, useEffect } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "@/lib/axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem("user");
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    () => !!localStorage.getItem("user"),
-  );
-  const [isLoading, setIsLoading] = useState(false); // Track loading state
+  const queryClient = useQueryClient();
+  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthLoading, setIsAuthLoading] = useState(false);
 
-  // context/AuthContext.js
-  const checkAuth = async () => {
-    try {
+  // 🔹 Fetch user session on app load
+  const { isFetching, refetch: checkAuth } = useQuery({
+    queryKey: ["authUser"],
+    queryFn: async () => {
       const { data } = await axios.get("/api/auth/verify");
-      console.log("verifying authentication");
-      if (data.isAuthenticated) {
-        setIsAuthenticated(data.isAuthenticated);
-        setIsLoading(false);
-      }else{
-        localStorage.removeItem("user");
-        setIsAuthenticated(false);
-        setIsLoading(false);
-      }
-    } catch (error) {
+      return data.user;
+    },
+    staleTime: 1000 * 60 * 5, // Cache valid for 5 minutes
+    refetchOnWindowFocus: false,
+    onSuccess: (userData) => {
+      setUser(userData);
+      setIsAuthenticated(!!userData);
+    },
+    onError: () => {
+      setUser(null);
       setIsAuthenticated(false);
-      setIsLoading(false);
-    }
-  };
+    },
+  });
 
-  //   useEffect(() => {
-  //     checkAuth();
-  // }, []);
+  // 🔹 Login Mutation
+  const loginMutation = useMutation({
+    mutationFn: async (credentials) => {
+      const { data } = await axios.post("/api/auth/sign-in", credentials);
+      return data.user;
+    },
+    onMutate: () => setIsAuthLoading(true),
+    onSuccess: (userData) => {
+      setUser(userData);
+      setIsAuthenticated(true);
+      queryClient.setQueryData(["authUser"], userData);
+      toast.success("Login successful! 🎉");
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.error || "Login failed. Please try again.");
+    },
+    onSettled: () => setIsAuthLoading(false),
+  });
 
-  const signup = async (name, email, password, role) => {
-    setIsLoading(true); // Start loading
-    try {
-      const response = await axios.post("/api/auth/sign-up", {
-        name,
-        email,
-        password,
-        role,
-      });
+  // 🔹 Signup Mutation
+  const signupMutation = useMutation({
+    mutationFn: async (userData) => {
+      const { data } = await axios.post("/api/auth/sign-up", userData);
+      return data.user;
+    },
+    onMutate: () => setIsAuthLoading(true),
+    onSuccess: (userData) => {
+      setUser(userData);
+      setIsAuthenticated(true);
+      queryClient.setQueryData(["authUser"], userData);
+      toast.success("Signup successful! Welcome to SkillSprint 🚀");
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.error || "Signup failed. Please try again.");
+    },
+    onSettled: () => setIsAuthLoading(false),
+  });
 
-      if (response.status === 200 || response.status === 201) {
-        setUser(response.data.user);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        setIsAuthenticated(true);
-        setIsLoading(false); // End loading
-        return true;
-      } else {
-        toast.error("Signup failed");
-        setIsLoading(false); // End loading
-        return false;
-      }
-    } catch (err) {
-      console.error("Signup error:", err);
-      if (err.response && err.response.status === 409) {
-        toast.error("Email is already taken");
-      } else {
-        toast.error("Signup error");
-      }
-      setIsLoading(false); // End loading
-      return false;
-    }
-  };
-
-  const login = async (email, password) => {
-    setIsLoading(true); // Start loading
-    try {
-      const response = await axios.post("/api/auth/sign-in", {
-        email: email.trim(),
-        password: password.trim(),
-      });
-
-      if (
-        response.status === 200 ||
-        response.data.message === "Login successful"
-      ) {
-        setUser(response.data.user);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        setIsAuthenticated(true);
-        setIsLoading(false); // End loading
-        return true;
-      } else {
-        setIsAuthenticated(false);
-        toast.error("Invalid email or password");
-        setIsLoading(false); // End loading
-        return false;
-      }
-    } catch (err) {
-      console.error("Login error:", err.response?.data || err.message);
-      toast.error(err.response?.data?.error || "Login failed");
-      setIsLoading(false); // End loading
-      return false;
-    }
-  };
-
-  const logout = async () => {
-    setIsLoading(true); // Start loading
-    try {
-      const response = await axios.post("/api/auth/sign-out");
-
-      if (response.status === 200) {
-        setUser(null);
-        localStorage.removeItem("user");
-        setIsAuthenticated(false);
-        setIsLoading(false); // End loading
-        return true;
-      } else {
-        toast.error("Logout failed");
-        setIsLoading(false); // End loading
-        return false;
-      }
-    } catch (err) {
-      console.error("Logout error:", err);
-      toast.error("Logout error");
-      setIsLoading(false); // End loading
-      return false;
-    }
-  };
+  // 🔹 Logout Mutation
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      await axios.post("/api/auth/sign-out");
+    },
+    onSuccess: () => {
+      setUser(null);
+      setIsAuthenticated(false);
+      queryClient.removeQueries(["authUser"]);
+      toast.info("You have been logged out. See you soon! 👋");
+    },
+    onError: () => {
+      toast.error("Logout failed. Please try again.");
+    },
+  });
 
   return (
     <AuthContext.Provider
       value={{
         user,
-        login,
-        logout,
-        signup,
         isAuthenticated,
-        isLoading,
-        setIsLoading,
-        checkAuth,
+        isLoading: isFetching || isAuthLoading,
+        login: loginMutation.mutateAsync,
+        signup: signupMutation.mutateAsync,
+        logout: logoutMutation.mutateAsync,
       }}
     >
       {children}

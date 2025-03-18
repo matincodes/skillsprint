@@ -18,10 +18,10 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { isAuthenticated, isLoading: authLoading, checkAuth } = useAuth();
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
   const {
     hasActiveEnrollment,
-    isLoading,
+    isLoading: enrollmentLoading,
     refetch: checkEnrollment,
   } = useEnrollmentStatus();
 
@@ -30,27 +30,25 @@ function Index() {
   console.log(isAuthenticated, hasActiveEnrollment, isLoading);
 
   useEffect(() => {
-    const initializeAuth = async () => {
-      await checkAuth();
       if (isAuthenticated) {
         checkEnrollment();
         refetchEnrollments();
       }
-    };
-    initializeAuth();
   }, [isAuthenticated]);
 
   const renderButton = () => {
-    if (authLoading) return <Button text="Loading..." disabled />;
+    if (authLoading || enrollmentLoading) {
+      return <Button text="Loading..." disabled />;
+    }
 
-    return isAuthenticated ? (
-      hasActiveEnrollment ? (
-        <Button text="Go to Dashboard" location="dashboard/" />
-      ) : (
-        <Button text="Enroll in a Course" location="/programmes" />
-      )
+    if (!isAuthenticated) {
+      return <Button text="Join the Free Program" location="/student/register" />;
+    }
+
+    return hasActiveEnrollment ? (
+      <Button text="Go to Dashboard" location="dashboard/" />
     ) : (
-      <Button text="Join the Free Program" location="/student/register" />
+      <Button text="Enroll in a Course" location="/programmes" />
     );
   };
 

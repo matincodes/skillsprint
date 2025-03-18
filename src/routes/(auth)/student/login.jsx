@@ -42,13 +42,10 @@ function RouteComponent() {
       console.log(success);
       // Redirect to the desired page after successful login
       if (success) {
-        toast.success("Login successful!");
-        navigate({ to: "/" });
+        navigate({ to: "/programmes" });
         setIsLoading(false); // Re-enable the button after a successful login
       }
-    } catch (err) {
-      console.error("Login error:", err);
-      toast.error("Failed to login. Please check your credentials.");
+    } finally {
       setIsLoading(false); // Re-enable the button if an error occurs
     }
   };
