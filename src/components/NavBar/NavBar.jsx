@@ -59,9 +59,9 @@ const NavBar = () => {
                 }
               />
               <div className="flex flex-col font-sora">
-                <h1 className="text-[13px] text-white font-[300]">
+                <div className="text-[13px] text-white font-[300]">
                   {user.name}
-                </h1>
+                </div>
                 <p className="text-paragraph text-[10px] font-[400]">
                   {user.email}
                 </p>
@@ -128,9 +128,9 @@ const NavBar = () => {
                   />
 
                   <div className="flex flex-col font-sora">
-                    <h1 className="text-[13px] text-white font-[300]">
+                    <div className="text-[13px] text-white font-[300]">
                       {user.name}
-                    </h1>
+                    </div>
                     <p className="text-paragraph text-[10px] font-[400]">
                       {user.email}
                     </p>

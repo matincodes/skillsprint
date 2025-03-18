@@ -35,8 +35,8 @@ const AppSidebar = () => {
     <div className="lg:w-51 relative">
       <Sidebar className={"w-50"}>
         <SidebarContent className={"relative"}>
-          <SidebarGroup className={"py-6 px-2 space-y-[50px]"}>
-            <SidebarGroupLabel>
+          <SidebarGroup className={"lg:py-6 py-[50px] px-2 space-y-[50px]"}>
+            <SidebarGroupLabel className={'lg:flex hidden'}>
               <Link
                 to="/dashboard/profile"
                 className={`${pathname == "/dashboard/profile" ? "bg-black w-[230px] p-1 cursor-pointer rounded-[50px]" : ""} flex gap-2 items-center`}
