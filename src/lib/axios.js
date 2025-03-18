@@ -19,7 +19,6 @@ instance.interceptors.response.use(
     if (response.config.url !== "/api/auth/token") {
       hasActiveSession = true;
     }
-    console.log(response);
     return response;
   },
   async (error) => {

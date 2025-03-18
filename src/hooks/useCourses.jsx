@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from '@/lib/axios';
 
-const useCourses = () => {
+const   useCourses = () => {
   return useQuery({
     queryKey: ['courses'],
     queryFn: async () => {

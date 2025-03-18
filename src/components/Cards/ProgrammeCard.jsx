@@ -1,4 +1,4 @@
-import React, { memo, useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { Link } from "@tanstack/react-router";
 import PopUp from "../Popup/Popup";
 import { useEnrollments } from "@/hooks/useEnrollment";
@@ -22,17 +22,25 @@ const ProgrammeCard = ({
     isLoading: queryLoading,
   } = useEnrollments();
   const [showPopup, setShowPopup] = useState(false);
+  const [loadingCourseId, setLoadingCourseId] = useState(null); // Track active enrollment
 
   const isEnrolledInThisCourse = useMemo(
     () => currentEnrollment?.courseId === courseId,
     [currentEnrollment, courseId],
   );
 
-  const handleEnrollClick = () => {
-    const success = handleEnroll(courseId);
-    if (success) {
-      setShowPopup(true);
-      checkEnrollment();
+  const handleEnrollClick = async () => {
+    setLoadingCourseId(courseId); // Set loading state for clicked button
+    try {
+      const success = await handleEnroll(courseId);
+      if (success) {
+        setShowPopup(true);
+        checkEnrollment();
+      }
+    } catch (error) {
+      console.error("Enrollment failed:", error);
+    } finally {
+      setLoadingCourseId(null); // Reset loading state after request completes
     }
   };
 
@@ -70,7 +78,7 @@ const ProgrammeCard = ({
               className="lg:text-base tracking-[1.5px] cursor-not-allowed font-semibold font-inter text-[10px] text-white py-3 px-6 bg-gray-500 rounded-md"
               disabled
             >
-              Already Enrolled
+              Enrolled
             </button>
           ) : (
             <button
@@ -80,9 +88,9 @@ const ProgrammeCard = ({
                   : "bg-[#AE752C] cursor-pointer"
               }`}
               onClick={handleEnrollClick}
-              disabled={hasActiveEnrollment || queryLoading}
+              disabled={hasActiveEnrollment || queryLoading || loadingCourseId !== null}
             >
-              Apply Now
+            {loadingCourseId === courseId ? "Loading..." : "Apply Now"}
             </button>
           )
         ) : (
