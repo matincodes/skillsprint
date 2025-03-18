@@ -71,7 +71,7 @@ function RouteComponent() {
 
     try {
       // Attempt signup
-      const success = await signup(name, email, password, "STUDENT");
+      const success = await signup({name, email, password, role: "STUDENT"});
       if (success) {
         navigate({ to: "/programmes" });
       }
