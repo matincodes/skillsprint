@@ -2,6 +2,7 @@ import axios from "axios";
 // import Cookies from "js-cookie";
 
 // lib/axios.js
+// https://skillsprint.up.railway.app
 const instance = axios.create({
   baseURL: "https://skillsprint.up.railway.app",
   headers: {

@@ -20,12 +20,12 @@ function RouteComponent() {
   const { data: courses, isLoading, error } = useCourses();
   const { isAuthenticated, checkAuth } = useAuth();
 
-  console.log(courses, isLoading);
+  console.log(courses, isLoading, isAuthenticated);
 
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  // useEffect(() => {
+  //   checkAuth();
+  // }, []);
   // Categories & Filtering Logic
   const categories = [
     { label: "All", filter: () => courses },

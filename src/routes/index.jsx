@@ -29,9 +29,9 @@ function Index() {
 
   console.log(isAuthenticated, hasActiveEnrollment, authLoading, enrollmentLoading);
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  // useEffect(() => {
+  //   checkAuth();
+  // }, []);
 
   useEffect(() => {
       if (isAuthenticated) {
