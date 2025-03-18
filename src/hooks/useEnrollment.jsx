@@ -11,8 +11,6 @@ export const useEnrollments = () => {
   // Auth state
   const { isAuthenticated } = useAuth();
 
-  const [currentEnrollment, setCurrentEnrollment] = useState(null);
-
   // Fetch enrollments
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["enrollments"],
@@ -32,7 +30,6 @@ export const useEnrollments = () => {
     },
     onSuccess: (data) => {
       queryClient.setQueryData(["enrollments"], (old) => [...old, data]);
-      setCurrentEnrollment(queryClient.getQueryData(["enrollments"]).find((e) => e?.status === "ACTIVE") || null);
     //   toast.success("Enrollment successful!");
     },
     onError: (error) => {
@@ -44,10 +41,10 @@ export const useEnrollments = () => {
 
   // Derived state
 
-  // const currentEnrollment = useMemo(
-  //   () => data.find((e) => e?.status === "ACTIVE") || null,
-  //   [data],
-  // );
+  const currentEnrollment = useMemo(
+    () => data?.find((e) => e?.status === "ACTIVE") || null,
+    [data],
+  );
 
   return {
     enrollments: data || [],
