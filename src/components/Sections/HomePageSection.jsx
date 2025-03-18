@@ -4,7 +4,7 @@ import SectionHeader from "./SectionHeader";
 const HomePageSection = (e) => {
   return (
     <>
-      <div className="text-white grid lg:p-[90px] p-[20px] place-content-center space-y-[90px]">
+      <div className="text-white grid lg:p-[90px] p-[20px] place-content-center space-y-[90px] font-inter">
         <SectionHeader header={e.header} paragraph={e.paragraph} />
 
         <div className="flex flex-col">

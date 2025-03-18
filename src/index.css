@@ -24,6 +24,18 @@
   -webkit-backdrop-filter: blur(7.6px);
 }
 
+.custom-scroll {
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-color: black; /* Scrollbar track and thumb color for Firefox */
+}
+.custom-scroll::-webkit-scrollbar {
+  height: 0px; /* Set scrollbar height */
+}
+
+
+
 :root {
   --sidebar: #121212;
   --sidebar-foreground: hsl(240 5.3% 26.1%);

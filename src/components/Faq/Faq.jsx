@@ -10,11 +10,10 @@ import faqs from "@/data/faqData";
 
 const FAQ = () => {
   const [active, setActive] = useState("General Information");
-  //   console.log(active);
 
   return (
     <>
-      <div className="lg:flex gap-[15px] p-[19px] hidden">
+      <div className="flex gap-[15px] p-[19px] items-center lg:justify-center overflow-x-auto whitespace-nowrap w-full no-scrollbar ">
         {faqs.map((faqCategory) => (
           <button
             key={faqCategory.id}

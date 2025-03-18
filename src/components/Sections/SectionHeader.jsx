@@ -3,7 +3,7 @@ import React from "react";
 const SectionHeader = (e) => {
   return (
     <>
-      <div className="lg:space-y-4 space-y-5 text-center p-2 text-white">
+      <div className="lg:space-y-4 space-y-5 text-center p-2 text-white font-mont">
         <h2 className="font-[700] lg:text-[45px] text-[30px] tracking-[2px] lg:leading-[60px] leading-[30px]">
           {e.header}
         </h2>
