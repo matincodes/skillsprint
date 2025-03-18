@@ -32,6 +32,7 @@ export const useEnrollments = () => {
     },
     onSuccess: (data) => {
       queryClient.setQueryData(["enrollments"], (old) => [...old, data]);
+      setCurrentEnrollment(queryClient.getQueryData(["enrollments"]).find((e) => e?.status === "ACTIVE") || null);
     //   toast.success("Enrollment successful!");
     },
     onError: (error) => {
@@ -42,7 +43,6 @@ export const useEnrollments = () => {
   });
 
   // Derived state
-  setCurrentEnrollment(queryClient.getQueryData(["enrollments"]).find((e) => e?.status === "ACTIVE") || null);
 
   // const currentEnrollment = useMemo(
   //   () => data.find((e) => e?.status === "ACTIVE") || null,
