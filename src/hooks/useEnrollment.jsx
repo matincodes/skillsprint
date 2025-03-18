@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "@/lib/axios";
 import { toast } from "react-toastify";
@@ -11,6 +11,7 @@ export const useEnrollments = () => {
   // Auth state
   const { isAuthenticated } = useAuth();
 
+  const [currentEnrollment, setCurrentEnrollment] = useState(null);
 
   // Fetch enrollments
   const { data, isLoading, error, refetch } = useQuery({
@@ -41,10 +42,12 @@ export const useEnrollments = () => {
   });
 
   // Derived state
-  const currentEnrollment = useMemo(
-    () => data.find((e) => e?.status === "ACTIVE") || null,
-    [data],
-  );
+  setCurrentEnrollment(queryClient.getQueryData(["enrollments"]).find((e) => e?.status === "ACTIVE") || null);
+
+  // const currentEnrollment = useMemo(
+  //   () => data.find((e) => e?.status === "ACTIVE") || null,
+  //   [data],
+  // );
 
   return {
     enrollments: data || [],
