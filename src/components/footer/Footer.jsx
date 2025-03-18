@@ -14,7 +14,7 @@ import deskfootericon from "/assets/Icons/deskfootericon.svg";
 
 const Footer = () => {
   return (
-    <div className=" flex flex-col justify-end items-center bg-footerBg  h-auto w-full bg-[#1A1106]">
+    <div className=" flex flex-col justify-end items-center bg-footerBg font-inter  h-auto w-full bg-[#1A1106]">
       <div className="w-[80%] pt-16 h-auto lg:pt-24 ">
         <div className=" lg:flex-row lg:justify-between lg:items-center gap-[40px] flex flex-col   w-full h-auto  ">
           <span className="flex items-center gap-[14px]">

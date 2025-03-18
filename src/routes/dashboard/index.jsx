@@ -87,12 +87,12 @@ const DashboardComponent = () => {
         <div className="p-2 space-y-4">
           <p className="text-paragraph">Upcoming Sessions</p>
           <div className="rounded-[6px] bg-[#121212a1] p-2">
-            {UpcomingSessionCard.map((session) => (
+            {UpcomingSessionCard.map((session, index) => (
               <UpcomingSession
                 title={session.title}
                 image={session.image}
                 url={session.url}
-                key={session.id}
+                key={index}
               />
             ))}
           </div>
@@ -112,8 +112,9 @@ const DashboardComponent = () => {
           </span>
 
           <div className="rounded-[6px] space-y-2">
-            {LeaderBoardCard.map((user) => (
+            {LeaderBoardCard.map((user, index) => (
               <LeaderBoard
+                key={index}
                 fullName={user.fullName}
                 image={user.image}
                 point={user.point}
