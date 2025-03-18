@@ -3,6 +3,7 @@ import curriculumData from "@/data/curriculumData";
 import { FolderOpen, CircleSmall, Ellipsis } from "lucide-react";
 import { CurriculumAccordion } from "../ui/Sheets/CurriculumAccordion";
 import { useState } from "react";
+import { Open } from "../Button/CurriculumButton";
 
 export function CurriculumTable() {
   const [activeWeek, setActiveWeek] = useState(null);

@@ -51,16 +51,16 @@ const DashboardComponent = () => {
             </p>
           </div>
 
-          <div className="flex gap-5">
+          <div className="flex gap-3">
             <Link
               to="/"
-              className="font-[400] duration-300 ease-in-out lg:text-[15px] text-[12px] lg:px-8 px-5 py-2 bg-main text-white rounded-[7px] flex gap-4 items-center"
+              className="font-[400] duration-300 ease-in-out lg:text-[15px] text-[10px] lg:px-8 px-5 py-2 bg-main text-white rounded-[7px] flex gap-4 items-center"
             >
               Join Live Class <Radio className="w-5" />{" "}
             </Link>
             <Link
               to="/"
-              className="font-[400] duration-300 ease-in-out lg:text-[15px] text-[12px] lg:px-8 px-5 py-2 hover:bg-main hover:text-white text-main rounded-[7px] flex gap-4 items-center"
+              className="font-[400] duration-300 ease-in-out lg:text-[15px] text-[10px] lg:px-8 px-5 py-2 hover:bg-main hover:text-white text-main rounded-[7px] flex gap-4 items-center"
             >
               View Last Recording
               <Radio className="w-5" />{" "}
