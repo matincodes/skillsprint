@@ -15,7 +15,7 @@ const TopNav = () => {
       {/* Mobile View */}
       <div className="flex lg:hidden gap-3 items-center justify-between py-[20px] ">
         <div className="flex gap-4 items-center">
-          <SidebarTrigger className={" lg:hidden md:hidden cursor-pointer"} />
+          <SidebarTrigger className={" lg:hidden md:hidden cursor-pointer "} />
           <img src="/assets/logo.png" alt="" className="w-13" />
         </div>
 

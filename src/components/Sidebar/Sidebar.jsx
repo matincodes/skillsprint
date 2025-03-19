@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -14,6 +14,7 @@ import { useLocation } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetTrigger,
   SheetHeader,
@@ -23,6 +24,7 @@ import {
 import NotificationModal from "../Notification/NotificationModal";
 import { AnnouncementData } from "@/data/dashboard";
 import UserAvatar from "../UserAvatar/UserAvatar";
+import { ChevronLeft } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 const AppSidebar = () => {
@@ -31,14 +33,13 @@ const AppSidebar = () => {
   const userImage = JSON.parse(window.localStorage.getItem("user"))?.image;
   const { user } = useAuth();
 
-  console.log(activeLink, location);
 
   return (
     <div className="lg:w-51 relative">
       <Sidebar className={"w-50"}>
         <SidebarContent className={"relative"}>
-          <SidebarGroup className={"lg:py-6 py-[50px] px-2 space-y-[50px]"}>
-            <SidebarGroupLabel className={'lg:flex hidden'}>
+          <SidebarGroup className={"lg:py-6 py-[60px] px-2 lg:space-y-[50px]"}>
+            <SidebarGroupLabel className={"lg:flex hidden"}>
               <Link
                 to="/dashboard/profile"
                 className={`${pathname == "/dashboard/profile" ? "bg-black w-[230px] p-1 cursor-pointer rounded-[50px]" : ""} flex gap-2 items-center`}
@@ -60,7 +61,7 @@ const AppSidebar = () => {
             <SidebarGroupContent>
               <SidebarMenu className="font-inter">
                 {sideNavData.map((group) => (
-                  <div key={group.id}>
+                  <div key={group.id} className="space-y-3">
                     {group.category && (
                       <p className="mt-[15px] text-[13.9px] ml-1 mb-3 font-[400]">
                         {group.category}
@@ -75,7 +76,7 @@ const AppSidebar = () => {
                               item.url === pathname
                                 ? "bg-black text-white" // Active background color
                                 : "hover:bg-black hover:text-white text-paragraph"
-                            } mb-1 py-[3px] px-3 cursor-pointer` // Default hover color
+                            } mb-1 py-[20px] px-3 cursor-pointer` // Default hover color
                           }
                           onClick={() => setActiveLink(item.url)}
                         >
@@ -106,17 +107,22 @@ const AppSidebar = () => {
                               <SheetContent
                                 side="left"
                                 className={
-                                  "text-white bg-black w-[700px] px-1 absolute left-[200px] "
+                                  "text-white bg-black lg:w-[700px] px-2 w-full lg:px-1 absolute lg:left-[200px] "
                                 }
                               >
-                                <SheetHeader className={"space-y-[25px]"}>
+                                <SheetHeader className={"space-y-[12px]"}>
                                   <SheetTitle
                                     className={"flex justify-between"}
                                   >
-                                    <p className="font-inter text-[14px] font-[300] tracking-[1.2px]">
-                                      Annoucements
-                                    </p>
-                                    <div className="flex gap-5 items-center">
+                                    <div className="flex gap-2 py-1">
+                                      <SheetClose asChild >
+                                        <ChevronLeft className="flex lg:hidden" />
+                                      </SheetClose>
+                                      <p className="font-inter lg:text-[14px] text-[18px] py-1 font-[300] tracking-[1.2px]">
+                                        Annoucements
+                                      </p>
+                                    </div>
+                                    <div className="lg:flex hidden gap-5 items-center">
                                       <img
                                         src="/assets/Icons/slider.png"
                                         alt=""
@@ -131,17 +137,17 @@ const AppSidebar = () => {
                                   </SheetTitle>
                                   <SheetDescription
                                     className={
-                                      "font-[400] text-[11px] text-paragraph"
+                                      "font-[400] text-[11px]  text-paragraph"
                                     }
                                   >
                                     Today
                                   </SheetDescription>
                                 </SheetHeader>
 
-                                <div className="relative overflow-y-auto no-scrollbar ">
-                                  {AnnouncementData.map((announcement) => (
+                                <div className="relative top-[-20px] overflow-y-auto lg:h-[610px] h-[520px] no-scrollbar">
+                                  {AnnouncementData.map((announcement, index) => (
                                     <NotificationModal
-                                      key={announcement.id}
+                                      key={index}
                                       image={announcement.image}
                                       name={announcement.name}
                                       description={announcement.description}
