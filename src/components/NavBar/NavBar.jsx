@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "../Button/Button";
-import { Link, useLocation } from "@tanstack/react-router";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import {
   Sheet,
   SheetContent,
@@ -23,8 +23,20 @@ const NavBar = () => {
   const pathname = useLocation();
   const [active, setActive] = useState("");
 
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   console.log(user);
+
+  const navigate = useNavigate();
+
+  const handleLogout = async() => {
+    try {
+      await logout();
+
+      navigate({ to: "/student/login" });
+    } catch (error) {
+       console.error("Logout error:", error);
+    }
+  };
 
   useEffect(() => {
     setActive(pathname.pathname);
@@ -103,12 +115,12 @@ const NavBar = () => {
                 </span>
                 <span className="flex items-center cursor-pointer pr-8 pl-1 py-1 hover:bg-black gap-2 text-[#FF3D0099] duration-300 ease-in-out">
                   <img src={logOutIcon} />
-                  <Link
+                  <button
                       to="/"
                       className={`${active == "" ? "text-main" : ""}  `}
                     >
                       Logout
-                    </Link>
+                    </button>
                   
                 </span>
               </DropdownMenuContent>
@@ -144,7 +156,7 @@ const NavBar = () => {
                 to="/"
                 className={`${active == "/" ? "text-main" : ""} font-[300] text-[14px] hover:text-main py-4 px-5`}
               >
-                Home page
+                Home
               </Link>
               <Link
                 to="/about"
@@ -202,13 +214,13 @@ const NavBar = () => {
                     >
                       Go to Dashboard
                     </Link>
-                    <Link
-                      to="/"
-                      className={`${active == "" ? "text-main" : ""} flex items-center gap-2 font-[300] text-[14px] text-[#FF3D0099] py-4 `}
+                    <button
+                      className="flex items-center gap-2 font-[300] text-[14px] text-[#FF3D0099] py-4 cursor-pointer"
+                      onClick={handleLogout}
                     >
                       <img src={logOutIcon} />
                       <p className="">Logout</p>
-                    </Link>
+                    </button>
                   </div>
                 </>
               )}
