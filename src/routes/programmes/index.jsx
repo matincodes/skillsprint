@@ -18,9 +18,14 @@ export const Route = createFileRoute("/programmes/")({
 function RouteComponent() {
   const [activeCategory, setActiveCategory] = useState(0);
   const { data: courses, isLoading, error } = useCourses();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, checkAuth } = useAuth();
 
-  console.log(courses, isLoading);
+  console.log(courses, isLoading, isAuthenticated);
+
+
+  // useEffect(() => {
+  //   checkAuth();
+  // }, []);
   // Categories & Filtering Logic
   const categories = [
     { label: "All", filter: () => courses },

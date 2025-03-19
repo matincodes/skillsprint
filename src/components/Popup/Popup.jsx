@@ -4,11 +4,10 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { CircleCheck } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import Button from "@/components/Button/Button";
 
 const PopUp = ({ open, onOpenChange, startDate, courseTitle }) => {
   const date = new Date([startDate]);
@@ -53,12 +52,10 @@ const PopUp = ({ open, onOpenChange, startDate, courseTitle }) => {
           </DialogHeader>
 
           <DialogFooter>
-            <button
-              type="submit"
-              className="lg:text-base tracking-[1.5px] cursor-pointer font-semibold font-inter text-[10px] text-white py-3 px-6 bg-[#AE752C] rounded-md"
-            >
-              Proceed To Dashboard
-            </button>
+            <Button
+              text="Proceed To Dashboard"
+              location="/dashboard/"
+              />
           </DialogFooter>
         </DialogContent>
       </Dialog>

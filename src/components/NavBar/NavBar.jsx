@@ -6,14 +6,15 @@ import {
   SheetContent,
   SheetDescription,
   SheetTrigger,
-  SheetTitle,
 } from "@/components/ui/Sheets/NavBarSheet";
 import UserAvatar from "../UserAvatar/UserAvatar";
+import { useAuth } from "@/context/AuthContext";
 
 const NavBar = () => {
   const pathname = useLocation();
   const [active, setActive] = useState("");
-  const user = JSON.parse(localStorage.getItem("user"));
+  const { user } = useAuth();
+  console.log(user);
 
   useEffect(() => {
     setActive(pathname.pathname);
@@ -115,7 +116,7 @@ const NavBar = () => {
 
               {user == null ? (
                 <div className="flex mt-10">
-                  <Button text="Login to portal" nav />
+                  <Button text="Login to portal" nav location="/student/login"/>
                 </div>
               ) : (
                 <div className="flex gap-2 w-fit ml-5 mt-[40px]">

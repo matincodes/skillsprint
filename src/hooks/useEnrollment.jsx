@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "@/lib/axios";
 import { toast } from "react-toastify";
@@ -11,7 +11,6 @@ export const useEnrollments = () => {
   // Auth state
   const { isAuthenticated } = useAuth();
 
-  
   // Fetch enrollments
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["enrollments"],
@@ -25,10 +24,12 @@ export const useEnrollments = () => {
 
   // Enrollment mutation
   const enrollMutation = useMutation({
-    mutationFn: (courseId) =>
-      axios.post(`/api/courses/${courseId}/enroll`, { courseId }),
+    mutationFn: async (courseId) => {
+      const response = await axios.post(`/api/courses/${courseId}/enroll`, { courseId });
+      return response.data;
+    },
     onSuccess: (data) => {
-      queryClient.setQueryData(["enrollments"], (old) => [...old, data.data]);
+      queryClient.setQueryData(["enrollments"], (old) => [...old, data]);
     //   toast.success("Enrollment successful!");
     },
     onError: (error) => {
@@ -39,8 +40,9 @@ export const useEnrollments = () => {
   });
 
   // Derived state
+
   const currentEnrollment = useMemo(
-    () => data?.find((e) => e.status === "ACTIVE") || null,
+    () => queryClient.getQueryData(["enrollments"])?.find((e) => e?.status === "ACTIVE") || null,
     [data],
   );
 
@@ -49,7 +51,7 @@ export const useEnrollments = () => {
     currentEnrollment,
     isLoading: isLoading || enrollMutation.isPending,
     error: error || enrollMutation.error,
-    handleEnroll: enrollMutation.mutate,
+    handleEnroll: enrollMutation.mutateAsync,
     refetchEnrollments: refetch,
   };
 };

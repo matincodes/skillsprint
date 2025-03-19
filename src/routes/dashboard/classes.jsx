@@ -35,16 +35,16 @@ const ClassesComponent = () => {
               </p>
             </div>
             {/* buttons layout */}
-            <div className="w-full flex items-center justify-between font-semibold lg:justify-start lg:gap-10">
+            <div className="w-full flex gap-2 items-center justify-between font-semibold lg:justify-start lg:gap-10">
               <Link
                 to="/"
-                className="font-[400] duration-300 ease-in-out lg:text-[15px] text-[12px] lg:px-8 px-4 py-2 bg-main text-white rounded-[7px] flex gap-2 items-center"
+                className="font-[400] duration-300 ease-in-out lg:text-[15px] text-[10px] lg:px-8 px-4 py-2 bg-main text-white rounded-[7px] flex gap-2 items-center"
               >
                 Join Live Class <Radio className="w-5" />{" "}
               </Link>
               <Link
                 to="/"
-                className="font-[400] lg:hidden duration-300 ease-in-out lg:text-[15px] text-[12px] lg:px-8 px-5 py-2 hover:bg-main hover:text-white text-main rounded-[7px] flex gap-2 items-center"
+                className="font-[400] lg:hidden duration-300 ease-in-out lg:text-[15px] text-[10px] lg:px-8 px-5 py-2 hover:bg-main hover:text-white text-main rounded-[7px] flex gap-2 items-center"
               >
                 View Last Recording
                 <Radio className="w-5" />
