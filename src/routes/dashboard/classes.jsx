@@ -11,8 +11,8 @@ export const Route = createFileRoute("/dashboard/classes")({
 
 const ClassesComponent = () => {
   return (
-    <div className="flex flex-col    gap-8 ">
-      <div className="flex flex-col gap-3 px-5 ">
+    <div className="flex flex-col w-full   gap-8 ">
+      <div className="flex flex-col gap-3 lg:px-5 ">
         <p className="text-paragraph font-inter text-sm font-normal lg:text-base">
           Live classes
         </p>
@@ -59,7 +59,7 @@ const ClassesComponent = () => {
         </div>
       </div>
       {/* live cards */}
-      <div className="flex flex-col w-full px-5 gap-3.5  md:mt-6">
+      <div className="flex flex-col w-full lg:px-5 gap-3.5  md:mt-6">
         <span className="flex w-full items-center justify-between">
           <b className="font-inter font-medium text-sm lg:text-base text-paragraph">
             Recorded classes
