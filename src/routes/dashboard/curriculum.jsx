@@ -1,18 +1,17 @@
-import CurriculumTable from "@/components/Table/CurriculumTable";
-import curriculumData from "@/data/curriculumData";
+import CurriculumTable from "@/components/Tables/CurriculumTable";
 import { createFileRoute } from "@tanstack/react-router";
-
+import "../../routes/programmes/programmes.css";
 export const Route = createFileRoute("/dashboard/curriculum")({
   component: CurriculumComponent,
 });
 
 const CurriculumComponent = () => {
   return (
-    <div className="px-3  w-full">
-      <p className="text-paragraph font-medium font-inter text-base">
+    <div className="px-3 w-full">
+      <p className="text-paragraph font-medium font-inter text-sm lg:text-base">
         Course curriculum
       </p>
-      <div>
+      <div className="w-full   bg-[#121212]  rounded-sm mt-5 py-2.5 px-3.5">
         <CurriculumTable />
       </div>
     </div>
