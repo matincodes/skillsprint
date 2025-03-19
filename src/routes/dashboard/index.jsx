@@ -45,7 +45,7 @@ const DashboardComponent = () => {
           </div>
 
           <div className="flex items-center space-x-3">
-            <Progress value={30} />
+            <Progress value={currentEnrollment.progress} />
             <p className="text-paragraph text-[15px] ml-2 font-[300]">
               {`${currentEnrollment.progress}% completed`}
             </p>

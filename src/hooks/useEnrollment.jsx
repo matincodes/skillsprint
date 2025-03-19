@@ -3,10 +3,15 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "@/lib/axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "@/context/AuthContext";
 
 export const useEnrollments = () => {
   const queryClient = useQueryClient();
 
+  // Auth state
+  const { isAuthenticated } = useAuth();
+
+  
   // Fetch enrollments
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["enrollments"],
@@ -15,6 +20,7 @@ export const useEnrollments = () => {
       return data;
     },
     staleTime: 5 * 60 * 1000,
+    enabled: !!isAuthenticated,
   });
 
   // Enrollment mutation
