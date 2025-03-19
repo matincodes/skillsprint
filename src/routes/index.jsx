@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { isAuthenticated, isLoading: authLoading } = useAuth();
+  const { isAuthenticated, isLoading: authLoading, checkAuth } = useAuth();
   const {
     hasActiveEnrollment,
     isLoading: enrollmentLoading,
@@ -27,7 +27,11 @@ function Index() {
 
   const { refetchEnrollments } = useEnrollments();
 
-  console.log(isAuthenticated, hasActiveEnrollment, isLoading);
+  console.log(isAuthenticated, hasActiveEnrollment, authLoading, enrollmentLoading);
+
+  // useEffect(() => {
+  //   checkAuth();
+  // }, []);
 
   useEffect(() => {
       if (isAuthenticated) {

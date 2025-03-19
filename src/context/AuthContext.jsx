@@ -8,8 +8,8 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const queryClient = useQueryClient();
-  const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(queryClient.getQueryData(["authUser"]) || null);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!user);
   const [isAuthLoading, setIsAuthLoading] = useState(false);
 
   // 🔹 Fetch user session on app load
@@ -33,8 +33,8 @@ export function AuthProvider({ children }) {
 
   // 🔹 Login Mutation
   const loginMutation = useMutation({
-    mutationFn: async (credentials) => {
-      const { data } = await axios.post("/api/auth/sign-in", credentials);
+    mutationFn: async (userData) => {
+      const { data } = await axios.post("/api/auth/sign-in", userData);
       return data.user;
     },
     onMutate: () => setIsAuthLoading(true),
@@ -53,6 +53,7 @@ export function AuthProvider({ children }) {
   // 🔹 Signup Mutation
   const signupMutation = useMutation({
     mutationFn: async (userData) => {
+      console.log(userData);
       const { data } = await axios.post("/api/auth/sign-up", userData);
       return data.user;
     },
@@ -94,6 +95,7 @@ export function AuthProvider({ children }) {
         login: loginMutation.mutateAsync,
         signup: signupMutation.mutateAsync,
         logout: logoutMutation.mutateAsync,
+        checkAuth,
       }}
     >
       {children}

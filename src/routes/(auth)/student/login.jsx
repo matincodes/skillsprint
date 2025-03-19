@@ -1,11 +1,10 @@
-import React, { useState, useContext } from "react";
-import { useAuth } from "@/context/AuthContext"; // Make sure to replace with the correct path to your AuthContext
+import React, { useState} from "react";
+import { useAuth } from "@/context/AuthContext";
 import { Button } from "../../../components/ui/button";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import showIcon from "../../../assets/show-icon.png"; // Make sure to replace with the correct path to your show icon
-// import hideIcon from "../../../assets/hide-icon.png"; // Make sure to replace with the correct path to your hide icon
+
 
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -15,38 +14,38 @@ export const Route = createFileRoute("/(auth)/student/login")({
 
 function RouteComponent() {
   const navigate = useNavigate();
-  const { login, isLoading, setIsLoading } = useAuth();
+  const { login, isLoading } = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [showPassword, setShowPassword] = useState(false);
 
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+  // const toggleShowPassword = () => {
+  //   setShowPassword(!showPassword);
+  // };
 
+  // Validate inputs & call the login function from AuthContext
   const handleSubmit = async () => {
     if (!email || !password) {
-      toast.error("Please fill all fields");
+      toast.error("Please fill in both email and password");
       return;
     }
 
-    if (password && password.length < 8) {
+    if (password.length < 8) {
       toast.error("Password must be at least 8 characters long");
       return;
     }
 
-    setIsLoading(true); // Disable the button after the first click
-
     try {
-      const success = await login(email, password);
-      console.log(success);
-      // Redirect to the desired page after successful login
-      if (success) {
-        navigate({ to: "/programmes" });
-        setIsLoading(false); // Re-enable the button after a successful login
-      }
-    } finally {
-      setIsLoading(false); // Re-enable the button if an error occurs
+      // Pass email & password to AuthContext login
+      await login({ email, password });
+      // If successful, AuthContext toasts "Login successful!" automatically
+      // Redirect user to programmes page
+      navigate({ to: "/programmes" });
+    } catch (err) {
+      // Errors are already handled by AuthContext (toast.error)
+      console.error("Login error:", err);
     }
   };
 
