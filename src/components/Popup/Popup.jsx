@@ -55,7 +55,6 @@ const PopUp = ({ open, onOpenChange, startDate, courseTitle }) => {
             <Button
               text="Proceed To Dashboard"
               location="/dashboard/"
-              className="lg:text-base tracking-[1.5px] cursor-pointer font-semibold font-inter text-[10px] text-white py-3 px-6 bg-[#AE752C] rounded-md"
               />
           </DialogFooter>
         </DialogContent>

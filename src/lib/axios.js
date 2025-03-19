@@ -4,7 +4,7 @@ import axios from "axios";
 // lib/axios.js
 // https://skillsprint.up.railway.app
 const instance = axios.create({
-  baseURL: "https://skillsprint.up.railway.app",
+  baseURL: "https://api.thynkcity.com",
   headers: {
     "Content-Type": "application/json",
   },
