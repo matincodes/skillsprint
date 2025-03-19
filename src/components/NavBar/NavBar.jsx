@@ -9,10 +9,20 @@ import {
 } from "@/components/ui/Sheets/NavBarSheet";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import { useAuth } from "@/context/AuthContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import arrowDown from "../../assets/icons/arrowDown.svg";
+import userIcon from "../../assets/icons/user.svg";
+import home from "../../assets/icons/home.svg";
+import logOutIcon from "../../assets/icons/logOutIcon.svg";
 
 const NavBar = () => {
   const pathname = useLocation();
   const [active, setActive] = useState("");
+
   const { user } = useAuth();
   console.log(user);
 
@@ -51,23 +61,58 @@ const NavBar = () => {
           {user === null ? (
             <Button text="Login to portal" location="/student/login" nav />
           ) : (
-            <div className="flex gap-2 items-center">
-              <UserAvatar
-                profile={
-                  user.profilePicture
-                    ? user.profilePicture
-                    : "/assets/avatar.png"
-                }
-              />
-              <div className="flex flex-col font-sora">
-                <div className="text-[13px] text-white font-[300]">
-                  {user.name}
+            <DropdownMenu className="">
+              <DropdownMenuTrigger asChild>
+                <div className="flex gap-2 items-center cursor-pointer">
+                  <UserAvatar
+                    profile={
+                      user.profilePicture
+                        ? user.profilePicture
+                        : "/assets/avatar.png"
+                    }
+                  />
+                  <div className="flex flex-col font-sora">
+                    <div className="text-[13px] text-white font-[300]">
+                      {user.name}
+                    </div>
+                    <p className="text-paragraph text-[10px] font-[400]">
+                      {user.email}
+                    </p>
+                  </div>
+                  <img src={arrowDown} alt="arrow" />
                 </div>
-                <p className="text-paragraph text-[10px] font-[400]">
-                  {user.email}
-                </p>
-              </div>
-            </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-full bg-[#121212] pt-4 text-white   space-y-4 font-[300] text-[14px] font-inter">
+                <span className="flex items-center cursor-pointer pr-8 pl-1 py-1 hover:bg-black gap-2 duration-300 ease-in-out">
+                  <img src={userIcon} />
+                  <Link
+                      to="/"
+                      className={`${active == "" ? "text-main" : ""}  `}
+                    >
+                      My Profile
+                    </Link>
+                </span>
+                <span className="flex items-center cursor-pointer pr-8 pl-1 py-1 hover:bg-black gap-2 duration-300 ease-in-out">
+                  <img src={home} />
+                  <Link
+                      to="/"
+                      className={`${active == "" ? "text-main" : ""}  `}
+                    >
+                      Go to Dashboard
+                    </Link>
+                </span>
+                <span className="flex items-center cursor-pointer pr-8 pl-1 py-1 hover:bg-black gap-2 text-[#FF3D0099] duration-300 ease-in-out">
+                  <img src={logOutIcon} />
+                  <Link
+                      to="/"
+                      className={`${active == "" ? "text-main" : ""}  `}
+                    >
+                      Logout
+                    </Link>
+                  
+                </span>
+              </DropdownMenuContent>
+            </DropdownMenu>
           )}
         </div>
       </div>
@@ -116,27 +161,56 @@ const NavBar = () => {
 
               {user == null ? (
                 <div className="flex mt-10">
-                  <Button text="Login to portal" nav location="/student/login"/>
+                  <Button
+                    text="Login to portal"
+                    nav
+                    location="/student/login"
+                  />
                 </div>
               ) : (
-                <div className="flex gap-2 w-fit ml-5 mt-[40px]">
-                  <UserAvatar
-                    profile={
-                      user.profilePicture
-                        ? user.profilePicture
-                        : "/assets/avatar.png"
-                    }
-                  />
+                <>
+                  <div className="flex gap-2 w-fit ml-5 mt-[40px]">
+                    <UserAvatar
+                      profile={
+                        user.profilePicture
+                          ? user.profilePicture
+                          : "/assets/avatar.png"
+                      }
+                    />
 
-                  <div className="flex flex-col font-sora">
-                    <div className="text-[13px] text-white font-[300]">
-                      {user.name}
+                    <div className="flex flex-col font-sora">
+                      <div className="text-[13px] text-white font-[300]">
+                        {user.name}
+                      </div>
+                      <p className="text-paragraph text-[10px] font-[400]">
+                        {user.email}
+                      </p>
                     </div>
-                    <p className="text-paragraph text-[10px] font-[400]">
-                      {user.email}
-                    </p>
                   </div>
-                </div>
+
+                  <div className="ml-5  flex h-full flex-col  font-inter py-[20px]  space-y-1">
+                    <Link
+                      to="/"
+                      className={`${active == "" ? "text-main" : ""} font-[300] text-[14px] hover:text-main py-4 `}
+                    >
+                      My Profile
+                    </Link>
+
+                    <Link
+                      to="/"
+                      className={`${active == "" ? "text-main" : ""} font-[300] text-[14px] hover:text-main py-4 `}
+                    >
+                      Go to Dashboard
+                    </Link>
+                    <Link
+                      to="/"
+                      className={`${active == "" ? "text-main" : ""} flex items-center gap-2 font-[300] text-[14px] text-[#FF3D0099] py-4 `}
+                    >
+                      <img src={logOutIcon} />
+                      <p className="">Logout</p>
+                    </Link>
+                  </div>
+                </>
               )}
             </SheetDescription>
           </SheetContent>
