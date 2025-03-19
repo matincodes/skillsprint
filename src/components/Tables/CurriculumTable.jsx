@@ -19,23 +19,23 @@ export function CurriculumTable() {
   const ongoing = "text-[#32CD32] bg-[#051505]";
 
   return (
-    <div class="flex flex-col w-full text-paragraph font-semibold text-[13px] lg:text-[15px] font-inter">
+    <div className="flex flex-col w-full text-paragraph font-semibold text-[13px] lg:text-[15px] font-inter">
       {/* Table Header (Only visible on larger screens) */}
-      <div class="hidden lg:flex">
-        <div class="w-[44px]">#</div>
-        <div class="w-[400px]">Topic</div>
-        <div class="w-[280px]">Status</div>
-        <div class="w-60">Period</div>
-        <div class="flex-1">
+      <div className="hidden lg:flex">
+        <div className="w-[44px]">#</div>
+        <div className="w-[400px]">Topic</div>
+        <div className="w-[280px]">Status</div>
+        <div className="w-60">Period</div>
+        <div className="flex-1">
           <div className="w-[20px]"></div>
         </div>
       </div>
 
       {/* Mapping through curriculum data to display each item */}
       {curriculumData.map((items, index) => (
-        <div class="flex space-y-3 mt-5 lg:mt-7 lg:space-y-5" key={index}>
-          <div class="w-[44px]">{index + 1}</div>
-          <div class="w-[400px] tracking-wide">
+        <div className="flex space-y-3 mt-5 lg:mt-7 lg:space-y-5" key={index}>
+          <div className="w-[44px]">{index + 1}</div>
+          <div className="w-[400px] tracking-wide">
             {items.topic}
             {/* Status and Period Display (Visible on smaller screens) */}
             <div className="flex items-center justify-between w-[155px] lg:hidden text-[10px]">
@@ -55,7 +55,7 @@ export function CurriculumTable() {
           </div>
 
           {/* Status Display (Visible on larger screens) */}
-          <div class="w-[280px] hidden lg:flex">
+          <div className="w-[280px] hidden lg:flex">
             <div className="flex w-[50px]">
               <p
                 className={`${items.status === "Completed" ? completed : items.status === "Ongoing" ? ongoing : inComplete} flex items-center gap-1 px-2 rounded-lg`}
@@ -70,10 +70,10 @@ export function CurriculumTable() {
           </div>
 
           {/* Period Display (Visible on larger screens) */}
-          <div class="w-60 hidden lg:flex">{items.period}</div>
+          <div className="w-60 hidden lg:flex">{items.period}</div>
 
           {/* Expandable Details Section */}
-          <div class="flex-1">
+          <div className="flex-1">
             <div className="flex justify-end w-full">
               {/* Toggle Button (Arrow Icon) */}
               <div className="w-[20px]">
