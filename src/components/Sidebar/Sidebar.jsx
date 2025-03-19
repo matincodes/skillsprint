@@ -23,11 +23,13 @@ import {
 import NotificationModal from "../Notification/NotificationModal";
 import { AnnouncementData } from "@/data/dashboard";
 import UserAvatar from "../UserAvatar/UserAvatar";
+import { useAuth } from "@/context/AuthContext";
 
 const AppSidebar = () => {
   const [activeLink, setActiveLink] = useState("/dashboard/");
   const { pathname } = useLocation();
   const userImage = JSON.parse(window.localStorage.getItem("user"))?.image;
+  const { user } = useAuth();
 
   console.log(activeLink, location);
 
@@ -46,7 +48,7 @@ const AppSidebar = () => {
                 {/* User Info */}
                 <div className="flex flex-col font-sora">
                   <h1 className="text-[13px] text-white font-[300]">
-                    Sophia Williams
+                    {user?.name}
                   </h1>
                   <p className="text-paragraph text-[10px] font-[400]">
                     View Profile

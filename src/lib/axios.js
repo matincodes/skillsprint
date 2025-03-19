@@ -1,10 +1,10 @@
 import axios from "axios";
 // // import Cookies from "js-cookie";
 
-// // lib/axios.js
-// // https://skillsprint.up.railway.app
+// lib/axios.js
+// https://skillsprint.up.railway.app
 // const instance = axios.create({
-//   baseURL: "https://api.thynkcity.com",
+//   baseURL: "http://localhost:5001",
 //   headers: {
 //     "Content-Type": "application/json",
 //   },
