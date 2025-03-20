@@ -4,7 +4,7 @@ import { Button } from "../../../components/ui/button";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEnrollmentStatus } from "@/hooks/useEnrollmentStatus";
+import  useEnrollmentStatus  from "@/hooks/useEnrollmentStatus";
 
 
 import { createFileRoute } from "@tanstack/react-router";
