@@ -24,7 +24,6 @@ const NavBar = () => {
   const [active, setActive] = useState("");
 
   const { user, logout } = useAuth();
-  console.log(user);
 
   const navigate = useNavigate();
 
@@ -117,7 +116,7 @@ const NavBar = () => {
                   <img src={logOutIcon} />
                   <button
                       to="/"
-                      className={`${active == "" ? "text-main" : ""}  `}
+                      onClick={handleLogout}
                     >
                       Logout
                     </button>

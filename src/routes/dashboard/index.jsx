@@ -14,7 +14,6 @@ export const Route = createFileRoute("/dashboard/")({
 
 const DashboardComponent = () => {
   const { currentEnrollment, enrollments, isLoading } = useEnrollments();
-  console.log(currentEnrollment, enrollments);
 
   if (isLoading) {
     return <div>Loading enrollment data...</div>;

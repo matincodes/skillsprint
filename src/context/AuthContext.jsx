@@ -53,7 +53,6 @@ export function AuthProvider({ children }) {
   // 🔹 Signup Mutation
   const signupMutation = useMutation({
     mutationFn: async (userData) => {
-      console.log(userData);
       const { data } = await axios.post("/api/auth/sign-up", userData);
       return data.user;
     },
