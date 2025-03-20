@@ -26,13 +26,14 @@ import { AnnouncementData } from "@/data/dashboard";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import { ChevronLeft } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
+import NullState from "../Null/Null";
+
 
 const AppSidebar = () => {
   const [activeLink, setActiveLink] = useState("/dashboard/");
   const { pathname } = useLocation();
   const userImage = JSON.parse(window.localStorage.getItem("user"))?.image;
   const { user } = useAuth();
-
 
   return (
     <div className="lg:w-51 relative">
@@ -114,8 +115,8 @@ const AppSidebar = () => {
                                   <SheetTitle
                                     className={"flex justify-between"}
                                   >
-                                    <div className="flex gap-2 py-1">
-                                      <SheetClose asChild >
+                                    <div className="flex items-center gap-2 py-1">
+                                      <SheetClose asChild>
                                         <ChevronLeft className="flex lg:hidden" />
                                       </SheetClose>
                                       <p className="font-inter lg:text-[14px] text-[18px] py-1 font-[300] tracking-[1.2px]">
@@ -144,17 +145,29 @@ const AppSidebar = () => {
                                   </SheetDescription>
                                 </SheetHeader>
 
-                                <div className="relative top-[-20px] overflow-y-auto lg:h-[610px] h-[520px] no-scrollbar">
-                                  {AnnouncementData.map((announcement, index) => (
-                                    <NotificationModal
-                                      key={index}
-                                      image={announcement.image}
-                                      name={announcement.name}
-                                      description={announcement.description}
-                                      date={announcement.date}
-                                      time={announcement.time}
+                                <div className={AnnouncementData.length <= 0 ? `lg:h-[650px] h-[520px] flex items-center justify-center` : `relative top-[-20px] overflow-y-auto lg:h-[610px] h-[520px] no-scrollbar`}>
+                                  {AnnouncementData.length <= 0 ? (
+                                    <NullState
+                                      mainText={"No New Announcements."}
+                                      miniText={
+                                        "Check back later!"
+                                      }
+                                      image={"/assets/null/announcement.png"}
                                     />
-                                  ))}
+                                  ) : (
+                                    AnnouncementData.map(
+                                      (announcement, index) => (
+                                        <NotificationModal
+                                          key={index}
+                                          image={announcement.image}
+                                          name={announcement.name}
+                                          description={announcement.description}
+                                          date={announcement.date}
+                                          time={announcement.time}
+                                        />
+                                      )
+                                    )
+                                  )}
                                 </div>
                               </SheetContent>
                             </Sheet>

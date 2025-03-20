@@ -57,9 +57,9 @@ export function CurriculumAccordion(e) {
 
       {/* Accordion content for each class */}
       {data.map((items, index) => (
-        <AccordionItem 
+        <AccordionItem
           key={index} // Ensure unique keys for React rendering
-          value={index + 1} 
+          value={index + 1}
           className="mt-10 p-0 border-b-2 border-[#121212] space-y-5 m-0"
         >
           <AccordionTrigger className="cursor-pointer font-inter font-normal text-[13px] lg:text-base p-1 lg:p-2">
@@ -88,17 +88,21 @@ export function CurriculumAccordion(e) {
                 <div className="flex w-[50px]">
                   <p
                     className={`${
-                      e.status === "Completed" ? completed 
-                      : e.status === "Ongoing" ? ongoing 
-                      : inComplete
+                      e.status === "Completed"
+                        ? completed
+                        : e.status === "Ongoing"
+                          ? ongoing
+                          : inComplete
                     } flex items-center gap-1 px-2 rounded-lg`}
                   >
                     <CircleSmall
                       width={15}
                       fill={`${
-                        e.status === "Completed" ? "#0950C3" 
-                        : e.status === "Ongoing" ? "#32CD32" 
-                        : "#C28B0A"
+                        e.status === "Completed"
+                          ? "#0950C3"
+                          : e.status === "Ongoing"
+                            ? "#32CD32"
+                            : "#C28B0A"
                       }`}
                     />
                     {e.status}

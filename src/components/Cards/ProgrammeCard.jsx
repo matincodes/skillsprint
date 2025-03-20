@@ -44,7 +44,6 @@ const ProgrammeCard = ({
     }
   };
 
-
   return (
     <div className="w-auto bg-[#121212] rounded-2xl flex flex-col justify-between">
       <img className="w-full rounded-t-2xl" src={image} alt={title} />
@@ -89,9 +88,11 @@ const ProgrammeCard = ({
                   : "bg-[#AE752C] cursor-pointer"
               }`}
               onClick={handleEnrollClick}
-              disabled={hasActiveEnrollment || queryLoading || loadingCourseId !== null}
+              disabled={
+                hasActiveEnrollment || queryLoading || loadingCourseId !== null
+              }
             >
-            {loadingCourseId === courseId ? "Loading..." : "Apply Now"}
+              {loadingCourseId === courseId ? "Loading..." : "Apply Now"}
             </button>
           )
         ) : (

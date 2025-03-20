@@ -27,13 +27,13 @@ const NavBar = () => {
 
   const navigate = useNavigate();
 
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     try {
       await logout();
 
       navigate({ to: "/" });
     } catch (error) {
-       console.error("Logout error:", error);
+      console.error("Logout error:", error);
     }
   };
 
@@ -97,29 +97,24 @@ const NavBar = () => {
                 <span className="flex items-center cursor-pointer pr-8 pl-1 py-1 hover:bg-black gap-2 duration-300 ease-in-out">
                   <img src={userIcon} />
                   <Link
-                      to="/dashboard/profile"
-                      className={`${active == "" ? "text-main" : ""}  `}
-                    >
-                      My Profile
-                    </Link>
+                    to="/dashboard/profile"
+                    className={`${active == "" ? "text-main" : ""}  `}
+                  >
+                    My Profile
+                  </Link>
                 </span>
                 <span className="flex items-center cursor-pointer pr-8 pl-1 py-1 hover:bg-black gap-2 duration-300 ease-in-out">
                   <img src={home} />
                   <Link
-                      to="dashbaord/"
-                      className={`${active == "" ? "text-main" : ""}  `}
-                    >
-                      Go to Dashboard
-                    </Link>
+                    to="dashbaord/"
+                    className={`${active == "" ? "text-main" : ""}  `}
+                  >
+                    Go to Dashboard
+                  </Link>
                 </span>
                 <span className="flex items-center cursor-pointer pr-8 pl-1 py-1 hover:bg-black gap-2 text-[#FF3D0099] duration-300 ease-in-out">
                   <img src={logOutIcon} />
-                  <button
-                      onClick={handleLogout}
-                    >
-                      Logout
-                    </button>
-                  
+                  <button onClick={handleLogout}>Logout</button>
                 </span>
               </DropdownMenuContent>
             </DropdownMenu>

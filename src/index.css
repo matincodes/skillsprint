@@ -34,8 +34,6 @@
   height: 0px; /* Set scrollbar height */
 }
 
-
-
 :root {
   --sidebar: #121212;
   --sidebar-foreground: hsl(240 5.3% 26.1%);
