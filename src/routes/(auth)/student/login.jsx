@@ -45,8 +45,10 @@ function RouteComponent() {
       // If successful, AuthContext toasts "Login successful!" automatically
       // Redirect user to programmes page
       if (hasActiveEnrollment) {
+        console.log("Has active enrollment");
         navigate({ to: "dashboard/" });
       } else {
+        console.log("No active enrollment");
         navigate({ to: "/programmes" });
       }
     } catch (err) {
