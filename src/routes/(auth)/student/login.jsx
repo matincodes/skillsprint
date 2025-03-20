@@ -4,6 +4,7 @@ import { Button } from "../../../components/ui/button";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEnrollmentStatus } from "@/hooks/useEnrollmentStatus";
 
 
 import { createFileRoute } from "@tanstack/react-router";
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/(auth)/student/login")({
 function RouteComponent() {
   const navigate = useNavigate();
   const { login, isLoading } = useAuth();
+  const { hasActiveEnrollment } = useEnrollmentStatus();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,7 +44,11 @@ function RouteComponent() {
       await login({ email, password });
       // If successful, AuthContext toasts "Login successful!" automatically
       // Redirect user to programmes page
-      navigate({ to: "/programmes" });
+      if (hasActiveEnrollment) {
+        navigate({ to: "dashboard/" });
+      } else {
+        navigate({ to: "/programmes" });
+      }
     } catch (err) {
       // Errors are already handled by AuthContext (toast.error)
       console.error("Login error:", err);

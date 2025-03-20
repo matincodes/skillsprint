@@ -31,7 +31,7 @@ const NavBar = () => {
     try {
       await logout();
 
-      navigate({ to: "/student/login" });
+      navigate({ to: "/" });
     } catch (error) {
        console.error("Logout error:", error);
     }
@@ -97,7 +97,7 @@ const NavBar = () => {
                 <span className="flex items-center cursor-pointer pr-8 pl-1 py-1 hover:bg-black gap-2 duration-300 ease-in-out">
                   <img src={userIcon} />
                   <Link
-                      to="/"
+                      to="/dashboard/profile"
                       className={`${active == "" ? "text-main" : ""}  `}
                     >
                       My Profile
@@ -106,7 +106,7 @@ const NavBar = () => {
                 <span className="flex items-center cursor-pointer pr-8 pl-1 py-1 hover:bg-black gap-2 duration-300 ease-in-out">
                   <img src={home} />
                   <Link
-                      to="/"
+                      to="dashbaord/"
                       className={`${active == "" ? "text-main" : ""}  `}
                     >
                       Go to Dashboard
@@ -115,7 +115,6 @@ const NavBar = () => {
                 <span className="flex items-center cursor-pointer pr-8 pl-1 py-1 hover:bg-black gap-2 text-[#FF3D0099] duration-300 ease-in-out">
                   <img src={logOutIcon} />
                   <button
-                      to="/"
                       onClick={handleLogout}
                     >
                       Logout
@@ -201,14 +200,14 @@ const NavBar = () => {
 
                   <div className="ml-5  flex h-full flex-col  font-inter py-[20px]  space-y-1">
                     <Link
-                      to="/"
+                      to="/dashboard/profile"
                       className={`${active == "" ? "text-main" : ""} font-[300] text-[14px] hover:text-main py-4 `}
                     >
                       My Profile
                     </Link>
 
                     <Link
-                      to="/"
+                      to="dashboard/"
                       className={`${active == "" ? "text-main" : ""} font-[300] text-[14px] hover:text-main py-4 `}
                     >
                       Go to Dashboard
