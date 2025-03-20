@@ -62,8 +62,8 @@ import axios from "axios";
 // export default instance;
 
 const instance = axios.create({
-  baseURL: "https://api.thynkcity.com",
-  // baseURL: "http://localhost:5001",
+  // baseURL: "https://api.thynkcity.com",
+  baseURL: "http://localhost:5001",
   headers: {
     "Content-Type": "application/json",
   },
