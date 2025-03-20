@@ -44,7 +44,7 @@ const ProgrammeCard = ({
     }
   };
 
-  console.log(hasActiveEnrollment);
+
   return (
     <div className="w-auto bg-[#121212] rounded-2xl flex flex-col justify-between">
       <img className="w-full rounded-t-2xl" src={image} alt={title} />

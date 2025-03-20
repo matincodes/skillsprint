@@ -46,10 +46,8 @@ function RouteComponent() {
       // Redirect user to programmes page
       const {data} = await checkEnrollment();
       if (data) {
-        console.log("Has active enrollment");
         navigate({ to: "/dashboard/" });
       } else {
-        console.log("No active enrollment");
         navigate({ to: "/programmes" });
       }
     } catch (err) {
