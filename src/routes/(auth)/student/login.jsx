@@ -16,7 +16,7 @@ export const Route = createFileRoute("/(auth)/student/login")({
 function RouteComponent() {
   const navigate = useNavigate();
   const { login, isLoading } = useAuth();
-  const { hasActiveEnrollment } = useEnrollmentStatus();
+  const { refetch:checkEnrollment } = useEnrollmentStatus();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -44,9 +44,10 @@ function RouteComponent() {
       await login({ email, password });
       // If successful, AuthContext toasts "Login successful!" automatically
       // Redirect user to programmes page
-      if (hasActiveEnrollment) {
+      const {data} = await checkEnrollment();
+      if (data) {
         console.log("Has active enrollment");
-        navigate({ to: "dashboard/" });
+        navigate({ to: "/dashboard/" });
       } else {
         console.log("No active enrollment");
         navigate({ to: "/programmes" });
