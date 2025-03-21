@@ -28,10 +28,10 @@ function Index() {
   const { refetchEnrollments } = useEnrollments();
 
   useEffect(() => {
-      if (isAuthenticated) {
-        checkEnrollment();
-        refetchEnrollments();
-      }
+    if (isAuthenticated) {
+      checkEnrollment();
+      refetchEnrollments();
+    }
   }, [isAuthenticated]);
 
   const renderButton = () => {
@@ -40,7 +40,9 @@ function Index() {
     }
 
     if (!isAuthenticated) {
-      return <Button text="Join the Free Program" location="/student/register" />;
+      return (
+        <Button text="Join the Free Program" location="/student/register" />
+      );
     }
 
     return hasActiveEnrollment ? (

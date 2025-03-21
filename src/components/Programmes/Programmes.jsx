@@ -3,7 +3,11 @@ import ProgrammeCard from "../Cards/ProgrammeCard";
 import useEnrollmentStatus from "@/hooks/useEnrollmentStatus";
 
 const Programmes = ({ data, isAuthenticated }) => {
-  const { isLoading, hasActiveEnrollment, refetch: checkEnrollment } = useEnrollmentStatus();
+  const {
+    isLoading,
+    hasActiveEnrollment,
+    refetch: checkEnrollment,
+  } = useEnrollmentStatus();
 
   return (
     <>

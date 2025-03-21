@@ -8,7 +8,9 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const queryClient = useQueryClient();
-  const [user, setUser] = useState(queryClient.getQueryData(["authUser"]) || null);
+  const [user, setUser] = useState(
+    queryClient.getQueryData(["authUser"]) || null,
+  );
   const [isAuthenticated, setIsAuthenticated] = useState(!!user);
   const [isAuthLoading, setIsAuthLoading] = useState(false);
 
@@ -45,7 +47,9 @@ export function AuthProvider({ children }) {
       toast.success("Login successful! 🎉");
     },
     onError: (error) => {
-      toast.error(error.response?.data?.error || "Login failed. Please try again.");
+      toast.error(
+        error.response?.data?.error || "Login failed. Please try again.",
+      );
     },
     onSettled: () => setIsAuthLoading(false),
   });
@@ -64,7 +68,9 @@ export function AuthProvider({ children }) {
       toast.success("Signup successful! Welcome to SkillSprint 🚀");
     },
     onError: (error) => {
-      toast.error(error.response?.data?.error || "Signup failed. Please try again.");
+      toast.error(
+        error.response?.data?.error || "Signup failed. Please try again.",
+      );
     },
     onSettled: () => setIsAuthLoading(false),
   });

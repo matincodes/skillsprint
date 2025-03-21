@@ -10,7 +10,6 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import queryClient from "@/lib/queryClient.js";
 
-
 // Create a new router instance
 const router = createRouter({ routeTree });
 
@@ -22,7 +21,7 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-            <App />
+          <App />
           <ToastContainer />
         </AuthProvider>
       </QueryClientProvider>
@@ -32,7 +31,5 @@ if (!rootElement.innerHTML) {
 
 export function App() {
   const auth = useAuth();
-  return (
-    <RouterProvider router={router} context={{ ...auth}} />
-  );
+  return <RouterProvider router={router} context={{ ...auth }} />;
 }

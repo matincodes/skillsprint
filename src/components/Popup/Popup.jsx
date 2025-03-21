@@ -52,10 +52,7 @@ const PopUp = ({ open, onOpenChange, startDate, courseTitle }) => {
           </DialogHeader>
 
           <DialogFooter>
-            <Button
-              text="Proceed To Dashboard"
-              location="/dashboard/"
-              />
+            <Button text="Proceed To Dashboard" location="/dashboard/" />
           </DialogFooter>
         </DialogContent>
       </Dialog>
