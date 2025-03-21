@@ -7,13 +7,15 @@ import { UpcomingSessionCard } from "@/data/dashboard";
 import LeaderBoard from "@/components/Cards/LeaderBoard";
 import { LeaderBoardCard } from "@/data/dashboard";
 import { useEnrollments } from "@/hooks/useEnrollment";
+import NullState from "@/components/Null/Null";
+
 
 export const Route = createFileRoute("/dashboard/")({
   component: DashboardComponent,
 });
 
 const DashboardComponent = () => {
-  const { currentEnrollment,  isLoading } = useEnrollments();
+  const { currentEnrollment, isLoading } = useEnrollments();
 
   if (isLoading) {
     return <div>Loading enrollment data...</div>;
@@ -53,13 +55,13 @@ const DashboardComponent = () => {
           <div className="flex gap-1">
             <Link
               to="/"
-              className="font-[400] duration-300 ease-in-out lg:text-[15px] text-[10px] lg:px-8 px-5 py-2 bg-main text-white rounded-[7px] flex gap-4 items-center"
+              className="font-[400] duration-300 ease-in-out lg:text-[15px] md:text-[10px] text-[9px] lg:px-8 px-5 py-2 bg-main text-white rounded-[7px] flex gap-4 items-center"
             >
               Join Live Class <Radio className="w-4 lg:w-5" />{" "}
             </Link>
             <Link
               to="/"
-              className="font-[400] duration-300 ease-in-out lg:text-[15px] text-[10px] lg:px-8 px-5 py-2 hover:bg-main hover:text-white text-main rounded-[7px] flex gap-4 items-center"
+              className="font-[400] duration-300 ease-in-out lg:text-[15px] md:text-[10px] text-[8px] lg:px-8 px-5 py-2 hover:bg-main hover:text-white text-main rounded-[7px] flex gap-4 items-center"
             >
               View Last Recording
               <Radio className=" w-4 lg:w-5" />{" "}
@@ -81,19 +83,28 @@ const DashboardComponent = () => {
       {/* TopSection */}
 
       {/* BottomSection */}
-      <div className="grid lg:grid-cols-2 mt-[70px] gap-6 py-5">
+      <div className="grid lg:grid-cols-2 mt-[70px] gap-6 py-5 items-center justify-center">
         {/* left */}
         <div className="p-2 space-y-4">
           <p className="text-paragraph">Upcoming Sessions</p>
-          <div className="rounded-[6px] bg-[#121212a1] p-2">
-            {UpcomingSessionCard.map((session, index) => (
+          <div className="rounded-[6px] bg-[#121212a1]">
+          {UpcomingSessionCard.length <= 0 ?
+            (
+              <>
+                <NullState mainText={'No Upcoming Sessions'} miniText={'Nothing planned yet, Browse available sessions!'} image={'/assets/null/upcomingSession.png'} />
+              </>
+            )
+            :
+            UpcomingSessionCard.map((session, index) => (
               <UpcomingSession
                 title={session.title}
                 image={session.image}
                 url={session.url}
                 key={index}
               />
-            ))}
+            ))
+            
+           }
           </div>
         </div>
         {/* left */}
@@ -111,7 +122,13 @@ const DashboardComponent = () => {
           </span>
 
           <div className="rounded-[6px] space-y-2">
-            {LeaderBoardCard.map((user, index) => (
+          {LeaderBoardCard.length <=0 ? (
+            <div className='bg-[#121212a1] p-2'>
+                <NullState mainText={'Leaderboard is empty.'} miniText={'No rankings yet. Dive into learning and lead the way!'} image={'/assets/null/leaderBoard.png'} />
+              </div>
+          )
+          :
+            LeaderBoardCard.map((user, index) => (
               <LeaderBoard
                 key={index}
                 fullName={user.fullName}
@@ -120,7 +137,8 @@ const DashboardComponent = () => {
                 level={user.level}
                 type={user.type}
               />
-            ))}
+            ))
+          }
           </div>
         </div>
         {/* Right */}

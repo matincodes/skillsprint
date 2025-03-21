@@ -25,12 +25,14 @@ export const useEnrollments = () => {
   // Enrollment mutation
   const enrollMutation = useMutation({
     mutationFn: async (courseId) => {
-      const response = await axios.post(`/api/courses/${courseId}/enroll`, { courseId });
+      const response = await axios.post(`/api/courses/${courseId}/enroll`, {
+        courseId,
+      });
       return response.data;
     },
     onSuccess: (data) => {
       queryClient.setQueryData(["enrollments"], (old) => [...old, data]);
-    //   toast.success("Enrollment successful!");
+      //   toast.success("Enrollment successful!");
     },
     onError: (error) => {
       const message =
@@ -42,7 +44,10 @@ export const useEnrollments = () => {
   // Derived state
 
   const currentEnrollment = useMemo(
-    () => queryClient.getQueryData(["enrollments"])?.find((e) => e?.status === "ACTIVE") || null,
+    () =>
+      queryClient
+        .getQueryData(["enrollments"])
+        ?.find((e) => e?.status === "ACTIVE") || null,
     [data],
   );
 
