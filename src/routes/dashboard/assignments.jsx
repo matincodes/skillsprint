@@ -53,7 +53,10 @@ const AssignmentComponent = () => {
         </div>
       )}
       
-      <div className={`${activeWeek ? " " : "space-y-[50px] lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-10 "}`}>
+      <div className={`${activeWeek ? "" : "space-y-[50px] lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-10"}`}>
+
+        {/* {assignmentsData.length <= 0 ? <div className="border border-red-500 w-[90%]"></div> : */}
+
         {assignmentsData.map((items, index) => (
           <>
             {!activeWeek && (
