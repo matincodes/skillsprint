@@ -25,8 +25,6 @@ function RouteComponent() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-
-
   // Basic regex: Only letters/spaces, at least 3 chars
   const nameRegex = /^[A-Za-z\s]{3,}$/;
   // Basic email pattern
@@ -71,7 +69,7 @@ function RouteComponent() {
 
     try {
       // Attempt signup
-      const success = await signup({name, email, password, role: "STUDENT"});
+      const success = await signup({ name, email, password, role: "STUDENT" });
       if (success) {
         navigate({ to: "/programmes" });
       }

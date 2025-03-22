@@ -7,9 +7,9 @@ import TopNav from "@/components/TopNav/TopNav";
 
 export const Route = createFileRoute("/dashboard")({
   component: DashboardLayout,
-  beforeLoad: ({context, location}) => {
+  beforeLoad: ({ context, location }) => {
     //Check if user is authenticated
-    if(!context.isAuthenticated) {
+    if (!context.isAuthenticated) {
       return redirect({
         to: "/student/login",
       });

@@ -3,7 +3,6 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { CirclePlusIcon } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 
-
 import { cn } from "../../lib/utils";
 
 function Accordion({ ...props }) {
@@ -32,9 +31,7 @@ function AccordionTrigger({ className, children, ...props }) {
         {...props}
       >
         {children}
-        <ChevronDown
-          className="transition-transform duration-200 data-[state=open]:rotate-180 text-[#525866]"
-        />
+        <ChevronDown className="transition-transform duration-200 data-[state=open]:rotate-180 text-[#525866]" />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   );

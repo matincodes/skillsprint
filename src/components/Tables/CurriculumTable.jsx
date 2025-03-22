@@ -3,6 +3,7 @@ import curriculumData from "@/data/curriculumData";
 import { CircleSmall } from "lucide-react";
 import { CurriculumAccordion } from "../ui/CurriculumAccordion";
 import { useState } from "react";
+import NullState from "../Null/Null";
 
 export function CurriculumTable() {
   // State to track the currently active week
@@ -21,83 +22,98 @@ export function CurriculumTable() {
   return (
     <div className="flex flex-col w-full text-paragraph font-semibold text-[13px] lg:text-[15px] font-inter">
       {/* Table Header (Only visible on larger screens) */}
-      <div className="hidden lg:flex">
-        <div className="w-[44px]">#</div>
-        <div className="w-[400px]">Topic</div>
-        <div className="w-[280px]">Status</div>
-        <div className="w-60">Period</div>
-        <div className="flex-1">
-          <div className="w-[20px]"></div>
+      {curriculumData.length <= 0 ? (
+        <div className="bg-[#121212a1] p-2">
+          <NullState
+            mainText={"No curriculum available yet."}
+            miniText={
+              " This course’s curriculum hasn’t been added yet. Check back later!"
+            }
+            image={"/assets/null/curriculum.png"}
+          />
         </div>
-      </div>
-
-      {/* Mapping through curriculum data to display each item */}
-      {curriculumData.map((items, index) => (
-        <div className="flex space-y-3 mt-5 lg:mt-7 lg:space-y-5" key={index}>
-          <div className="w-[44px]">{index + 1}</div>
-          <div className="w-[400px] tracking-wide">
-            {items.topic}
-            {/* Status and Period Display (Visible on smaller screens) */}
-            <div className="flex items-center justify-between w-[155px] lg:hidden text-[10px]">
-              <div className="flex w-[50px]">
-                <p
-                  className={`${items.status === "Completed" ? completed : items.status === "Ongoing" ? ongoing : inComplete} flex items-center gap-1 px-2 rounded-lg`}
-                >
-                  <CircleSmall
-                    width={15}
-                    fill={`${items.status === "Completed" ? "#0950C3" : items.status === "Ongoing" ? "#32CD32" : "#C28B0A"}`}
-                  />
-                  {items.status}
-                </p>
-              </div>
-              <p>{items.period}</p>
+      ) : (
+        <>
+          <div className="hidden lg:flex">
+            <div className="w-[44px]">#</div>
+            <div className="w-[400px]">Topic</div>
+            <div className="w-[280px]">Status</div>
+            <div className="w-60">Period</div>
+            <div className="flex-1">
+              <div className="w-[20px]"></div>
             </div>
           </div>
-
-          {/* Status Display (Visible on larger screens) */}
-          <div className="w-[280px] hidden lg:flex">
-            <div className="flex w-[50px]">
-              <p
-                className={`${items.status === "Completed" ? completed : items.status === "Ongoing" ? ongoing : inComplete} flex items-center gap-1 px-2 rounded-lg`}
-              >
-                <CircleSmall
-                  width={20}
-                  fill={`${items.status === "Completed" ? "#0950C3" : items.status === "Ongoing" ? "#32CD32" : "#C28B0A"}`}
-                />
-                {items.status}
-              </p>
-            </div>
-          </div>
-
-          {/* Period Display (Visible on larger screens) */}
-          <div className="w-60 hidden lg:flex">{items.period}</div>
-
-          {/* Expandable Details Section */}
-          <div className="flex-1">
-            <div className="flex justify-end w-full">
-              {/* Toggle Button (Arrow Icon) */}
-              <div className="w-[20px]">
-                <img
-                  src={arrow}
-                  className="cursor-pointer size-6"
-                  onClick={() => toggleWeek(index)}
-                />
+          {curriculumData.map((items, index) => (
+            <div
+              className="flex space-y-3 mt-5 lg:mt-7 lg:space-y-5"
+              key={index}
+            >
+              <div className="w-[44px]">{index + 1}</div>
+              <div className="w-[400px] tracking-wide">
+                {items.topic}
+                {/* Status and Period Display (Visible on smaller screens) */}
+                <div className="flex items-center justify-between w-[155px] lg:hidden text-[10px]">
+                  <div className="flex w-[50px]">
+                    <p
+                      className={`${items.status === "Completed" ? completed : items.status === "Ongoing" ? ongoing : inComplete} flex items-center gap-1 px-2 rounded-lg`}
+                    >
+                      <CircleSmall
+                        width={15}
+                        fill={`${items.status === "Completed" ? "#0950C3" : items.status === "Ongoing" ? "#32CD32" : "#C28B0A"}`}
+                      />
+                      {items.status}
+                    </p>
+                  </div>
+                  <p>{items.period}</p>
+                </div>
               </div>
 
-              {/* Render the Accordion if the week is active */}
-              {activeWeek === index && (
-                <CurriculumAccordion
-                  topic={items.topic}
-                  period={items.period}
-                  date={items.date}
-                  status={items.status}
-                  setActiveWeek={setActiveWeek}
-                />
-              )}
+              {/* Status Display (Visible on larger screens) */}
+              <div className="w-[280px] hidden lg:flex">
+                <div className="flex w-[50px]">
+                  <p
+                    className={`${items.status === "Completed" ? completed : items.status === "Ongoing" ? ongoing : inComplete} flex items-center gap-1 px-2 rounded-lg`}
+                  >
+                    <CircleSmall
+                      width={20}
+                      fill={`${items.status === "Completed" ? "#0950C3" : items.status === "Ongoing" ? "#32CD32" : "#C28B0A"}`}
+                    />
+                    {items.status}
+                  </p>
+                </div>
+              </div>
+
+              {/* Period Display (Visible on larger screens) */}
+              <div className="w-60 hidden lg:flex">{items.period}</div>
+
+              {/* Expandable Details Section */}
+              <div className="flex-1">
+                <div className="flex justify-end w-full">
+                  {/* Toggle Button (Arrow Icon) */}
+                  <div className="w-[20px]">
+                    <img
+                      src={arrow}
+                      className="cursor-pointer size-6"
+                      onClick={() => toggleWeek(index)}
+                    />
+                  </div>
+
+                  {/* Render the Accordion if the week is active */}
+                  {activeWeek === index && (
+                    <CurriculumAccordion
+                      topic={items.topic}
+                      period={items.period}
+                      date={items.date}
+                      status={items.status}
+                      setActiveWeek={setActiveWeek}
+                    />
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      ))}
+          ))}
+        </>
+      )}
     </div>
   );
 }
