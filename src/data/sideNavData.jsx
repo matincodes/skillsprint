@@ -34,11 +34,6 @@ const sideNavData = [
         url: "/dashboard/assignments",
         icon: "/assets/Icons/assignments.png",
       },
-      {
-        title: "Quizzes",
-        url: "/dashboard/quizzes",
-        icon: "/assets/Icons/quizzes.png",
-      },
     ],
   },
   {
@@ -49,6 +44,17 @@ const sideNavData = [
         title: "Settings",
         url: "/dashboard/settings",
         icon: "/assets/Icons/settings.png",
+      },
+    ],
+  },
+  {
+    id: 4,
+    // category: "Logout",
+    links: [
+      {
+        title: "Logout",
+        // url: "/dashboard/settings",
+        icon: "/assets/Icons/logout.png",
       },
     ],
   },

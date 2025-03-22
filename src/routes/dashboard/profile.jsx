@@ -11,7 +11,7 @@ export const Route = createFileRoute("/dashboard/profile")({
 const ProfileComponent = () => {
   const [profile, setProfile] = useState(
     JSON.parse(window.localStorage.getItem("user"))?.image ||
-      "/assets/users/user1.png",
+      "/assets/users/avatar.png",
   );
   const userprofile = useRef();
 
