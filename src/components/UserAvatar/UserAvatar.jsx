@@ -6,7 +6,7 @@ const UserAvatar = (e) => {
   return (
     <Avatar>
       <AvatarImage
-        src={` ${e.profile == null ? "/assets/users/user1.png" : e.profile} `}
+        src={` ${e.profile == null ? "/assets/users/avatar.png" : e.profile} `}
         className={"size-8"}
       />
       <AvatarFallback>CN</AvatarFallback>
