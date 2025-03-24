@@ -4,6 +4,7 @@ import { CircleSmall } from "lucide-react";
 import { CurriculumAccordion } from "../ui/CurriculumAccordion";
 import { useState } from "react";
 import NullState from "../Null/Null";
+import Status from "../ui/Status";
 
 export function CurriculumTable() {
   // State to track the currently active week
@@ -53,34 +54,14 @@ export function CurriculumTable() {
                 {items.topic}
                 {/* Status and Period Display (Visible on smaller screens) */}
                 <div className="flex items-center justify-between w-[155px] lg:hidden text-[10px]">
-                  <div className="flex w-[50px]">
-                    <p
-                      className={`${items.status === "Completed" ? completed : items.status === "Ongoing" ? ongoing : inComplete} flex items-center gap-1 px-2 rounded-lg`}
-                    >
-                      <CircleSmall
-                        width={15}
-                        fill={`${items.status === "Completed" ? "#0950C3" : items.status === "Ongoing" ? "#32CD32" : "#C28B0A"}`}
-                      />
-                      {items.status}
-                    </p>
-                  </div>
+                  <Status status={items.status} />
                   <p>{items.period}</p>
                 </div>
               </div>
 
               {/* Status Display (Visible on larger screens) */}
               <div className="w-[280px] hidden lg:flex">
-                <div className="flex w-[50px]">
-                  <p
-                    className={`${items.status === "Completed" ? completed : items.status === "Ongoing" ? ongoing : inComplete} flex items-center gap-1 px-2 rounded-lg`}
-                  >
-                    <CircleSmall
-                      width={20}
-                      fill={`${items.status === "Completed" ? "#0950C3" : items.status === "Ongoing" ? "#32CD32" : "#C28B0A"}`}
-                    />
-                    {items.status}
-                  </p>
-                </div>
+                <Status status={items.status} />
               </div>
 
               {/* Period Display (Visible on larger screens) */}
