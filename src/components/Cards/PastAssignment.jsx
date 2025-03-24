@@ -7,6 +7,7 @@ import close from "../../assets/icons/close.svg";
 import checkBox from "../../assets/icons/checkBox.svg";
 import Status from "../ui/Status";
 import Confirmationmessage from "../ui/Confirmationmessage";
+import NullState from "../Null/Null";
 
 // Component for displaying past assignments
 const PastAssignment = (e) => {
@@ -38,9 +39,17 @@ const PastAssignment = (e) => {
       )}
 
       <div
-        className={`${pastAssignment ? " " : "space-y-[50px] lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-10 "} `}
+        className={`${pastAssignment ? " " : `space-y-[50px] lg:space-y-0 lg:grid  lg:gap-10 mt-4 ${pastAssignmentsData.length <= 0 ? 'lg:grid-cols-1 bg-[#121212a1]' : 'lg:grid-cols-2' }`} `}
       >
-        {pastAssignmentsData.map((items, index) => (
+        
+         {pastAssignmentsData.length <= 0 ? (
+                  <NullState
+                    mainText={"No Previous assigments."}
+                    miniText={"Once you have, they’ll appear here!"}
+                    image={"/assets/null/pastAssignments.png"}
+                  />
+                ) :
+        pastAssignmentsData.map((items, index) => (
           <>
             {/* Display assignment list if no specific assignment is selected */}
 

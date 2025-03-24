@@ -1,7 +1,7 @@
 const NullState = (e) => {
   return (
-    <div className="flex flex-col items-center justify-center font-inter text-white p-5 text-center gap-8 ">
-      <img src={e.image} alt="" className="w-[160px]" />
+    <div className="flex flex-col items-center justify-center font-inter text-white px-5 py-[40px] text-center gap-8 ">
+      <img src={e.image} alt="" className="lg:w-[160px] w-[90px]" />
 
       <span className="flex flex-col gap-1">
         <b className="font-[400]">{e.mainText}</b>

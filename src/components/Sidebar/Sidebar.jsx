@@ -10,7 +10,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import sideNavData from "@/data/sideNavData";
-import { useLocation } from "@tanstack/react-router";
+import { useLocation, useNavigate } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import {
   Sheet,
@@ -33,11 +33,12 @@ const AppSidebar = () => {
   const { pathname } = useLocation();
   const userImage = JSON.parse(window.localStorage.getItem("user"))?.image;
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await logout();
-
+      
       navigate({ to: "/" });
     } catch (error) {
       console.error("Logout error:", error);

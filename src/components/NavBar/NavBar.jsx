@@ -106,7 +106,7 @@ const NavBar = () => {
                 <span className="flex items-center cursor-pointer pr-8 pl-1 py-1 hover:bg-black gap-2 duration-300 ease-in-out">
                   <img src={home} />
                   <Link
-                    to="dashbaord/"
+                    to="/dashboard/"
                     className={`${active == "" ? "text-main" : ""}  `}
                   >
                     Go to Dashboard
@@ -202,7 +202,7 @@ const NavBar = () => {
                     </Link>
 
                     <Link
-                      to="dashboard/"
+                      to="/dashboard/"
                       className={`${active == "" ? "text-main" : ""} font-[300] text-[14px] hover:text-main py-4 `}
                     >
                       Go to Dashboard
